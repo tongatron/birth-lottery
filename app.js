@@ -146,7 +146,7 @@ async function boot() {
 async function initMap(countries) {
   if (typeof d3 === "undefined" || typeof topojson === "undefined") return;
 
-  const world = await fetch("./assets/world-110m.json").then((r) => r.json());
+  const world = await fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then((r) => r.json());
 
   const svg = d3.select("#world-map");
   const container = document.querySelector(".map-container");
