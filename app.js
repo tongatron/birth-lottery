@@ -60,6 +60,10 @@ const elements = {
   resultBirths: document.querySelector("#result-births"),
   resultPopulation: document.querySelector("#result-population"),
   resultSummary: document.querySelector("#result-summary"),
+  resultInsights: document.querySelector("#result-insights"),
+  insightScoreLabel: document.querySelector("#insight-score-label"),
+  insightScoreDetail: document.querySelector("#insight-score-detail"),
+  insightTopDiffs: document.querySelector("#insight-top-diffs"),
   italyLife: document.querySelector("#italy-life"),
   italyLifeMeta: document.querySelector("#italy-life-meta"),
   italyInfant: document.querySelector("#italy-infant"),
@@ -72,6 +76,7 @@ const elements = {
   italyHdiMeta: document.querySelector("#italy-hdi-meta"),
   italyPoverty: document.querySelector("#italy-poverty"),
   italyPovertyMeta: document.querySelector("#italy-poverty-meta"),
+  comparisonWarning: document.querySelector("#comparison-warning"),
   comparisonGrid: document.querySelector("#comparison-grid"),
   distributionList: document.querySelector("#distribution-list"),
 };
@@ -81,8 +86,8 @@ boot();
 async function boot() {
   try {
     const dataset = window.BIRTH_LOTTERY_DATA;
-    const ranked = dataset?.countries || [];
-    const totalBirths = dataset?.totalBirths || 0;
+    const ranked = sanitizeCountries(dataset?.countries || []);
+    const totalBirths = ranked.reduce((sum, country) => sum + country.annualBirths, 0);
 
     if (!ranked.length || !totalBirths) {
       throw new Error("Dataset locale non disponibile.");
@@ -152,9 +157,10 @@ function renderDistribution(countries) {
 }
 
 function renderPlaceholderComparison() {
+  elements.comparisonWarning.classList.add("hidden");
   elements.comparisonGrid.innerHTML = METRIC_CONFIG.map(
     (metric) => `
-      <article class="comparison-row" data-tone="neutral">
+      <article class="comparison-row" role="row" data-tone="neutral">
         <div class="comparison-indicator">
           <strong>${metric.label}</strong>
           <span>${metric.detail}</span>
@@ -188,6 +194,14 @@ function rollLottery() {
     "Il paese viene estratto in proporzione alle nascite annuali stimate.";
 
   const cycleCountries = sampleWithoutMeaning(state.countries, 18);
+  if (!cycleCountries.length) {
+    state.isRolling = false;
+    elements.drawButton.disabled = false;
+    elements.drawButton.textContent = "Avvia la lotteria";
+    elements.statusText.textContent =
+      "Dati incompleti per il sorteggio. Ricarica la pagina per riprovare.";
+    return;
+  }
   let cursor = 0;
 
   const ticker = setInterval(() => {
@@ -199,6 +213,14 @@ function rollLottery() {
   window.setTimeout(() => {
     clearInterval(ticker);
     const winner = weightedPick(state.countries);
+    if (!winner) {
+      state.isRolling = false;
+      elements.drawButton.disabled = false;
+      elements.drawButton.textContent = "Avvia la lotteria";
+      elements.statusText.textContent =
+        "Sorteggio non disponibile con i dati correnti.";
+      return;
+    }
     renderWinner(winner);
     state.isRolling = false;
     elements.drawButton.disabled = false;
@@ -211,6 +233,7 @@ function rollLottery() {
 function showRollingCountry(country) {
   elements.resultEmpty.classList.add("hidden");
   elements.resultCard.classList.remove("hidden");
+  elements.resultInsights.classList.add("hidden");
   elements.resultCountry.textContent = country.name;
   elements.resultShare.textContent = formatPercent(country.birthShare);
   elements.resultBirths.textContent = formatInteger(country.annualBirths);
@@ -227,10 +250,16 @@ function renderWinner(country) {
   elements.resultBirths.textContent = formatInteger(country.annualBirths);
   elements.resultPopulation.textContent = formatInteger(country.population);
   elements.resultSummary.textContent = buildSummary(country, state.italy);
+  renderInsights(country, state.italy);
   renderComparison(country, state.italy);
 }
 
 function renderComparison(country, italy) {
+  const missingCount = METRIC_CONFIG.filter(
+    (metric) => country[metric.key] == null || italy[metric.key] == null
+  ).length;
+  renderComparisonWarning(missingCount, METRIC_CONFIG.length);
+
   const markup = METRIC_CONFIG.map((metric) => {
     const candidate = country[metric.key];
     const baseline = italy[metric.key];
@@ -248,14 +277,20 @@ function renderComparison(country, italy) {
       metric.detail
     );
 
+    const confidence = getMetricConfidence(country, metric.key);
     return `
-      <article class="comparison-row" data-tone="${tone}">
+      <article class="comparison-row" role="row" data-tone="${tone}">
         <div class="comparison-indicator">
           <strong>${metric.label}</strong>
           <span>${metric.detail}</span>
         </div>
         <div class="comparison-value">
-          <strong class="${toneClass(tone)}">${formatMetric(metric.key, country)}</strong>
+          <strong class="${toneClass(tone)}">
+            ${formatMetric(metric.key, country)}
+            <span class="confidence-badge confidence-${confidence.level}" title="${confidence.title}">
+              ${confidence.label}
+            </span>
+          </strong>
           <span>${escapeHtml(country.name)} · ${formatMetricMeta(metric.key, country)}</span>
         </div>
         <div class="comparison-value">
@@ -357,7 +392,131 @@ function compareMetric(candidate, baseline, betterDirection) {
   return candidate < baseline ? "better" : "worse";
 }
 
+function renderComparisonWarning(missingCount, totalCount) {
+  if (!missingCount) {
+    elements.comparisonWarning.classList.add("hidden");
+    elements.comparisonWarning.textContent = "";
+    return;
+  }
+
+  elements.comparisonWarning.classList.remove("hidden");
+  elements.comparisonWarning.textContent =
+    missingCount >= 2
+      ? `Lettura parziale: ${missingCount} indicatori su ${totalCount} non sono pienamente confrontabili.`
+      : `Nota di lettura: ${missingCount} indicatore su ${totalCount} non e pienamente confrontabile.`;
+}
+
+function renderInsights(country, italy) {
+  const tones = [];
+  const impacts = [];
+
+  for (const metric of METRIC_CONFIG) {
+    const candidate = country[metric.key];
+    const baseline = italy[metric.key];
+    const tone = compareMetric(candidate, baseline, metric.betterDirection);
+    if (tone !== "neutral") {
+      tones.push(tone);
+    }
+
+    const impact = computeImpact(candidate, baseline, metric.betterDirection);
+    if (impact != null) {
+      impacts.push({ metric, impact, candidate, baseline });
+    }
+  }
+
+  const score = buildScore(tones);
+  elements.resultInsights.classList.remove("hidden");
+  elements.insightScoreLabel.textContent = score.label;
+  elements.insightScoreDetail.textContent = score.detail;
+
+  const top = impacts.sort((a, b) => b.impact - a.impact).slice(0, 2);
+  if (!top.length) {
+    elements.insightTopDiffs.innerHTML =
+      "<li>Dati insufficienti per evidenziare differenze forti.</li>";
+    return;
+  }
+
+  elements.insightTopDiffs.innerHTML = top
+    .map(({ metric, candidate, baseline }) => {
+      const delta = buildDeltaLabel(
+        candidate,
+        baseline,
+        metric.betterDirection,
+        metric.detail
+      );
+      return `<li><strong>${metric.label}</strong>: ${delta} rispetto all'Italia.</li>`;
+    })
+    .join("");
+}
+
+function buildScore(tones) {
+  const better = tones.filter((tone) => tone === "better").length;
+  const worse = tones.filter((tone) => tone === "worse").length;
+  const net = better - worse;
+
+  if (net >= 2) {
+    return {
+      label: "Partenza tendenzialmente favorita",
+      detail: `Segnali positivi prevalenti (${better} migliori, ${worse} peggiori).`,
+    };
+  }
+
+  if (net <= -2) {
+    return {
+      label: "Partenza tendenzialmente in salita",
+      detail: `Criticita prevalenti (${better} migliori, ${worse} peggiori).`,
+    };
+  }
+
+  return {
+    label: "Partenza con luci e ombre",
+    detail: `Quadro equilibrato (${better} migliori, ${worse} peggiori).`,
+  };
+}
+
+function computeImpact(candidate, baseline, betterDirection) {
+  if (candidate == null || baseline == null) {
+    return null;
+  }
+
+  const rawDelta = candidate - baseline;
+  const normalized = Math.abs(rawDelta) / Math.max(Math.abs(baseline), 1);
+  if (!Number.isFinite(normalized)) {
+    return null;
+  }
+
+  if (betterDirection === "lower") {
+    return normalized;
+  }
+  return normalized;
+}
+
+function getMetricConfidence(country, metricKey) {
+  const year = country?.metricDetails?.[metricKey]?.year;
+  const parsedYear = Number(year);
+  if (!Number.isFinite(parsedYear)) {
+    return {
+      level: "unknown",
+      label: "Stima prudente",
+      title: "Anno non disponibile: interpretazione prudente",
+    };
+  }
+
+  const age = new Date().getFullYear() - parsedYear;
+  if (age <= 2) {
+    return { level: "high", label: "Dato recente", title: `Base informativa aggiornata (${parsedYear})` };
+  }
+  if (age <= 5) {
+    return { level: "medium", label: "Dato stabile", title: `Base informativa solida ma non recentissima (${parsedYear})` };
+  }
+  return { level: "low", label: "Dato storico", title: `Base informativa piu datata (${parsedYear})` };
+}
+
 function weightedPick(countries) {
+  if (!countries.length || state.totalBirths <= 0) {
+    return null;
+  }
+
   const threshold = Math.random() * state.totalBirths;
   let running = 0;
 
@@ -383,6 +542,77 @@ function sampleWithoutMeaning(countries, size) {
   return sample;
 }
 
+function sanitizeCountries(countries) {
+  const sanitized = countries
+    .map((country) => sanitizeCountry(country))
+    .filter(Boolean);
+
+  const totalBirths = sanitized.reduce((sum, country) => sum + country.annualBirths, 0);
+  if (!totalBirths) {
+    return [];
+  }
+
+  return sanitized
+    .map((country) => ({
+      ...country,
+      birthShare: country.annualBirths / totalBirths,
+    }))
+    .sort((a, b) => b.annualBirths - a.annualBirths);
+}
+
+function sanitizeCountry(country) {
+  if (!country || typeof country !== "object") {
+    return null;
+  }
+
+  const name = sanitizeText(country.name);
+  const iso3 = sanitizeText(country.iso3);
+  const annualBirths = sanitizePositiveNumber(country.annualBirths);
+  const population = sanitizePositiveNumber(country.population);
+
+  if (!name || !iso3 || annualBirths == null || population == null) {
+    return null;
+  }
+
+  const metricDetails =
+    country.metricDetails && typeof country.metricDetails === "object"
+      ? country.metricDetails
+      : {};
+
+  return {
+    ...country,
+    name,
+    iso3,
+    annualBirths,
+    population,
+    metricDetails,
+    lifeExpectancy: sanitizeMetric(country.lifeExpectancy),
+    infantMortality: sanitizeMetric(country.infantMortality),
+    gdpPerCapita: sanitizeMetric(country.gdpPerCapita),
+    internetUsers: sanitizeMetric(country.internetUsers),
+    hdi: sanitizeMetric(country.hdi),
+    povertyRate: sanitizeMetric(country.povertyRate),
+  };
+}
+
+function sanitizeText(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function sanitizePositiveNumber(value) {
+  if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) {
+    return null;
+  }
+  return value;
+}
+
+function sanitizeMetric(value) {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return null;
+  }
+  return value;
+}
+
 function formatMetric(metricKey, country) {
   const config = METRIC_CONFIG.find((metric) => metric.key === metricKey);
   const value = country[metricKey];
@@ -390,7 +620,7 @@ function formatMetric(metricKey, country) {
 }
 
 function formatMetricMeta(metricKey, country) {
-  const detail = country.metricDetails?.[metricKey];
+  const detail = country?.metricDetails?.[metricKey];
   if (!detail?.year && !detail?.source) {
     return "fonte non disponibile";
   }
@@ -456,7 +686,7 @@ function toneClass(tone) {
 }
 
 function escapeHtml(value) {
-  return value
+  return String(value ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")

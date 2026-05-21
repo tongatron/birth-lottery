@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Salta al contenuto principale</a>
     <div class="page-shell">
       <header class="hero">
         <div class="hero-grid">
@@ -47,11 +48,17 @@
         </div>
 
         <div class="hero-actions">
-          <button id="draw-button" class="draw-button" disabled>
+          <button
+            id="draw-button"
+            class="draw-button"
+            type="button"
+            disabled
+            aria-describedby="status-text"
+          >
             Caricamento dati...
           </button>
           <div class="status-block">
-            <p id="status-text" class="status-text">
+            <p id="status-text" class="status-text" role="status" aria-live="polite">
               Recupero indicatori ufficiali dalla World Bank.
             </p>
             <p class="status-note">
@@ -62,7 +69,7 @@
         </div>
       </header>
 
-      <main class="layout">
+      <main id="main-content" class="layout">
         <section class="panel spotlight">
           <div class="panel-heading">
             <p class="section-kicker">Esito</p>
@@ -75,7 +82,12 @@
               l'Italia.
             </div>
 
-            <div id="result-card" class="result-card hidden" aria-live="polite">
+            <div
+              id="result-card"
+              class="result-card hidden"
+              role="status"
+              aria-live="polite"
+            >
               <div class="result-country-line">
                 <p class="result-label">Paese estratto</p>
                 <h3 id="result-country">-</h3>
@@ -97,6 +109,17 @@
               </div>
 
               <p id="result-summary" class="result-summary"></p>
+              <div id="result-insights" class="result-insights hidden">
+                <div class="insight-score">
+                  <span class="meta-label">Score sintetico</span>
+                  <strong id="insight-score-label">-</strong>
+                  <small id="insight-score-detail">-</small>
+                </div>
+                <div>
+                  <span class="meta-label">Differenze piu impattanti</span>
+                  <ul id="insight-top-diffs" class="insight-top-diffs"></ul>
+                </div>
+              </div>
             </div>
 
             <aside class="spotlight-sidebar">
@@ -173,7 +196,13 @@
             <span>Italia</span>
             <span>Delta</span>
           </div>
-          <div id="comparison-grid" class="comparison-grid"></div>
+          <p id="comparison-warning" class="comparison-warning hidden" role="status"></p>
+          <div
+            id="comparison-grid"
+            class="comparison-grid"
+            role="table"
+            aria-label="Confronto indicatori tra paese estratto e Italia"
+          ></div>
         </section>
 
         <section class="panel distribution">
