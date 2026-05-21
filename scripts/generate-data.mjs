@@ -1,0 +1,241 @@
+import { execFile } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
+import { readFile, writeFile } from "node:fs/promises";
+
+const execFileAsync = promisify(execFile);
+
+const FILES = {
+  countries: "/private/tmp/birth-lottery-countries.json",
+  population: "/private/tmp/birth-lottery-population.json",
+  birthRate: "/private/tmp/birth-lottery-birthrate.json",
+  lifeExpectancy: "/private/tmp/birth-lottery-life.json",
+  infantMortality: "/private/tmp/birth-lottery-infant.json",
+  gdpPerCapita: "/private/tmp/birth-lottery-gdp.json",
+  internetUsers: "/private/tmp/birth-lottery-internet.json",
+  povertyRate: "/private/tmp/birth-lottery-poverty.json",
+  hdiWorkbook: "/private/tmp/birth-lottery-hdi.xlsx",
+  internetItaly: "/private/tmp/birth-lottery-internet-ita.json",
+};
+
+async function loadJson(path) {
+  const raw = await readFile(path, "utf8");
+  return JSON.parse(raw);
+}
+
+async function loadHdiRows(path) {
+  const scriptPath = fileURLToPath(new URL("./extract-undp-hdi.py", import.meta.url));
+  const { stdout } = await execFileAsync("python3", [scriptPath, path]);
+  return JSON.parse(stdout);
+}
+
+function buildCountryIndex(rows) {
+  return rows.reduce((index, row) => {
+    if (row.region?.value === "Aggregates") {
+      return index;
+    }
+
+    index[row.id] = {
+      iso3: row.id,
+      iso2: row.iso2Code,
+      name: row.name,
+      region: row.region?.value || "N/D",
+      income: row.incomeLevel?.value || "N/D",
+      metrics: {},
+    };
+    return index;
+  }, {});
+}
+
+function applyMetric(countryIndex, rows, key) {
+  for (const row of rows) {
+    const target = countryIndex[row.countryiso3code];
+    if (!target || row.value == null) {
+      continue;
+    }
+
+    target.metrics[key] = {
+      value: Number(row.value),
+      year: row.date,
+      source: "World Bank Data API",
+    };
+  }
+}
+
+function normalizeCountryName(value) {
+  return value
+    .normalize("NFD")
+    .replaceAll(/\p{Diacritic}/gu, "")
+    .replaceAll(/&/g, " and ")
+    .replaceAll(/[()'.’,-]/g, " ")
+    .replaceAll(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function buildNormalizedNameIndex(countryIndex) {
+  return Object.values(countryIndex).reduce((index, country) => {
+    index[normalizeCountryName(country.name)] = country;
+    return index;
+  }, {});
+}
+
+function applyHdiMetric(countryIndex, rows) {
+  const normalizedIndex = buildNormalizedNameIndex(countryIndex);
+  const aliases = {
+    "bolivia plurinational state of": "bolivia",
+    "congo": "congo rep",
+    "cabo verde": "cape verde",
+    "democratic people s republic of korea": "korea dem people s rep",
+    "democratic republic of the congo": "congo dem rep",
+    "egypt": "egypt arab rep",
+    "gambia": "gambia the",
+    "hong kong china sar": "hong kong sar china",
+    "iran islamic republic of": "iran islamic rep",
+    "korea republic of": "korea rep",
+    "lao people s democratic republic": "lao pdr",
+    "micronesia federated states of": "micronesia fed sts",
+    "moldova republic of": "moldova",
+    "palestine state of": "west bank and gaza",
+    "russian federation": "russian federation",
+    "tanzania united republic of": "tanzania",
+    "venezuela bolivarian republic of": "venezuela rb",
+    "viet nam": "viet nam",
+    "yemen": "yemen rep",
+  };
+
+  for (const row of rows) {
+    const normalized = normalizeCountryName(row.country);
+    const matchKey = aliases[normalized] || normalized;
+    const target = normalizedIndex[matchKey];
+
+    if (!target) {
+      continue;
+    }
+
+    target.metrics.hdi = {
+      value: Number(row.value),
+      year: String(row.year),
+      source: row.source,
+    };
+  }
+}
+
+function buildMetricDetails(country) {
+  return {
+    population: country.metrics.population || null,
+    birthRate: country.metrics.birthRate || null,
+    lifeExpectancy: country.metrics.lifeExpectancy || null,
+    infantMortality: country.metrics.infantMortality || null,
+    gdpPerCapita: country.metrics.gdpPerCapita || null,
+    internetUsers: country.metrics.internetUsers || null,
+    povertyRate: country.metrics.povertyRate || null,
+    hdi: country.metrics.hdi || null,
+  };
+}
+
+function applyCountryOverride(countryIndex, response, key) {
+  const row = response?.[1]?.[0];
+  if (!row?.countryiso3code || row.value == null) {
+    return;
+  }
+
+  const target = countryIndex[row.countryiso3code];
+  if (!target) {
+    return;
+  }
+
+  target.metrics[key] = {
+    value: Number(row.value),
+    year: row.date,
+    source: "World Bank Data API",
+  };
+}
+
+async function main() {
+  const [
+    countries,
+    population,
+    birthRate,
+    lifeExpectancy,
+    infantMortality,
+    gdpPerCapita,
+    internetUsers,
+    povertyRate,
+    internetItaly,
+  ] = await Promise.all([
+    loadJson(FILES.countries),
+    loadJson(FILES.population),
+    loadJson(FILES.birthRate),
+    loadJson(FILES.lifeExpectancy),
+    loadJson(FILES.infantMortality),
+    loadJson(FILES.gdpPerCapita),
+    loadJson(FILES.internetUsers),
+    loadJson(FILES.povertyRate),
+    loadJson(FILES.internetItaly),
+  ]);
+  const hdiData = await loadHdiRows(FILES.hdiWorkbook);
+
+  const countryIndex = buildCountryIndex(countries[1]);
+
+  applyMetric(countryIndex, population[1], "population");
+  applyMetric(countryIndex, birthRate[1], "birthRate");
+  applyMetric(countryIndex, lifeExpectancy[1], "lifeExpectancy");
+  applyMetric(countryIndex, infantMortality[1], "infantMortality");
+  applyMetric(countryIndex, gdpPerCapita[1], "gdpPerCapita");
+  applyMetric(countryIndex, internetUsers[1], "internetUsers");
+  applyMetric(countryIndex, povertyRate[1], "povertyRate");
+  applyCountryOverride(countryIndex, internetItaly, "internetUsers");
+  applyHdiMetric(countryIndex, hdiData);
+
+  const dataset = Object.values(countryIndex)
+    .map((country) => {
+      const populationValue = country.metrics.population?.value || 0;
+      const birthRateValue = country.metrics.birthRate?.value || 0;
+      const annualBirths = (populationValue * birthRateValue) / 1000;
+
+      return {
+        iso3: country.iso3,
+        iso2: country.iso2,
+        name: country.name,
+        region: country.region,
+        income: country.income,
+        metricDetails: buildMetricDetails(country),
+        population: populationValue,
+        birthRate: birthRateValue,
+        annualBirths,
+        lifeExpectancy: country.metrics.lifeExpectancy?.value ?? null,
+        infantMortality: country.metrics.infantMortality?.value ?? null,
+        gdpPerCapita: country.metrics.gdpPerCapita?.value ?? null,
+        internetUsers: country.metrics.internetUsers?.value ?? null,
+        povertyRate: country.metrics.povertyRate?.value ?? null,
+        hdi: country.metrics.hdi?.value ?? null,
+      };
+    })
+    .filter((country) => country.iso3 && country.annualBirths > 0)
+    .sort((left, right) => right.annualBirths - left.annualBirths);
+
+  const totalBirths = dataset.reduce(
+    (sum, country) => sum + country.annualBirths,
+    0
+  );
+
+  for (const country of dataset) {
+    country.birthShare = country.annualBirths / totalBirths;
+  }
+
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    source: "World Bank Data API + UNDP Human Development Report 2025",
+    totalBirths,
+    countries: dataset,
+  };
+
+  const output = `window.BIRTH_LOTTERY_DATA = ${JSON.stringify(payload, null, 2)};\n`;
+  await writeFile(new URL("../data.js", import.meta.url), output, "utf8");
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

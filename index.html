@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birth Lottery</title>
+    <meta
+      name="description"
+      content="Una simulazione che mostra dove potresti nascere oggi, pesando il sorteggio sulle nascite reali nel mondo."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-grid">
+          <div class="hero-copy-block">
+            <p class="eyebrow">Birth Lottery</p>
+            <h1>Se nascessi oggi, dove verresti al mondo?</h1>
+            <p class="hero-copy">
+              Una simulazione basata su nascite annue stimate e indicatori
+              pubblici recenti. Il confronto iniziale usa l'Italia come punto
+              di riferimento.
+            </p>
+          </div>
+
+          <aside class="hero-meta" aria-label="Contesto del dataset">
+            <div class="meta-card">
+              <span class="meta-label">Base dati</span>
+              <strong>World Bank + UNDP</strong>
+            </div>
+            <div class="meta-card">
+              <span class="meta-label">Metodo</span>
+              <strong>Nascite annue stimate</strong>
+            </div>
+            <div class="meta-card">
+              <span class="meta-label">Confronto</span>
+              <strong>Italia vs paese estratto</strong>
+            </div>
+          </aside>
+        </div>
+
+        <div class="hero-actions">
+          <button id="draw-button" class="draw-button" disabled>
+            Caricamento dati...
+          </button>
+          <div class="status-block">
+            <p id="status-text" class="status-text">
+              Recupero indicatori ufficiali dalla World Bank.
+            </p>
+            <p class="status-note">
+              Il sorteggio pesa ogni paese in base alla quota stimata di
+              nascite mondiali.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel spotlight">
+          <div class="panel-heading">
+            <p class="section-kicker">Esito</p>
+            <h2>La tua nascita sorteggiata</h2>
+          </div>
+
+          <div class="spotlight-grid">
+            <div id="result-empty" class="result-empty">
+              Avvia la lotteria per vedere un paese estratto e confrontarlo con
+              l'Italia.
+            </div>
+
+            <div id="result-card" class="result-card hidden" aria-live="polite">
+              <div class="result-country-line">
+                <p class="result-label">Paese estratto</p>
+                <h3 id="result-country">-</h3>
+              </div>
+
+              <div class="result-stats">
+                <div>
+                  <span class="stat-label">Quota nascite mondiali</span>
+                  <strong id="result-share">-</strong>
+                </div>
+                <div>
+                  <span class="stat-label">Nascite annue stimate</span>
+                  <strong id="result-births">-</strong>
+                </div>
+                <div>
+                  <span class="stat-label">Popolazione</span>
+                  <strong id="result-population">-</strong>
+                </div>
+              </div>
+
+              <p id="result-summary" class="result-summary"></p>
+            </div>
+
+            <aside class="spotlight-sidebar">
+              <div class="sidebar-block">
+                <span class="meta-label">Lettura rapida</span>
+                <p>
+                  Il risultato va letto come probabilita statistica di nascita,
+                  non come giudizio assoluto sul paese estratto.
+                </p>
+              </div>
+              <div class="sidebar-block">
+                <span class="meta-label">Cosa osservare</span>
+                <p>
+                  Differenze su salute, reddito e connettivita mostrano quanto
+                  il punto di partenza cambi da un contesto all'altro.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="panel baseline">
+          <div class="panel-heading">
+            <p class="section-kicker">Riferimento</p>
+            <h2>Italia oggi</h2>
+          </div>
+
+          <div class="panel-intro">
+            Parametri medi usati come base di confronto per l'estrazione.
+          </div>
+
+          <div id="italy-baseline" class="baseline-grid">
+            <div class="metric-chip">
+              <span>Aspettativa di vita</span>
+              <strong id="italy-life">-</strong>
+              <small id="italy-life-meta">-</small>
+            </div>
+            <div class="metric-chip">
+              <span>Mortalita infantile</span>
+              <strong id="italy-infant">-</strong>
+              <small id="italy-infant-meta">-</small>
+            </div>
+            <div class="metric-chip">
+              <span>PIL pro capite</span>
+              <strong id="italy-gdp">-</strong>
+              <small id="italy-gdp-meta">-</small>
+            </div>
+            <div class="metric-chip">
+              <span>Accesso a internet</span>
+              <strong id="italy-internet">-</strong>
+              <small id="italy-internet-meta">-</small>
+            </div>
+            <div class="metric-chip">
+              <span>Human Development Index</span>
+              <strong id="italy-hdi">-</strong>
+              <small id="italy-hdi-meta">-</small>
+            </div>
+            <div class="metric-chip">
+              <span>Poverta nazionale</span>
+              <strong id="italy-poverty">-</strong>
+              <small id="italy-poverty-meta">-</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel comparison">
+          <div class="panel-heading">
+            <p class="section-kicker">Confronto</p>
+            <h2>Italia vs paese estratto</h2>
+          </div>
+          <div class="comparison-header" aria-hidden="true">
+            <span>Indicatore</span>
+            <span>Paese estratto</span>
+            <span>Italia</span>
+            <span>Delta</span>
+          </div>
+          <div id="comparison-grid" class="comparison-grid"></div>
+        </section>
+
+        <section class="panel distribution">
+          <div class="panel-heading">
+            <p class="section-kicker">Distribuzione</p>
+            <h2>Dove avvengono piu nascite</h2>
+          </div>
+          <div class="panel-intro">
+            Prime dieci quote stimate di nascite mondiali nel dataset corrente.
+          </div>
+          <div id="distribution-list" class="distribution-list"></div>
+        </section>
+
+        <section class="panel notes">
+          <div class="panel-heading">
+            <p class="section-kicker">Metodo</p>
+            <h2>Come funziona il sorteggio</h2>
+          </div>
+          <div class="notes-banner">
+            Un'esperienza costruita come report interattivo: dati chiari,
+            inferenze prudenti, fonti leggibili.
+          </div>
+          <div class="notes-grid">
+            <p>
+              Ogni paese riceve un peso pari a
+              <strong>popolazione x tasso di natalita / 1000</strong>, cioe una
+              stima delle nascite annuali.
+            </p>
+            <p>
+              Il confronto usa indicatori World Bank recenti. Dove un valore
+              non e disponibile, l'interfaccia lo segnala senza inventare dati.
+            </p>
+            <p>
+              L'HDI arriva dal dataset ufficiale UNDP Human Development Report
+              2025. L'indicatore di poverta usa la serie World Bank sulle soglie
+              nazionali, per mantenere il confronto con l'Italia.
+            </p>
+            <p>
+              Questa versione e un MVP: comunica il concetto della
+              <em>lotteria della nascita</em> senza trasformare la disuguaglianza
+              in un gioco leggero.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
