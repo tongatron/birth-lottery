@@ -140,36 +140,12 @@ const METRIC_CONFIG = [
     category: "Sicurezza",
   },
   {
-    key: "ruleOfLawEstimate",
-    label: "Rule of law",
-    formatter: (v) => formatNumber(v, 2),
-    betterDirection: "higher",
-    detail: "stima governance (circa da -2.5 a +2.5)",
-    category: "Sicurezza",
-  },
-  {
     key: "outOfPocketHealth",
     label: "Spesa sanitaria out-of-pocket",
     formatter: (v) => formatNumber(v, 1) + "%",
     betterDirection: "lower",
     detail: "quota della spesa sanitaria pagata di tasca propria",
     category: "Salute",
-  },
-  {
-    key: "uhcCoverageIndex",
-    label: "Copertura servizi essenziali (UHC)",
-    formatter: (v) => formatNumber(v, 1),
-    betterDirection: "higher",
-    detail: "indice di copertura dei servizi sanitari essenziali",
-    category: "Salute",
-  },
-  {
-    key: "intergenerationalMobility",
-    label: "Mobilità intergenerazionale",
-    formatter: (v) => formatNumber(v, 1),
-    betterDirection: "higher",
-    detail: "proxy opportunità: years of schooling mobility estimate",
-    category: "Mobilità sociale",
   },
 ];
 
@@ -191,6 +167,7 @@ const state = {
   mapPaths: null,
   currentWinner: null,
   comparisonView: "essential",
+  comparisonBaselineIso3: "ITA",
   metricStats: {},
   birthRankByIso3: new Map(),
 };
@@ -216,10 +193,13 @@ const elements = {
   insightScoreLabel: document.querySelector("#insight-score-label"),
   insightScoreDetail: document.querySelector("#insight-score-detail"),
   insightTopDiffs: document.querySelector("#insight-top-diffs"),
+  comparisonHeading: document.querySelector("#comparison-heading"),
   comparisonCaption: document.querySelector("#comparison-caption"),
   comparisonSummary: document.querySelector("#comparison-summary"),
   comparisonVisual: document.querySelector("#comparison-visual"),
   comparisonPanel: document.querySelector("#comparison-panel"),
+  comparisonBaselineSelect: document.querySelector("#comparison-baseline-select"),
+  comparisonBaselineLabel: document.querySelector("#comparison-baseline-label"),
   comparisonWarning: document.querySelector("#comparison-warning"),
   comparisonGrid: document.querySelector("#comparison-grid"),
   comparisonToggleButtons: document.querySelectorAll(".comparison-toggle-button"),
@@ -251,8 +231,10 @@ async function boot() {
 
     hydrateItalyBaseline(italy);
     renderDistribution(ranked.slice(0, 10));
+    populateComparisonBaselineSelector(ranked);
     renderPlaceholderComparison();
     bindComparisonControls();
+    syncComparisonBaselineUI();
 
     elements.drawButton.disabled = false;
     elements.drawButton.textContent = "Avvia la lotteria";
@@ -625,8 +607,9 @@ function renderWinner(country) {
   elements.resultPopulation.textContent = formatInteger(country.population);
   renderResultContext(country);
   elements.resultSummary.textContent = buildNarrative(country, state.italy);
-  renderInsights(country, state.italy);
-  renderComparison(country, state.italy);
+  const baselineCountry = getComparisonBaselineCountry();
+  renderInsights(country, baselineCountry);
+  renderComparison(country, baselineCountry);
 }
 
 function bindComparisonControls() {
@@ -637,9 +620,20 @@ function bindComparisonControls() {
       state.comparisonView = nextView;
       syncComparisonToggle();
       if (state.currentWinner) {
-        renderComparison(state.currentWinner, state.italy);
+        renderComparison(state.currentWinner, getComparisonBaselineCountry());
       } else {
-        renderPlaceholderComparison();
+        renderPlaceholderComparison(getComparisonBaselineCountry());
+      }
+    });
+  }
+  if (elements.comparisonBaselineSelect) {
+    elements.comparisonBaselineSelect.addEventListener("change", () => {
+      state.comparisonBaselineIso3 = elements.comparisonBaselineSelect.value || "ITA";
+      syncComparisonBaselineUI();
+      if (state.currentWinner) {
+        renderComparison(state.currentWinner, getComparisonBaselineCountry());
+      } else {
+        renderPlaceholderComparison(getComparisonBaselineCountry());
       }
     });
   }
@@ -657,6 +651,50 @@ function syncComparisonToggle() {
     state.comparisonView === "essential"
       ? "Una lettura più corta mette davanti gli indicatori con impatto e copertura più solidi."
       : "La vista completa mostra anche metriche con copertura più discontinua, sempre segnalata in tabella.";
+}
+
+function populateComparisonBaselineSelector(countries) {
+  if (!elements.comparisonBaselineSelect) return;
+  const sorted = [...countries].sort((a, b) => a.name.localeCompare(b.name, "it"));
+  elements.comparisonBaselineSelect.innerHTML = sorted.map((country) => {
+    const selected = country.iso3 === state.comparisonBaselineIso3 ? " selected" : "";
+    return `<option value="${escapeHtml(country.iso3)}"${selected}>${escapeHtml(renderFlagAndName(country))}</option>`;
+  }).join("");
+  if (!sorted.some((country) => country.iso3 === state.comparisonBaselineIso3)) {
+    state.comparisonBaselineIso3 = "ITA";
+    elements.comparisonBaselineSelect.value = "ITA";
+  }
+}
+
+function syncComparisonBaselineUI() {
+  const baselineCountry = getComparisonBaselineCountry();
+  if (!baselineCountry) return;
+  if (elements.comparisonHeading) {
+    elements.comparisonHeading.textContent = `${baselineCountry.name} vs paese estratto`;
+  }
+  if (elements.comparisonBaselineLabel) {
+    elements.comparisonBaselineLabel.textContent = baselineCountry.name;
+  }
+  if (elements.comparisonGrid) {
+    elements.comparisonGrid.setAttribute(
+      "aria-label",
+      `Confronto indicatori tra paese estratto e ${baselineCountry.name}`
+    );
+  }
+  if (elements.comparisonBaselineSelect && elements.comparisonBaselineSelect.value !== baselineCountry.iso3) {
+    elements.comparisonBaselineSelect.value = baselineCountry.iso3;
+  }
+}
+
+function getComparisonBaselineCountry() {
+  return state.countries.find((country) => country.iso3 === state.comparisonBaselineIso3)
+    || state.italy
+    || null;
+}
+
+function renderFlagAndName(country) {
+  const flag = countryFlagEmoji(country);
+  return flag ? `${flag} ${country.name}` : country.name;
 }
 
 // ─── EXTRA DATA ──────────────────────────────────────────
@@ -702,21 +740,9 @@ function mergeExtraData(countries) {
       country.intentionalHomicides = s.intentionalHomicides;
       country.metricDetails.intentionalHomicides = { value: s.intentionalHomicides, year: "2023", source: "UNODC / World Bank" };
     }
-    if (s.ruleOfLawEstimate != null) {
-      country.ruleOfLawEstimate = s.ruleOfLawEstimate;
-      country.metricDetails.ruleOfLawEstimate = { value: s.ruleOfLawEstimate, year: "2023", source: "WGI / World Bank" };
-    }
     if (s.outOfPocketHealth != null) {
       country.outOfPocketHealth = s.outOfPocketHealth;
       country.metricDetails.outOfPocketHealth = { value: s.outOfPocketHealth, year: "2021", source: "World Bank" };
-    }
-    if (s.uhcCoverageIndex != null) {
-      country.uhcCoverageIndex = s.uhcCoverageIndex;
-      country.metricDetails.uhcCoverageIndex = { value: s.uhcCoverageIndex, year: "2021", source: "WHO / World Bank" };
-    }
-    if (s.intergenerationalMobility != null) {
-      country.intergenerationalMobility = s.intergenerationalMobility;
-      country.metricDetails.intergenerationalMobility = { value: s.intergenerationalMobility, year: "2018", source: "Global Database on Intergenerational Mobility" };
     }
   }
 }
@@ -888,9 +914,9 @@ function renderDistribution(countries) {
   }).join("");
 }
 
-function renderPlaceholderComparison() {
-  renderComparisonSummary(getVisibleMetrics(), null);
-  renderComparisonVisual(null, null, getVisibleMetrics());
+function renderPlaceholderComparison(baselineCountry = getComparisonBaselineCountry()) {
+  renderComparisonSummary(getVisibleMetrics(), null, baselineCountry);
+  renderComparisonVisual(null, baselineCountry, getVisibleMetrics());
   elements.comparisonWarning.classList.add("hidden");
   elements.comparisonWarning.textContent = "";
   elements.comparisonGrid.innerHTML = getComparisonRowsMarkup(getVisibleMetrics(), ({ metric }) => `
@@ -905,7 +931,7 @@ function renderPlaceholderComparison() {
       </div>
       <div class="comparison-value">
         <strong>-</strong>
-        <span>Italia</span>
+        <span>${escapeHtml(baselineCountry?.name || "Paese di confronto")}</span>
       </div>
       <div class="comparison-delta">
         <strong class="tone-neutral">In attesa</strong>
@@ -931,22 +957,22 @@ function finishLotteryAnimation() {
   }, 780);
 }
 
-function renderComparison(country, italy) {
+function renderComparison(country, baselineCountry) {
   const visibleMetrics = getVisibleMetrics();
   const missingCount = visibleMetrics.filter(
-    (m) => country[m.key] == null || italy[m.key] == null
+    (m) => country[m.key] == null || baselineCountry?.[m.key] == null
   ).length;
-  renderComparisonSummary(visibleMetrics, country);
-  renderComparisonVisual(country, italy, visibleMetrics);
+  renderComparisonSummary(visibleMetrics, country, baselineCountry);
+  renderComparisonVisual(country, baselineCountry, visibleMetrics);
   renderComparisonWarning(missingCount, visibleMetrics.length);
 
   elements.comparisonGrid.innerHTML = getComparisonRowsMarkup(visibleMetrics, ({ metric, categoryLabel }) => {
     const candidate = country[metric.key];
-    const baseline = italy[metric.key];
+    const baseline = baselineCountry?.[metric.key];
     const tone = compareMetric(candidate, baseline, metric.betterDirection);
-    const detail = buildMetricDetail(candidate, baseline, metric.betterDirection, metric.detail);
-    const deltaLabel = buildDeltaLabel(metric, candidate, baseline);
-    const directionLabel = buildDirectionLabel(country.name, candidate, baseline, metric.betterDirection);
+    const detail = buildMetricDetail(candidate, baseline, metric.betterDirection, metric.detail, baselineCountry?.name);
+    const deltaLabel = buildDeltaLabel(metric, candidate, baseline, baselineCountry?.name);
+    const directionLabel = buildDirectionLabel(country.name, baselineCountry?.name || "Paese selezionato", candidate, baseline, metric.betterDirection);
     const confidence = getMetricConfidence(country, metric.key);
     const coverage = getMetricCoverage(metric.key);
 
@@ -970,10 +996,10 @@ function renderComparison(country, italy) {
             </strong>
             <span>${formatMetricMeta(metric.key, country)}</span>
           </div>
-          <div class="comparison-value comparison-value-italy">
-            <span class="comparison-value-label">${renderCountryLabelMarkup({ iso2: "IT", name: "Italia" })}</span>
-            <strong>${formatMetric(metric.key, italy)}</strong>
-            <span>${formatMetricMeta(metric.key, italy)}</span>
+          <div class="comparison-value comparison-value-baseline">
+            <span class="comparison-value-label">${renderCountryLabelMarkup(baselineCountry || { iso2: "", name: "Paese di confronto" })}</span>
+            <strong>${formatMetric(metric.key, baselineCountry || {})}</strong>
+            <span>${formatMetricMeta(metric.key, baselineCountry || {})}</span>
           </div>
         </div>
         <div class="comparison-delta">
@@ -1012,14 +1038,14 @@ function getComparisonRowsMarkup(metrics, renderRow) {
   return chunks.join("");
 }
 
-function buildMetricDetail(candidate, baseline, betterDirection, suffix) {
+function buildMetricDetail(candidate, baseline, betterDirection, suffix, baselineName = "paese selezionato") {
   if (candidate == null || baseline == null) {
-    return `Dato non disponibile in modo comparabile per ${suffix}.`;
+    return `Dato non disponibile in modo comparabile rispetto a ${baselineName} per ${suffix}.`;
   }
   const delta = candidate - baseline;
   const absoluteDelta = Math.abs(delta);
   if (absoluteDelta < 0.05) {
-    return `Valore molto vicino a quello italiano per ${suffix}.`;
+    return `Valore molto vicino a quello di ${baselineName} per ${suffix}.`;
   }
   const better = betterDirection === "higher" ? delta > 0 : delta < 0;
   const toneText = better ? "Meglio" : "Peggio";
@@ -1027,14 +1053,14 @@ function buildMetricDetail(candidate, baseline, betterDirection, suffix) {
     suffix === "dollari correnti per persona"
       ? formatCurrency(absoluteDelta)
       : formatNumber(absoluteDelta, 1);
-  return `${toneText} rispetto all'Italia di ${formattedDelta} per ${suffix}.`;
+  return `${toneText} rispetto a ${baselineName} di ${formattedDelta} per ${suffix}.`;
 }
 
-function buildDeltaLabel(metric, candidate, baseline) {
+function buildDeltaLabel(metric, candidate, baseline, baselineName = "il paese selezionato") {
   if (candidate == null || baseline == null) return "Confronto non disponibile";
   const delta = candidate - baseline;
   const absoluteDelta = Math.abs(delta);
-  if (absoluteDelta < 0.05) return "Quasi uguale all'Italia";
+  if (absoluteDelta < 0.05) return `Quasi uguale a ${baselineName}`;
 
   const countryAhead = metric.betterDirection === "higher" ? delta > 0 : delta < 0;
   const relation = countryAhead ? "in più" : "in meno";
@@ -1060,10 +1086,7 @@ function buildDeltaLabel(metric, candidate, baseline) {
       return `${formatNumber(absoluteDelta, 0)} ${countryAhead ? "in meno" : "in più"} ogni 100.000`;
     case "intentionalHomicides":
       return `${formatNumber(absoluteDelta, 2)} ${countryAhead ? "in meno" : "in più"} per 100.000`;
-    case "ruleOfLawEstimate":
     case "giniIndex":
-    case "uhcCoverageIndex":
-    case "intergenerationalMobility":
       return `${formatNumber(absoluteDelta, 1)} punti ${relation}`;
     default:
       return `${formatNumber(absoluteDelta, 1)} ${relation}`;
@@ -1090,7 +1113,7 @@ function renderComparisonWarning(missingCount, totalCount) {
       : `Nota di lettura: ${missingCount} indicatore su ${totalCount} non è pienamente confrontabile.`;
 }
 
-function renderComparisonSummary(metrics, country) {
+function renderComparisonSummary(metrics, country, baselineCountry) {
   const averageCoverage = metrics.length
     ? metrics.reduce((sum, metric) => sum + getMetricCoverage(metric.key).ratio, 0) / metrics.length
     : 0;
@@ -1098,7 +1121,7 @@ function renderComparisonSummary(metrics, country) {
     ? metrics.filter((metric) => getMetricConfidence(country, metric.key).level === "high").length
     : 0;
   const completeCount = country
-    ? metrics.filter((metric) => country[metric.key] != null && state.italy?.[metric.key] != null).length
+    ? metrics.filter((metric) => country[metric.key] != null && baselineCountry?.[metric.key] != null).length
     : 0;
 
   const cards = [
@@ -1116,7 +1139,9 @@ function renderComparisonSummary(metrics, country) {
       label: country ? "Confronti completi" : "Base dati",
       value: country ? `${completeCount}/${metrics.length}` : `${state.countries.length} paesi`,
       meta: country
-        ? `Indicatori disponibili sia per ${country.name} sia per l'Italia`
+        ? baselineCountry && country.iso3 === baselineCountry.iso3
+          ? `Confronto interno al medesimo paese (${country.name})`
+          : `Indicatori disponibili sia per ${country.name} sia per ${baselineCountry?.name || "il paese selezionato"}`
         : "Dataset pronto per il sorteggio",
     },
   ];
@@ -1138,20 +1163,20 @@ function renderComparisonSummary(metrics, country) {
   `).join("");
 }
 
-function renderComparisonVisual(country, italy, metrics) {
+function renderComparisonVisual(country, baselineCountry, metrics) {
   if (!elements.comparisonVisual) return;
-  if (!country || !italy) {
+  if (!country || !baselineCountry) {
     elements.comparisonVisual.innerHTML = `
       <div class="comparison-balance-card is-placeholder">
         <span class="comparison-balance-label">Colpo d'occhio</span>
         <strong>Il riepilogo apparirà dopo il sorteggio</strong>
-        <p>Qui riassumeremo subito dove il paese estratto sta meglio, peggio o in linea con l'Italia.</p>
+        <p>Qui riassumeremo subito dove il paese estratto sta meglio, peggio o in linea con il paese di confronto.</p>
       </div>
     `;
     return;
   }
 
-  const tones = metrics.map((metric) => compareMetric(country[metric.key], italy[metric.key], metric.betterDirection));
+  const tones = metrics.map((metric) => compareMetric(country[metric.key], baselineCountry[metric.key], metric.betterDirection));
   const better = tones.filter((tone) => tone === "better").length;
   const worse = tones.filter((tone) => tone === "worse").length;
   const neutral = tones.filter((tone) => tone === "neutral").length;
@@ -1163,7 +1188,7 @@ function renderComparisonVisual(country, italy, metrics) {
   const leadLabel = lead > 0
     ? `${country.name} avanti su ${better} indicatori`
     : lead < 0
-      ? `Italia avanti su ${worse} indicatori`
+      ? `${baselineCountry.name} avanti su ${worse} indicatori`
       : "Quadro complessivamente bilanciato";
 
   elements.comparisonVisual.innerHTML = `
@@ -1191,22 +1216,22 @@ function renderComparisonVisual(country, italy, metrics) {
   `;
 }
 
-function buildDirectionLabel(countryName, candidate, baseline, betterDirection) {
+function buildDirectionLabel(countryName, baselineName, candidate, baseline, betterDirection) {
   if (candidate == null || baseline == null) return "Confronto incompleto";
   const delta = Math.abs(candidate - baseline);
   if (delta < 0.05) return "Molto simile";
   const countryBetter = betterDirection === "higher" ? candidate > baseline : candidate < baseline;
-  return countryBetter ? `${countryName} avanti` : "Italia avanti";
+  return countryBetter ? `${countryName} avanti` : `${baselineName} avanti`;
 }
 
-function renderInsights(country, italy) {
+function renderInsights(country, baselineCountry) {
   const scoringMetrics = getScoringMetrics();
   const tones = [];
   const impacts = [];
 
   for (const metric of scoringMetrics) {
     const candidate = country[metric.key];
-    const baseline = italy[metric.key];
+    const baseline = baselineCountry?.[metric.key];
     const tone = compareMetric(candidate, baseline, metric.betterDirection);
     if (tone !== "neutral") tones.push(tone);
     const impact = computeImpact(candidate, baseline);
@@ -1225,8 +1250,8 @@ function renderInsights(country, italy) {
   }
 
   elements.insightTopDiffs.innerHTML = top.map(({ metric, candidate, baseline }) => {
-    const delta = buildDeltaLabel(metric, candidate, baseline);
-    return `<li><strong>${metric.label}</strong>: ${delta} rispetto all'Italia.</li>`;
+    const delta = buildDeltaLabel(metric, candidate, baseline, baselineCountry?.name || "il paese selezionato");
+    return `<li><strong>${metric.label}</strong>: ${delta} rispetto a ${baselineCountry?.name || "il paese selezionato"}.</li>`;
   }).join("");
 }
 

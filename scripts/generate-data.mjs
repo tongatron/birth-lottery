@@ -16,10 +16,7 @@ const FILES = {
   giniIndex: "/private/tmp/birth-lottery-gini.json",
   gdpPerCapitaPpp: "/private/tmp/birth-lottery-gdp-ppp.json",
   intentionalHomicides: "/private/tmp/birth-lottery-homicide.json",
-  ruleOfLawEstimate: "/private/tmp/birth-lottery-rule-of-law.json",
   outOfPocketHealth: "/private/tmp/birth-lottery-oop-health.json",
-  uhcCoverageIndex: "/private/tmp/birth-lottery-uhc.json",
-  intergenerationalMobility: "/private/tmp/birth-lottery-ig-mobility.json",
   baselineData: "/private/tmp/birth-lottery-baseline-data.js",
 };
 
@@ -156,10 +153,7 @@ function buildMetricDetails(country) {
   if (country.metrics.giniIndex) details.giniIndex = country.metrics.giniIndex;
   if (country.metrics.gdpPerCapitaPpp) details.gdpPerCapitaPpp = country.metrics.gdpPerCapitaPpp;
   if (country.metrics.intentionalHomicides) details.intentionalHomicides = country.metrics.intentionalHomicides;
-  if (country.metrics.ruleOfLawEstimate) details.ruleOfLawEstimate = country.metrics.ruleOfLawEstimate;
   if (country.metrics.outOfPocketHealth) details.outOfPocketHealth = country.metrics.outOfPocketHealth;
-  if (country.metrics.uhcCoverageIndex) details.uhcCoverageIndex = country.metrics.uhcCoverageIndex;
-  if (country.metrics.intergenerationalMobility) details.intergenerationalMobility = country.metrics.intergenerationalMobility;
   return details;
 }
 
@@ -200,10 +194,7 @@ async function main() {
     giniIndex,
     gdpPerCapitaPpp,
     intentionalHomicides,
-    ruleOfLawEstimate,
     outOfPocketHealth,
-    uhcCoverageIndex,
-    intergenerationalMobility,
   ] = await Promise.all([
     loadJson(FILES.countries),
     loadJson(FILES.population),
@@ -220,10 +211,7 @@ async function main() {
     loadJsonIfExists(FILES.giniIndex),
     loadJsonIfExists(FILES.gdpPerCapitaPpp),
     loadJsonIfExists(FILES.intentionalHomicides),
-    loadJsonIfExists(FILES.ruleOfLawEstimate),
     loadJsonIfExists(FILES.outOfPocketHealth),
-    loadJsonIfExists(FILES.uhcCoverageIndex),
-    loadJsonIfExists(FILES.intergenerationalMobility),
   ]);
   const baselineCountries = await loadBaselineCountries(FILES.baselineData);
 
@@ -255,17 +243,8 @@ async function main() {
   if (intentionalHomicides?.[1]) {
     applyMetric(countryIndex, intentionalHomicides[1], "intentionalHomicides");
   }
-  if (ruleOfLawEstimate?.[1]) {
-    applyMetric(countryIndex, ruleOfLawEstimate[1], "ruleOfLawEstimate");
-  }
   if (outOfPocketHealth?.[1]) {
     applyMetric(countryIndex, outOfPocketHealth[1], "outOfPocketHealth");
-  }
-  if (uhcCoverageIndex?.[1]) {
-    applyMetric(countryIndex, uhcCoverageIndex[1], "uhcCoverageIndex");
-  }
-  if (intergenerationalMobility?.[1]) {
-    applyMetric(countryIndex, intergenerationalMobility[1], "intergenerationalMobility");
   }
   applyBaselineFallback(countryIndex, baselineCountries, [
     "literacyRate",
@@ -274,10 +253,7 @@ async function main() {
     "giniIndex",
     "gdpPerCapitaPpp",
     "intentionalHomicides",
-    "ruleOfLawEstimate",
     "outOfPocketHealth",
-    "uhcCoverageIndex",
-    "intergenerationalMobility",
   ]);
 
   const dataset = Object.values(countryIndex)
@@ -320,17 +296,8 @@ async function main() {
       if (country.metrics.intentionalHomicides?.value != null) {
         output.intentionalHomicides = country.metrics.intentionalHomicides.value;
       }
-      if (country.metrics.ruleOfLawEstimate?.value != null) {
-        output.ruleOfLawEstimate = country.metrics.ruleOfLawEstimate.value;
-      }
       if (country.metrics.outOfPocketHealth?.value != null) {
         output.outOfPocketHealth = country.metrics.outOfPocketHealth.value;
-      }
-      if (country.metrics.uhcCoverageIndex?.value != null) {
-        output.uhcCoverageIndex = country.metrics.uhcCoverageIndex.value;
-      }
-      if (country.metrics.intergenerationalMobility?.value != null) {
-        output.intergenerationalMobility = country.metrics.intergenerationalMobility.value;
       }
       return output;
     })
@@ -370,10 +337,7 @@ async function main() {
     giniIndex: "giniIndex",
     gdpPerCapitaPpp: "gdpPerCapitaPpp",
     intentionalHomicides: "intentionalHomicides",
-    ruleOfLawEstimate: "ruleOfLawEstimate",
     outOfPocketHealth: "outOfPocketHealth",
-    uhcCoverageIndex: "uhcCoverageIndex",
-    intergenerationalMobility: "intergenerationalMobility",
   });
 }
 

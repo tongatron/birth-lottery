@@ -122,7 +122,7 @@
 
             <div id="result-empty" class="result-empty">
               Avvia la lotteria per vedere il paese estratto e confrontarlo
-              con l'Italia.
+              con il paese di confronto.
             </div>
 
             <div
@@ -182,7 +182,7 @@
           <section id="comparison-panel" class="panel comparison hidden" aria-hidden="true">
             <div class="panel-heading">
               <p class="section-kicker">Confronto</p>
-              <h2>Italia vs paese estratto</h2>
+              <h2 id="comparison-heading">Confronto tra paesi</h2>
             </div>
             <div class="comparison-toolbar">
               <div class="comparison-toggle" role="tablist" aria-label="Modalità confronto">
@@ -207,16 +207,20 @@
                   Completa
                 </button>
               </div>
-              <p id="comparison-caption" class="comparison-caption">
-                Una lettura più corta mette davanti gli indicatori con impatto e copertura più solidi.
-              </p>
+              <label class="comparison-baseline-picker" for="comparison-baseline-select">
+                <span>Paese di confronto</span>
+                <select id="comparison-baseline-select"></select>
+              </label>
             </div>
+            <p id="comparison-caption" class="comparison-caption">
+              Una lettura più corta mette davanti gli indicatori con impatto e copertura più solidi.
+            </p>
             <div id="comparison-summary" class="comparison-summary"></div>
             <div id="comparison-visual" class="comparison-visual" aria-live="polite"></div>
             <div class="comparison-header" aria-hidden="true">
               <span>Indicatore</span>
               <span>Paese estratto</span>
-              <span>Italia</span>
+              <span id="comparison-baseline-label">Paese di confronto</span>
               <span>Delta</span>
             </div>
             <p id="comparison-warning" class="comparison-warning hidden" role="status"></p>
@@ -224,7 +228,7 @@
               id="comparison-grid"
               class="comparison-grid"
               role="table"
-              aria-label="Confronto indicatori tra paese estratto e Italia"
+              aria-label="Confronto indicatori tra paese estratto e paese di confronto"
             ></div>
           </section>
 
