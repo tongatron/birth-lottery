@@ -23,6 +23,13 @@ Il sorteggio non usa la popolazione totale come peso, ma una stima delle **nasci
 - `NY.GDP.PCAP.CD` GDP per capita (current US$)
 - `IT.NET.USER.ZS` Individuals using the Internet (% of population)
 - `SI.POV.NAHC` Poverty headcount ratio at national poverty lines (% of population)
+- `SI.POV.GINI` Gini index
+- `NY.GDP.PCAP.PP.CD` GDP per capita, PPP (current international $)
+- `VC.IHR.PSRC.P5` Intentional homicides (per 100,000 people)
+- `GE.EST` Worldwide Governance Indicators: Rule of Law (estimate)
+- `SH.XPD.OOPC.CH.ZS` Out-of-pocket expenditure (% of current health expenditure)
+- `SH.UHC.SRVS.CV.XD` UHC service coverage index
+- `GDIM.YOSM` Global Database on Intergenerational Mobility: years of schooling mobility estimate (copertura discontinua)
 
 Fonte aggiuntiva:
 

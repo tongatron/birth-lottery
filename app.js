@@ -123,6 +123,62 @@ const METRIC_CONFIG = [
     detail: "dollari pro capite spesi in sanità",
     category: "Salute",
   },
+  {
+    key: "giniIndex",
+    label: "Indice di Gini",
+    formatter: (v) => formatNumber(v, 1),
+    betterDirection: "lower",
+    detail: "disuguaglianza di reddito/consumo (0-100)",
+    category: "Economia",
+  },
+  {
+    key: "gdpPerCapitaPpp",
+    label: "PIL pro capite (PPP)",
+    formatter: (v) => formatCurrency(v),
+    betterDirection: "higher",
+    detail: "dollari internazionali correnti per persona",
+    category: "Economia",
+  },
+  {
+    key: "intentionalHomicides",
+    label: "Tasso omicidi",
+    formatter: (v) => formatNumber(v, 2),
+    betterDirection: "lower",
+    detail: "omicidi intenzionali per 100.000 persone",
+    category: "Sicurezza",
+  },
+  {
+    key: "ruleOfLawEstimate",
+    label: "Rule of law",
+    formatter: (v) => formatNumber(v, 2),
+    betterDirection: "higher",
+    detail: "stima governance (circa da -2.5 a +2.5)",
+    category: "Sicurezza",
+  },
+  {
+    key: "outOfPocketHealth",
+    label: "Spesa sanitaria out-of-pocket",
+    formatter: (v) => formatNumber(v, 1) + "%",
+    betterDirection: "lower",
+    detail: "quota della spesa sanitaria pagata di tasca propria",
+    category: "Salute",
+  },
+  {
+    key: "uhcCoverageIndex",
+    label: "Copertura servizi essenziali (UHC)",
+    formatter: (v) => formatNumber(v, 1),
+    betterDirection: "higher",
+    detail: "indice di copertura dei servizi sanitari essenziali",
+    category: "Salute",
+  },
+  {
+    key: "intergenerationalMobility",
+    label: "Mobilità intergenerazionale",
+    formatter: (v) => formatNumber(v, 1),
+    betterDirection: "higher",
+    detail: "proxy opportunità: years of schooling mobility estimate",
+    category: "Mobilità sociale",
+  },
 ];
 
 const ESSENTIAL_METRIC_KEYS = [
@@ -131,6 +187,8 @@ const ESSENTIAL_METRIC_KEYS = [
   "gdpPerCapita",
   "hdi",
   "povertyRate",
+  "giniIndex",
+  "intentionalHomicides",
 ];
 
 const state = {
@@ -602,6 +660,34 @@ function mergeExtraData(countries) {
     if (s.healthExpenditure != null) {
       country.healthExpenditure = s.healthExpenditure;
       country.metricDetails.healthExpenditure = { value: s.healthExpenditure, year: "2021", source: "World Bank" };
+    }
+    if (s.giniIndex != null) {
+      country.giniIndex = s.giniIndex;
+      country.metricDetails.giniIndex = { value: s.giniIndex, year: "2022", source: "World Bank" };
+    }
+    if (s.gdpPerCapitaPpp != null) {
+      country.gdpPerCapitaPpp = s.gdpPerCapitaPpp;
+      country.metricDetails.gdpPerCapitaPpp = { value: s.gdpPerCapitaPpp, year: "2024", source: "World Bank ICP" };
+    }
+    if (s.intentionalHomicides != null) {
+      country.intentionalHomicides = s.intentionalHomicides;
+      country.metricDetails.intentionalHomicides = { value: s.intentionalHomicides, year: "2023", source: "UNODC / World Bank" };
+    }
+    if (s.ruleOfLawEstimate != null) {
+      country.ruleOfLawEstimate = s.ruleOfLawEstimate;
+      country.metricDetails.ruleOfLawEstimate = { value: s.ruleOfLawEstimate, year: "2023", source: "WGI / World Bank" };
+    }
+    if (s.outOfPocketHealth != null) {
+      country.outOfPocketHealth = s.outOfPocketHealth;
+      country.metricDetails.outOfPocketHealth = { value: s.outOfPocketHealth, year: "2021", source: "World Bank" };
+    }
+    if (s.uhcCoverageIndex != null) {
+      country.uhcCoverageIndex = s.uhcCoverageIndex;
+      country.metricDetails.uhcCoverageIndex = { value: s.uhcCoverageIndex, year: "2021", source: "WHO / World Bank" };
+    }
+    if (s.intergenerationalMobility != null) {
+      country.intergenerationalMobility = s.intergenerationalMobility;
+      country.metricDetails.intergenerationalMobility = { value: s.intergenerationalMobility, year: "2018", source: "Global Database on Intergenerational Mobility" };
     }
   }
 }

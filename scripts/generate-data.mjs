@@ -19,6 +19,14 @@ const FILES = {
   literacyRate: "/private/tmp/birth-lottery-literacy.json",
   under5Mortality: "/private/tmp/birth-lottery-under5.json",
   healthExpenditure: "/private/tmp/birth-lottery-health.json",
+  giniIndex: "/private/tmp/birth-lottery-gini.json",
+  gdpPerCapitaPpp: "/private/tmp/birth-lottery-gdp-ppp.json",
+  intentionalHomicides: "/private/tmp/birth-lottery-homicide.json",
+  ruleOfLawEstimate: "/private/tmp/birth-lottery-rule-of-law.json",
+  outOfPocketHealth: "/private/tmp/birth-lottery-oop-health.json",
+  uhcCoverageIndex: "/private/tmp/birth-lottery-uhc.json",
+  intergenerationalMobility: "/private/tmp/birth-lottery-ig-mobility.json",
+  baselineData: "/private/tmp/birth-lottery-baseline-data.js",
 };
 
 async function loadJson(path) {
@@ -40,6 +48,60 @@ async function loadHdiRows(path) {
   const scriptPath = fileURLToPath(new URL("./extract-undp-hdi.py", import.meta.url));
   const { stdout } = await execFileAsync("python3", [scriptPath, path]);
   return JSON.parse(stdout);
+}
+
+async function loadHdiRowsFallbackFromData() {
+  try {
+    const raw = await readFile(new URL("../data.js", import.meta.url), "utf8");
+    const match = raw.match(/window\.BIRTH_LOTTERY_DATA\s*=\s*(\{[\s\S]*\});\s*$/);
+    if (!match) return [];
+    const parsed = JSON.parse(match[1]);
+    const countries = Array.isArray(parsed?.countries) ? parsed.countries : [];
+    return countries
+      .filter((c) => c?.name && Number.isFinite(Number(c?.hdi)))
+      .map((c) => ({
+        country: c.name,
+        value: Number(c.hdi),
+        year: Number(c?.metricDetails?.hdi?.year) || 2023,
+        source: c?.metricDetails?.hdi?.source || "UNDP Human Development Report 2025 (fallback)",
+      }));
+  } catch {
+    return [];
+  }
+}
+
+async function loadBaselineCountries(path) {
+  try {
+    const raw = await readFile(path, "utf8");
+    const match = raw.match(/window\.BIRTH_LOTTERY_DATA\s*=\s*(\{[\s\S]*\});\s*$/);
+    if (!match) return [];
+    const parsed = JSON.parse(match[1]);
+    return Array.isArray(parsed?.countries) ? parsed.countries : [];
+  } catch {
+    return [];
+  }
+}
+
+function applyBaselineFallback(countryIndex, baselineCountries, keys) {
+  if (!baselineCountries.length) return;
+  const byIso3 = new Map(baselineCountries.map((c) => [c.iso3, c]));
+  for (const country of Object.values(countryIndex)) {
+    const base = byIso3.get(country.iso3);
+    if (!base) continue;
+    const baseDetails = base.metricDetails && typeof base.metricDetails === "object"
+      ? base.metricDetails
+      : {};
+    for (const key of keys) {
+      if (country.metrics[key]?.value != null) continue;
+      const baseValue = base[key];
+      if (baseValue == null) continue;
+      country.metrics[key] = {
+        value: Number(baseValue),
+        year: String(baseDetails[key]?.year || "n/d"),
+        source: baseDetails[key]?.source || "Baseline dataset fallback",
+      };
+    }
+  }
 }
 
 function buildCountryIndex(rows) {
@@ -165,6 +227,13 @@ function buildMetricDetails(country) {
   if (country.metrics.literacyRate) details.literacyRate = country.metrics.literacyRate;
   if (country.metrics.under5Mortality) details.under5Mortality = country.metrics.under5Mortality;
   if (country.metrics.healthExpenditure) details.healthExpenditure = country.metrics.healthExpenditure;
+  if (country.metrics.giniIndex) details.giniIndex = country.metrics.giniIndex;
+  if (country.metrics.gdpPerCapitaPpp) details.gdpPerCapitaPpp = country.metrics.gdpPerCapitaPpp;
+  if (country.metrics.intentionalHomicides) details.intentionalHomicides = country.metrics.intentionalHomicides;
+  if (country.metrics.ruleOfLawEstimate) details.ruleOfLawEstimate = country.metrics.ruleOfLawEstimate;
+  if (country.metrics.outOfPocketHealth) details.outOfPocketHealth = country.metrics.outOfPocketHealth;
+  if (country.metrics.uhcCoverageIndex) details.uhcCoverageIndex = country.metrics.uhcCoverageIndex;
+  if (country.metrics.intergenerationalMobility) details.intergenerationalMobility = country.metrics.intergenerationalMobility;
   return details;
 }
 
@@ -202,6 +271,13 @@ async function main() {
     literacyRate,
     under5Mortality,
     healthExpenditure,
+    giniIndex,
+    gdpPerCapitaPpp,
+    intentionalHomicides,
+    ruleOfLawEstimate,
+    outOfPocketHealth,
+    uhcCoverageIndex,
+    intergenerationalMobility,
   ] = await Promise.all([
     loadJson(FILES.countries),
     loadJson(FILES.population),
@@ -215,8 +291,22 @@ async function main() {
     loadJsonIfExists(FILES.literacyRate),
     loadJsonIfExists(FILES.under5Mortality),
     loadJsonIfExists(FILES.healthExpenditure),
+    loadJsonIfExists(FILES.giniIndex),
+    loadJsonIfExists(FILES.gdpPerCapitaPpp),
+    loadJsonIfExists(FILES.intentionalHomicides),
+    loadJsonIfExists(FILES.ruleOfLawEstimate),
+    loadJsonIfExists(FILES.outOfPocketHealth),
+    loadJsonIfExists(FILES.uhcCoverageIndex),
+    loadJsonIfExists(FILES.intergenerationalMobility),
   ]);
-  const hdiData = await loadHdiRows(FILES.hdiWorkbook);
+  let hdiData = [];
+  try {
+    hdiData = await loadHdiRows(FILES.hdiWorkbook);
+  } catch {
+    console.warn("UNDP HDI workbook missing: using HDI fallback from existing data.js");
+    hdiData = await loadHdiRowsFallbackFromData();
+  }
+  const baselineCountries = await loadBaselineCountries(FILES.baselineData);
 
   const countryIndex = buildCountryIndex(countries[1]);
 
@@ -238,6 +328,40 @@ async function main() {
   if (healthExpenditure?.[1]) {
     applyMetric(countryIndex, healthExpenditure[1], "healthExpenditure");
   }
+  if (giniIndex?.[1]) {
+    applyMetric(countryIndex, giniIndex[1], "giniIndex");
+  }
+  if (gdpPerCapitaPpp?.[1]) {
+    applyMetric(countryIndex, gdpPerCapitaPpp[1], "gdpPerCapitaPpp");
+  }
+  if (intentionalHomicides?.[1]) {
+    applyMetric(countryIndex, intentionalHomicides[1], "intentionalHomicides");
+  }
+  if (ruleOfLawEstimate?.[1]) {
+    applyMetric(countryIndex, ruleOfLawEstimate[1], "ruleOfLawEstimate");
+  }
+  if (outOfPocketHealth?.[1]) {
+    applyMetric(countryIndex, outOfPocketHealth[1], "outOfPocketHealth");
+  }
+  if (uhcCoverageIndex?.[1]) {
+    applyMetric(countryIndex, uhcCoverageIndex[1], "uhcCoverageIndex");
+  }
+  if (intergenerationalMobility?.[1]) {
+    applyMetric(countryIndex, intergenerationalMobility[1], "intergenerationalMobility");
+  }
+  applyBaselineFallback(countryIndex, baselineCountries, [
+    "hdi",
+    "literacyRate",
+    "under5Mortality",
+    "healthExpenditure",
+    "giniIndex",
+    "gdpPerCapitaPpp",
+    "intentionalHomicides",
+    "ruleOfLawEstimate",
+    "outOfPocketHealth",
+    "uhcCoverageIndex",
+    "intergenerationalMobility",
+  ]);
 
   const dataset = Object.values(countryIndex)
     .map((country) => {
@@ -270,6 +394,27 @@ async function main() {
       }
       if (country.metrics.healthExpenditure?.value != null) {
         output.healthExpenditure = country.metrics.healthExpenditure.value;
+      }
+      if (country.metrics.giniIndex?.value != null) {
+        output.giniIndex = country.metrics.giniIndex.value;
+      }
+      if (country.metrics.gdpPerCapitaPpp?.value != null) {
+        output.gdpPerCapitaPpp = country.metrics.gdpPerCapitaPpp.value;
+      }
+      if (country.metrics.intentionalHomicides?.value != null) {
+        output.intentionalHomicides = country.metrics.intentionalHomicides.value;
+      }
+      if (country.metrics.ruleOfLawEstimate?.value != null) {
+        output.ruleOfLawEstimate = country.metrics.ruleOfLawEstimate.value;
+      }
+      if (country.metrics.outOfPocketHealth?.value != null) {
+        output.outOfPocketHealth = country.metrics.outOfPocketHealth.value;
+      }
+      if (country.metrics.uhcCoverageIndex?.value != null) {
+        output.uhcCoverageIndex = country.metrics.uhcCoverageIndex.value;
+      }
+      if (country.metrics.intergenerationalMobility?.value != null) {
+        output.intergenerationalMobility = country.metrics.intergenerationalMobility.value;
       }
       return output;
     })
@@ -307,6 +452,13 @@ async function main() {
     literacyRate: "literacyRate",
     under5Mortality: "under5Mortality",
     healthExpenditure: "healthExpenditure",
+    giniIndex: "giniIndex",
+    gdpPerCapitaPpp: "gdpPerCapitaPpp",
+    intentionalHomicides: "intentionalHomicides",
+    ruleOfLawEstimate: "ruleOfLawEstimate",
+    outOfPocketHealth: "outOfPocketHealth",
+    uhcCoverageIndex: "uhcCoverageIndex",
+    intergenerationalMobility: "intergenerationalMobility",
   });
 }
 
