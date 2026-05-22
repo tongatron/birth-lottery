@@ -128,6 +128,7 @@ const elements = {
   statusText: document.querySelector("#status-text"),
   resultEmpty: document.querySelector("#result-empty"),
   resultCard: document.querySelector("#result-card"),
+  lotteryVeil: document.querySelector("#lottery-veil"),
   resultCountry: document.querySelector("#result-country"),
   resultShare: document.querySelector("#result-share"),
   resultBirths: document.querySelector("#result-births"),
@@ -299,6 +300,7 @@ function rollLottery() {
   elements.statusText.textContent =
     "Il paese viene estratto in proporzione alle nascite annuali stimate.";
 
+  startLotteryAnimation();
   triggerBirthFlash();
   clearMapHighlight();
 
@@ -315,6 +317,8 @@ function rollLottery() {
     elements.resultCard.classList.remove("result-exit");
     elements.resultEmpty.classList.add("hidden");
     elements.resultCard.classList.remove("hidden");
+    elements.resultCard.classList.add("is-rolling");
+    elements.resultCard.classList.remove("winner-revealed");
     elements.resultInsights.classList.add("hidden");
     elements.resultCountry.classList.add("scrambling");
 
@@ -329,6 +333,8 @@ function rollLottery() {
 
       const winner = weightedPick(state.countries);
       if (!winner) {
+        finishLotteryAnimation();
+        elements.resultCard.classList.remove("is-rolling");
         state.isRolling = false;
         elements.drawButton.disabled = false;
         elements.drawButton.textContent = "Avvia la lotteria";
@@ -337,6 +343,7 @@ function rollLottery() {
       }
 
       renderWinner(winner);
+      finishLotteryAnimation();
       highlightMapCountry(winner.iso3);
 
       if (!prefersReduced) {
@@ -384,6 +391,10 @@ function startScramble(el) {
 
 function renderWinner(country) {
   elements.resultCountry.classList.remove("scrambling");
+  elements.resultCard.classList.remove("is-rolling");
+  elements.resultCard.classList.remove("winner-revealed");
+  void elements.resultCard.offsetWidth;
+  elements.resultCard.classList.add("winner-revealed");
   elements.resultCountry.textContent = country.name;
   elements.resultShare.textContent = formatPercent(country.birthShare);
   elements.resultBirths.textContent = formatInteger(country.annualBirths);
@@ -568,6 +579,20 @@ function renderPlaceholderComparison() {
 }
 
 // ─── COMPARISON ──────────────────────────────────────────
+
+function startLotteryAnimation() {
+  elements.lotteryVeil.classList.remove("hidden", "is-settling");
+  elements.lotteryVeil.classList.add("is-active");
+}
+
+function finishLotteryAnimation() {
+  elements.lotteryVeil.classList.remove("is-active");
+  elements.lotteryVeil.classList.add("is-settling");
+  window.setTimeout(() => {
+    elements.lotteryVeil.classList.add("hidden");
+    elements.lotteryVeil.classList.remove("is-settling");
+  }, 780);
+}
 
 function renderComparison(country, italy) {
   const missingCount = METRIC_CONFIG.filter(
