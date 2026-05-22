@@ -258,7 +258,8 @@ async function initMap(countries) {
   const maxShare = countries[0]?.birthShare || 0;
   for (const c of countries) {
     const num = ISO3_TO_NUMERIC[c.iso3];
-    if (num != null) birthByNumeric.set(String(num), c);
+    const key = numericIsoKey(num);
+    if (key) birthByNumeric.set(key, c);
   }
 
   const colorScale = d3.scaleLinear()
@@ -269,19 +270,19 @@ async function initMap(countries) {
     .data(countriesFeature.features)
     .join("path")
     .attr("class", (d) => {
-      const c = birthByNumeric.get(String(d.id));
+      const c = birthByNumeric.get(numericIsoKey(d.id));
       return "country-path" + (c ? " has-data" : "");
     })
     .attr("d", path)
     .attr("fill", (d) => {
-      const c = birthByNumeric.get(String(d.id));
+      const c = birthByNumeric.get(numericIsoKey(d.id));
       return c ? colorScale(c.birthShare) : null;
     })
     .attr("data-numeric", (d) => d.id);
 
   paths
     .on("mouseenter", function (event, d) {
-      const c = birthByNumeric.get(String(d.id));
+      const c = birthByNumeric.get(numericIsoKey(d.id));
       if (!c) return;
       const tooltip = elements.mapTooltip;
       tooltip.textContent = `${c.name} · ${formatPercent(c.birthShare)}`;
@@ -311,14 +312,20 @@ function positionTooltip(event, tooltip) {
 function highlightMapCountry(iso3) {
   if (!state.mapReady || !state.mapPaths) return;
   const { paths } = state.mapPaths;
-  const targetNum = String(ISO3_TO_NUMERIC[iso3] ?? "");
+  const targetNum = numericIsoKey(ISO3_TO_NUMERIC[iso3]);
 
-  paths.classed("country-winner", (d) => String(d.id) === targetNum);
+  paths.classed("country-winner", (d) => numericIsoKey(d.id) === targetNum);
 }
 
 function clearMapHighlight() {
   if (!state.mapReady || !state.mapPaths) return;
   state.mapPaths.paths.classed("country-winner", false);
+}
+
+function numericIsoKey(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "";
+  return String(Math.trunc(n)).padStart(3, "0");
 }
 
 // ─── LOTTERY ─────────────────────────────────────────────
