@@ -224,6 +224,7 @@ const elements = {
   insightTopDiffs: document.querySelector("#insight-top-diffs"),
   comparisonCaption: document.querySelector("#comparison-caption"),
   comparisonSummary: document.querySelector("#comparison-summary"),
+  comparisonVisual: document.querySelector("#comparison-visual"),
   comparisonWarning: document.querySelector("#comparison-warning"),
   comparisonGrid: document.querySelector("#comparison-grid"),
   comparisonToggleButtons: document.querySelectorAll(".comparison-toggle-button"),
@@ -868,6 +869,7 @@ function renderDistribution(countries) {
 
 function renderPlaceholderComparison() {
   renderComparisonSummary(getVisibleMetrics(), null);
+  renderComparisonVisual(null, null, getVisibleMetrics());
   elements.comparisonWarning.classList.add("hidden");
   elements.comparisonWarning.textContent = "";
   elements.comparisonGrid.innerHTML = getComparisonRowsMarkup(getVisibleMetrics(), ({ metric }) => `
@@ -914,6 +916,7 @@ function renderComparison(country, italy) {
     (m) => country[m.key] == null || italy[m.key] == null
   ).length;
   renderComparisonSummary(visibleMetrics, country);
+  renderComparisonVisual(country, italy, visibleMetrics);
   renderComparisonWarning(missingCount, visibleMetrics.length);
 
   elements.comparisonGrid.innerHTML = getComparisonRowsMarkup(visibleMetrics, ({ metric, categoryLabel }) => {
@@ -921,31 +924,39 @@ function renderComparison(country, italy) {
     const baseline = italy[metric.key];
     const tone = compareMetric(candidate, baseline, metric.betterDirection);
     const detail = buildMetricDetail(candidate, baseline, metric.betterDirection, metric.detail);
-    const deltaLabel = buildDeltaLabel(candidate, baseline, metric.betterDirection, metric.detail);
+    const deltaLabel = buildDeltaLabel(metric, candidate, baseline);
+    const directionLabel = buildDirectionLabel(country.name, candidate, baseline, metric.betterDirection);
     const confidence = getMetricConfidence(country, metric.key);
     const coverage = getMetricCoverage(metric.key);
 
     return `
       <article class="comparison-row" role="row" data-tone="${tone}">
-        <div class="comparison-indicator">
-          <strong>${metric.label}</strong>
-          <span>${metric.detail}</span>
-          <small>${categoryLabel} · ${coverage.label}</small>
+        <div class="comparison-row-head">
+          <div class="comparison-indicator">
+            <strong>${metric.label}</strong>
+            <span>${metric.detail}</span>
+          </div>
+          <small class="comparison-meta">${categoryLabel} · ${coverage.label}</small>
         </div>
-        <div class="comparison-value">
-          <strong class="${toneClass(tone)}">
-            ${formatMetric(metric.key, country)}
-            <span class="confidence-badge confidence-${confidence.level}" title="${confidence.title}">
-              ${confidence.label}
-            </span>
-          </strong>
-          <span>${escapeHtml(country.name)} · ${formatMetricMeta(metric.key, country)}</span>
-        </div>
-        <div class="comparison-value">
-          <strong>${formatMetric(metric.key, italy)}</strong>
-          <span>Italia · ${formatMetricMeta(metric.key, italy)}</span>
+        <div class="comparison-values">
+          <div class="comparison-value comparison-value-country">
+            <span class="comparison-value-label">${escapeHtml(country.name)}</span>
+            <strong class="${toneClass(tone)}">
+              ${formatMetric(metric.key, country)}
+              <span class="confidence-badge confidence-${confidence.level}" title="${confidence.title}">
+                ${confidence.label}
+              </span>
+            </strong>
+            <span>${formatMetricMeta(metric.key, country)}</span>
+          </div>
+          <div class="comparison-value comparison-value-italy">
+            <span class="comparison-value-label">Italia</span>
+            <strong>${formatMetric(metric.key, italy)}</strong>
+            <span>${formatMetricMeta(metric.key, italy)}</span>
+          </div>
         </div>
         <div class="comparison-delta">
+          <span class="comparison-outcome comparison-outcome-${tone}">${escapeHtml(directionLabel)}</span>
           <strong class="${toneClass(tone)}">${deltaLabel}</strong>
           <span>${detail}</span>
         </div>
@@ -998,17 +1009,45 @@ function buildMetricDetail(candidate, baseline, betterDirection, suffix) {
   return `${toneText} rispetto all'Italia di ${formattedDelta} per ${suffix}.`;
 }
 
-function buildDeltaLabel(candidate, baseline, betterDirection, suffix) {
-  if (candidate == null || baseline == null) return "N/D";
+function buildDeltaLabel(metric, candidate, baseline) {
+  if (candidate == null || baseline == null) return "Confronto non disponibile";
   const delta = candidate - baseline;
   const absoluteDelta = Math.abs(delta);
-  if (absoluteDelta < 0.05) return "Allineato";
-  const formattedDelta =
-    suffix === "dollari correnti per persona"
-      ? formatCurrency(absoluteDelta)
-      : formatNumber(absoluteDelta, 1);
-  const positive = betterDirection === "higher" ? delta > 0 : delta < 0;
-  return positive ? `+ ${formattedDelta}` : `− ${formattedDelta}`;
+  if (absoluteDelta < 0.05) return "Quasi uguale all'Italia";
+
+  const countryAhead = metric.betterDirection === "higher" ? delta > 0 : delta < 0;
+  const relation = countryAhead ? "in più" : "in meno";
+
+  switch (metric.key) {
+    case "lifeExpectancy":
+    case "expectedSchooling":
+      return `${formatNumber(absoluteDelta, 1)} anni ${relation}`;
+    case "gdpPerCapita":
+    case "gdpPerCapitaPpp":
+    case "healthExpenditure":
+      return `${formatCurrency(absoluteDelta)} ${relation}`;
+    case "internetUsers":
+    case "povertyRate":
+    case "womenInParliament":
+    case "literacyRate":
+    case "outOfPocketHealth":
+      return `${formatNumber(absoluteDelta, 1)} punti ${relation}`;
+    case "infantMortality":
+    case "under5Mortality":
+      return `${formatNumber(absoluteDelta, 1)} ${countryAhead ? "in meno" : "in più"} ogni 1.000`;
+    case "maternalMortality":
+      return `${formatNumber(absoluteDelta, 0)} ${countryAhead ? "in meno" : "in più"} ogni 100.000`;
+    case "intentionalHomicides":
+      return `${formatNumber(absoluteDelta, 2)} ${countryAhead ? "in meno" : "in più"} per 100.000`;
+    case "hdi":
+    case "ruleOfLawEstimate":
+    case "giniIndex":
+    case "uhcCoverageIndex":
+    case "intergenerationalMobility":
+      return `${formatNumber(absoluteDelta, metric.key === "hdi" ? 3 : 1)} punti ${relation}`;
+    default:
+      return `${formatNumber(absoluteDelta, 1)} ${relation}`;
+  }
 }
 
 function compareMetric(candidate, baseline, betterDirection) {
@@ -1079,6 +1118,67 @@ function renderComparisonSummary(metrics, country) {
   `).join("");
 }
 
+function renderComparisonVisual(country, italy, metrics) {
+  if (!elements.comparisonVisual) return;
+  if (!country || !italy) {
+    elements.comparisonVisual.innerHTML = `
+      <div class="comparison-balance-card is-placeholder">
+        <span class="comparison-balance-label">Colpo d'occhio</span>
+        <strong>Il riepilogo apparirà dopo il sorteggio</strong>
+        <p>Qui riassumeremo subito dove il paese estratto sta meglio, peggio o in linea con l'Italia.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const tones = metrics.map((metric) => compareMetric(country[metric.key], italy[metric.key], metric.betterDirection));
+  const better = tones.filter((tone) => tone === "better").length;
+  const worse = tones.filter((tone) => tone === "worse").length;
+  const neutral = tones.filter((tone) => tone === "neutral").length;
+  const total = Math.max(metrics.length, 1);
+  const betterWidth = (better / total) * 100;
+  const neutralWidth = (neutral / total) * 100;
+  const worseWidth = (worse / total) * 100;
+  const lead = better - worse;
+  const leadLabel = lead > 0
+    ? `${country.name} avanti su ${better} indicatori`
+    : lead < 0
+      ? `Italia avanti su ${worse} indicatori`
+      : "Quadro complessivamente bilanciato";
+
+  elements.comparisonVisual.innerHTML = `
+    <div class="comparison-balance-card">
+      <div>
+        <span class="comparison-balance-label">Colpo d'occhio</span>
+        <strong>${escapeHtml(leadLabel)}</strong>
+        <p>Un riepilogo testuale più rapido da leggere dei grafici metrica per metrica.</p>
+      </div>
+      <div class="comparison-balance-tiles">
+        <div class="comparison-balance-tile is-better">
+          <strong>${better}</strong>
+          <span>Migliori</span>
+        </div>
+        <div class="comparison-balance-tile is-neutral">
+          <strong>${neutral}</strong>
+          <span>Allineati o N/D</span>
+        </div>
+        <div class="comparison-balance-tile is-worse">
+          <strong>${worse}</strong>
+          <span>Peggiori</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function buildDirectionLabel(countryName, candidate, baseline, betterDirection) {
+  if (candidate == null || baseline == null) return "Confronto incompleto";
+  const delta = Math.abs(candidate - baseline);
+  if (delta < 0.05) return "Molto simile";
+  const countryBetter = betterDirection === "higher" ? candidate > baseline : candidate < baseline;
+  return countryBetter ? `${countryName} avanti` : "Italia avanti";
+}
+
 function renderInsights(country, italy) {
   const scoringMetrics = getScoringMetrics();
   const tones = [];
@@ -1105,7 +1205,7 @@ function renderInsights(country, italy) {
   }
 
   elements.insightTopDiffs.innerHTML = top.map(({ metric, candidate, baseline }) => {
-    const delta = buildDeltaLabel(candidate, baseline, metric.betterDirection, metric.detail);
+    const delta = buildDeltaLabel(metric, candidate, baseline);
     return `<li><strong>${metric.label}</strong>: ${delta} rispetto all'Italia.</li>`;
   }).join("");
 }
