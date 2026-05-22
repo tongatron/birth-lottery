@@ -1,7 +1,7 @@
 import { execFile } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
-import { readFile, writeFile } from "node:fs/promises";
+import { access, readFile, writeFile } from "node:fs/promises";
 
 const execFileAsync = promisify(execFile);
 
@@ -24,6 +24,16 @@ const FILES = {
 async function loadJson(path) {
   const raw = await readFile(path, "utf8");
   return JSON.parse(raw);
+}
+
+async function loadJsonIfExists(path) {
+  try {
+    await access(path);
+  } catch {
+    console.warn(`Optional source missing: ${path}`);
+    return null;
+  }
+  return loadJson(path);
 }
 
 async function loadHdiRows(path) {
@@ -50,17 +60,34 @@ function buildCountryIndex(rows) {
   }, {});
 }
 
-function applyMetric(countryIndex, rows, key) {
+function parseRowYear(row) {
+  const parsed = Number(row?.date);
+  return Number.isFinite(parsed) ? parsed : -Infinity;
+}
+
+function shouldReplaceMetric(existing, candidateYear) {
+  if (!existing) return true;
+  const existingYear = Number(existing.year);
+  if (!Number.isFinite(existingYear)) return true;
+  return candidateYear >= existingYear;
+}
+
+function applyMetric(countryIndex, rows, key, source = "World Bank Data API") {
   for (const row of rows) {
     const target = countryIndex[row.countryiso3code];
     if (!target || row.value == null) {
       continue;
     }
 
+    const candidateYear = parseRowYear(row);
+    if (!shouldReplaceMetric(target.metrics[key], candidateYear)) {
+      continue;
+    }
+
     target.metrics[key] = {
       value: Number(row.value),
       year: row.date,
-      source: "World Bank Data API",
+      source,
     };
   }
 }
@@ -125,7 +152,7 @@ function applyHdiMetric(countryIndex, rows) {
 }
 
 function buildMetricDetails(country) {
-  return {
+  const details = {
     population: country.metrics.population || null,
     birthRate: country.metrics.birthRate || null,
     lifeExpectancy: country.metrics.lifeExpectancy || null,
@@ -135,24 +162,30 @@ function buildMetricDetails(country) {
     povertyRate: country.metrics.povertyRate || null,
     hdi: country.metrics.hdi || null,
   };
+  if (country.metrics.literacyRate) details.literacyRate = country.metrics.literacyRate;
+  if (country.metrics.under5Mortality) details.under5Mortality = country.metrics.under5Mortality;
+  if (country.metrics.healthExpenditure) details.healthExpenditure = country.metrics.healthExpenditure;
+  return details;
 }
 
-function applyCountryOverride(countryIndex, response, key) {
-  const row = response?.[1]?.[0];
-  if (!row?.countryiso3code || row.value == null) {
+function applyCountryOverride(countryIndex, response, key, source = "World Bank Data API") {
+  const rows = response?.[1];
+  if (!Array.isArray(rows)) {
     return;
   }
 
-  const target = countryIndex[row.countryiso3code];
-  if (!target) {
-    return;
-  }
+  applyMetric(countryIndex, rows, key, source);
+}
 
-  target.metrics[key] = {
-    value: Number(row.value),
-    year: row.date,
-    source: "World Bank Data API",
-  };
+function logMetricCoverage(countryIndex, metricMap) {
+  const countries = Object.values(countryIndex);
+  for (const [key, label] of Object.entries(metricMap)) {
+    const available = countries.filter((country) => country.metrics[key]?.value != null).length;
+    console.log(`${label}: ${available}/${countries.length}`);
+    if (available > 0 && available / countries.length < 0.15) {
+      console.warn(`Low coverage for ${label}: check the source export or query window.`);
+    }
+  }
 }
 
 async function main() {
@@ -178,10 +211,10 @@ async function main() {
     loadJson(FILES.gdpPerCapita),
     loadJson(FILES.internetUsers),
     loadJson(FILES.povertyRate),
-    loadJson(FILES.internetItaly),
-    loadJson(FILES.literacyRate),
-    loadJson(FILES.under5Mortality),
-    loadJson(FILES.healthExpenditure),
+    loadJsonIfExists(FILES.internetItaly),
+    loadJsonIfExists(FILES.literacyRate),
+    loadJsonIfExists(FILES.under5Mortality),
+    loadJsonIfExists(FILES.healthExpenditure),
   ]);
   const hdiData = await loadHdiRows(FILES.hdiWorkbook);
 
@@ -196,9 +229,15 @@ async function main() {
   applyMetric(countryIndex, povertyRate[1], "povertyRate");
   applyCountryOverride(countryIndex, internetItaly, "internetUsers");
   applyHdiMetric(countryIndex, hdiData);
-  applyMetric(countryIndex, literacyRate[1], "literacyRate");
-  applyMetric(countryIndex, under5Mortality[1], "under5Mortality");
-  applyMetric(countryIndex, healthExpenditure[1], "healthExpenditure");
+  if (literacyRate?.[1]) {
+    applyMetric(countryIndex, literacyRate[1], "literacyRate");
+  }
+  if (under5Mortality?.[1]) {
+    applyMetric(countryIndex, under5Mortality[1], "under5Mortality");
+  }
+  if (healthExpenditure?.[1]) {
+    applyMetric(countryIndex, healthExpenditure[1], "healthExpenditure");
+  }
 
   const dataset = Object.values(countryIndex)
     .map((country) => {
@@ -206,7 +245,7 @@ async function main() {
       const birthRateValue = country.metrics.birthRate?.value || 0;
       const annualBirths = (populationValue * birthRateValue) / 1000;
 
-      return {
+      const output = {
         iso3: country.iso3,
         iso2: country.iso2,
         name: country.name,
@@ -223,6 +262,16 @@ async function main() {
         povertyRate: country.metrics.povertyRate?.value ?? null,
         hdi: country.metrics.hdi?.value ?? null,
       };
+      if (country.metrics.literacyRate?.value != null) {
+        output.literacyRate = country.metrics.literacyRate.value;
+      }
+      if (country.metrics.under5Mortality?.value != null) {
+        output.under5Mortality = country.metrics.under5Mortality.value;
+      }
+      if (country.metrics.healthExpenditure?.value != null) {
+        output.healthExpenditure = country.metrics.healthExpenditure.value;
+      }
+      return output;
     })
     .filter((country) => country.iso3 && country.annualBirths > 0)
     .sort((left, right) => right.annualBirths - left.annualBirths);
@@ -245,6 +294,20 @@ async function main() {
 
   const output = `window.BIRTH_LOTTERY_DATA = ${JSON.stringify(payload, null, 2)};\n`;
   await writeFile(new URL("../data.js", import.meta.url), output, "utf8");
+
+  logMetricCoverage(countryIndex, {
+    population: "population",
+    birthRate: "birthRate",
+    lifeExpectancy: "lifeExpectancy",
+    infantMortality: "infantMortality",
+    gdpPerCapita: "gdpPerCapita",
+    internetUsers: "internetUsers",
+    povertyRate: "povertyRate",
+    hdi: "hdi",
+    literacyRate: "literacyRate",
+    under5Mortality: "under5Mortality",
+    healthExpenditure: "healthExpenditure",
+  });
 }
 
 main().catch((error) => {

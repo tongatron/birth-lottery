@@ -151,6 +151,8 @@
                 </div>
               </div>
 
+              <div id="result-context" class="result-context"></div>
+
               <p id="result-summary" class="result-summary"></p>
 
               <div id="result-insights" class="result-insights hidden">
@@ -173,6 +175,34 @@
               <p class="section-kicker">Confronto</p>
               <h2>Italia vs paese estratto</h2>
             </div>
+            <div class="comparison-toolbar">
+              <div class="comparison-toggle" role="tablist" aria-label="Modalità confronto">
+                <button
+                  id="comparison-view-essential"
+                  class="comparison-toggle-button is-active"
+                  type="button"
+                  data-view="essential"
+                  role="tab"
+                  aria-selected="true"
+                >
+                  Essenziale
+                </button>
+                <button
+                  id="comparison-view-complete"
+                  class="comparison-toggle-button"
+                  type="button"
+                  data-view="complete"
+                  role="tab"
+                  aria-selected="false"
+                >
+                  Completa
+                </button>
+              </div>
+              <p id="comparison-caption" class="comparison-caption">
+                Una lettura più corta mette davanti gli indicatori con impatto e copertura più solidi.
+              </p>
+            </div>
+            <div id="comparison-summary" class="comparison-summary"></div>
             <div class="comparison-header" aria-hidden="true">
               <span>Indicatore</span>
               <span>Paese estratto</span>
