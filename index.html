@@ -103,7 +103,7 @@
         <div class="panel-wrap">
 
           <!-- ESITO -->
-          <section class="panel spotlight">
+          <section id="result-panel" class="panel spotlight hidden" aria-hidden="true">
             <div id="lottery-veil" class="lottery-veil hidden" aria-hidden="true">
               <div class="lottery-orbit">
                 <span></span>
@@ -139,7 +139,10 @@
                     <div id="result-country-track" class="country-roller-track"></div>
                   </div>
                 </div>
-                <h3 id="result-country">-</h3>
+                <h3 id="result-country">
+                  <span id="result-country-flag" class="country-flag" aria-hidden="true"></span>
+                  <span id="result-country-name">-</span>
+                </h3>
               </div>
 
               <div class="result-stats">
@@ -176,7 +179,7 @@
           </section>
 
           <!-- CONFRONTO -->
-          <section class="panel comparison">
+          <section id="comparison-panel" class="panel comparison hidden" aria-hidden="true">
             <div class="panel-heading">
               <p class="section-kicker">Confronto</p>
               <h2>Italia vs paese estratto</h2>
@@ -246,8 +249,7 @@
                 non è disponibile, l'interfaccia lo segnala senza inventare dati.
               </p>
               <p>
-                L'HDI arriva dal dataset ufficiale UNDP Human Development Report
-                2025. L'indicatore di povertà usa la serie World Bank sulle soglie
+                L'indicatore di povertà usa la serie World Bank sulle soglie
                 nazionali.
               </p>
               <p>

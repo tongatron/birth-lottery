@@ -1,9 +1,4 @@
-import { execFile } from "node:child_process";
-import { fileURLToPath } from "node:url";
-import { promisify } from "node:util";
 import { access, readFile, writeFile } from "node:fs/promises";
-
-const execFileAsync = promisify(execFile);
 
 const FILES = {
   countries: "/private/tmp/birth-lottery-countries.json",
@@ -14,7 +9,6 @@ const FILES = {
   gdpPerCapita: "/private/tmp/birth-lottery-gdp.json",
   internetUsers: "/private/tmp/birth-lottery-internet.json",
   povertyRate: "/private/tmp/birth-lottery-poverty.json",
-  hdiWorkbook: "/private/tmp/birth-lottery-hdi.xlsx",
   internetItaly: "/private/tmp/birth-lottery-internet-ita.json",
   literacyRate: "/private/tmp/birth-lottery-literacy.json",
   under5Mortality: "/private/tmp/birth-lottery-under5.json",
@@ -42,32 +36,6 @@ async function loadJsonIfExists(path) {
     return null;
   }
   return loadJson(path);
-}
-
-async function loadHdiRows(path) {
-  const scriptPath = fileURLToPath(new URL("./extract-undp-hdi.py", import.meta.url));
-  const { stdout } = await execFileAsync("python3", [scriptPath, path]);
-  return JSON.parse(stdout);
-}
-
-async function loadHdiRowsFallbackFromData() {
-  try {
-    const raw = await readFile(new URL("../data.js", import.meta.url), "utf8");
-    const match = raw.match(/window\.BIRTH_LOTTERY_DATA\s*=\s*(\{[\s\S]*\});\s*$/);
-    if (!match) return [];
-    const parsed = JSON.parse(match[1]);
-    const countries = Array.isArray(parsed?.countries) ? parsed.countries : [];
-    return countries
-      .filter((c) => c?.name && Number.isFinite(Number(c?.hdi)))
-      .map((c) => ({
-        country: c.name,
-        value: Number(c.hdi),
-        year: Number(c?.metricDetails?.hdi?.year) || 2023,
-        source: c?.metricDetails?.hdi?.source || "UNDP Human Development Report 2025 (fallback)",
-      }));
-  } catch {
-    return [];
-  }
 }
 
 async function loadBaselineCountries(path) {
@@ -172,47 +140,6 @@ function buildNormalizedNameIndex(countryIndex) {
   }, {});
 }
 
-function applyHdiMetric(countryIndex, rows) {
-  const normalizedIndex = buildNormalizedNameIndex(countryIndex);
-  const aliases = {
-    "bolivia plurinational state of": "bolivia",
-    "congo": "congo rep",
-    "cabo verde": "cape verde",
-    "democratic people s republic of korea": "korea dem people s rep",
-    "democratic republic of the congo": "congo dem rep",
-    "egypt": "egypt arab rep",
-    "gambia": "gambia the",
-    "hong kong china sar": "hong kong sar china",
-    "iran islamic republic of": "iran islamic rep",
-    "korea republic of": "korea rep",
-    "lao people s democratic republic": "lao pdr",
-    "micronesia federated states of": "micronesia fed sts",
-    "moldova republic of": "moldova",
-    "palestine state of": "west bank and gaza",
-    "russian federation": "russian federation",
-    "tanzania united republic of": "tanzania",
-    "venezuela bolivarian republic of": "venezuela rb",
-    "viet nam": "viet nam",
-    "yemen": "yemen rep",
-  };
-
-  for (const row of rows) {
-    const normalized = normalizeCountryName(row.country);
-    const matchKey = aliases[normalized] || normalized;
-    const target = normalizedIndex[matchKey];
-
-    if (!target) {
-      continue;
-    }
-
-    target.metrics.hdi = {
-      value: Number(row.value),
-      year: String(row.year),
-      source: row.source,
-    };
-  }
-}
-
 function buildMetricDetails(country) {
   const details = {
     population: country.metrics.population || null,
@@ -222,7 +149,6 @@ function buildMetricDetails(country) {
     gdpPerCapita: country.metrics.gdpPerCapita || null,
     internetUsers: country.metrics.internetUsers || null,
     povertyRate: country.metrics.povertyRate || null,
-    hdi: country.metrics.hdi || null,
   };
   if (country.metrics.literacyRate) details.literacyRate = country.metrics.literacyRate;
   if (country.metrics.under5Mortality) details.under5Mortality = country.metrics.under5Mortality;
@@ -299,13 +225,6 @@ async function main() {
     loadJsonIfExists(FILES.uhcCoverageIndex),
     loadJsonIfExists(FILES.intergenerationalMobility),
   ]);
-  let hdiData = [];
-  try {
-    hdiData = await loadHdiRows(FILES.hdiWorkbook);
-  } catch {
-    console.warn("UNDP HDI workbook missing: using HDI fallback from existing data.js");
-    hdiData = await loadHdiRowsFallbackFromData();
-  }
   const baselineCountries = await loadBaselineCountries(FILES.baselineData);
 
   const countryIndex = buildCountryIndex(countries[1]);
@@ -318,7 +237,6 @@ async function main() {
   applyMetric(countryIndex, internetUsers[1], "internetUsers");
   applyMetric(countryIndex, povertyRate[1], "povertyRate");
   applyCountryOverride(countryIndex, internetItaly, "internetUsers");
-  applyHdiMetric(countryIndex, hdiData);
   if (literacyRate?.[1]) {
     applyMetric(countryIndex, literacyRate[1], "literacyRate");
   }
@@ -350,7 +268,6 @@ async function main() {
     applyMetric(countryIndex, intergenerationalMobility[1], "intergenerationalMobility");
   }
   applyBaselineFallback(countryIndex, baselineCountries, [
-    "hdi",
     "literacyRate",
     "under5Mortality",
     "healthExpenditure",
@@ -384,7 +301,6 @@ async function main() {
         gdpPerCapita: country.metrics.gdpPerCapita?.value ?? null,
         internetUsers: country.metrics.internetUsers?.value ?? null,
         povertyRate: country.metrics.povertyRate?.value ?? null,
-        hdi: country.metrics.hdi?.value ?? null,
       };
       if (country.metrics.literacyRate?.value != null) {
         output.literacyRate = country.metrics.literacyRate.value;
@@ -432,7 +348,7 @@ async function main() {
 
   const payload = {
     generatedAt: new Date().toISOString(),
-    source: "World Bank Data API + UNDP Human Development Report 2025",
+    source: "World Bank Data API + supplemental sources",
     totalBirths,
     countries: dataset,
   };
@@ -448,7 +364,6 @@ async function main() {
     gdpPerCapita: "gdpPerCapita",
     internetUsers: "internetUsers",
     povertyRate: "povertyRate",
-    hdi: "hdi",
     literacyRate: "literacyRate",
     under5Mortality: "under5Mortality",
     healthExpenditure: "healthExpenditure",

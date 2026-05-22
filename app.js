@@ -60,14 +60,6 @@ const METRIC_CONFIG = [
     category: "Accesso",
   },
   {
-    key: "hdi",
-    label: "Human Development Index",
-    formatter: (v) => formatNumber(v, 3),
-    betterDirection: "higher",
-    detail: "indice sintetico di sviluppo umano",
-    category: "Sviluppo",
-  },
-  {
     key: "povertyRate",
     label: "Povertà nazionale",
     formatter: (v) => formatNumber(v, 1) + "%",
@@ -185,7 +177,6 @@ const ESSENTIAL_METRIC_KEYS = [
   "lifeExpectancy",
   "infantMortality",
   "gdpPerCapita",
-  "hdi",
   "povertyRate",
   "giniIndex",
   "intentionalHomicides",
@@ -207,10 +198,13 @@ const state = {
 const elements = {
   drawButton: document.querySelector("#draw-button"),
   statusText: document.querySelector("#status-text"),
+  resultPanel: document.querySelector("#result-panel"),
   resultEmpty: document.querySelector("#result-empty"),
   resultCard: document.querySelector("#result-card"),
   lotteryVeil: document.querySelector("#lottery-veil"),
   resultCountry: document.querySelector("#result-country"),
+  resultCountryFlag: document.querySelector("#result-country-flag"),
+  resultCountryName: document.querySelector("#result-country-name"),
   resultCountryRoller: document.querySelector("#result-country-roller"),
   resultCountryTrack: document.querySelector("#result-country-track"),
   resultShare: document.querySelector("#result-share"),
@@ -225,6 +219,7 @@ const elements = {
   comparisonCaption: document.querySelector("#comparison-caption"),
   comparisonSummary: document.querySelector("#comparison-summary"),
   comparisonVisual: document.querySelector("#comparison-visual"),
+  comparisonPanel: document.querySelector("#comparison-panel"),
   comparisonWarning: document.querySelector("#comparison-warning"),
   comparisonGrid: document.querySelector("#comparison-grid"),
   comparisonToggleButtons: document.querySelectorAll(".comparison-toggle-button"),
@@ -418,6 +413,7 @@ function rollLottery() {
   if (hasExisting) triggerParticleBurst(elements.drawButton);
   const EXIT_DURATION = (!prefersReduced && hasExisting) ? 240 : 0;
   const ROLLER_DURATION = prefersReduced ? 0 : 3600;
+  revealResultPanel();
 
   if (!prefersReduced && hasExisting) {
     elements.resultCard.classList.add("result-exit");
@@ -521,7 +517,7 @@ function startCountryRoller(winner, duration) {
 
   track.innerHTML = sequence.map((country, index) => `
       <div class="country-roller-item${index === finalIndex ? " is-final" : ""}">
-        ${escapeHtml(country.name)}
+        ${renderCountryLabelMarkup(country)}
       </div>
     `
   ).join("");
@@ -548,6 +544,37 @@ function startCountryRoller(winner, duration) {
 
 function cleanupCountryRoller(handle) {
   window.clearInterval(handle.statsInterval);
+}
+
+function revealResultPanel() {
+  if (!elements.resultPanel) return;
+  elements.resultPanel.classList.remove("hidden");
+  elements.resultPanel.setAttribute("aria-hidden", "false");
+}
+
+function revealComparisonPanel() {
+  if (!elements.comparisonPanel) return;
+  elements.comparisonPanel.classList.remove("hidden");
+  elements.comparisonPanel.setAttribute("aria-hidden", "false");
+}
+
+function renderCountryLabelMarkup(country) {
+  const flag = countryFlagEmoji(country);
+  return `
+    <span class="country-flag" aria-hidden="true">${flag}</span>
+    <span class="country-name">${escapeHtml(country.name)}</span>
+  `;
+}
+
+function renderCountryLabel(country, flagEl, nameEl) {
+  if (flagEl) flagEl.textContent = countryFlagEmoji(country);
+  if (nameEl) nameEl.textContent = country.name;
+}
+
+function countryFlagEmoji(country) {
+  const iso2 = sanitizeText(country?.iso2).toUpperCase();
+  if (!/^[A-Z]{2}$/.test(iso2)) return "";
+  return String.fromCodePoint(...iso2.split("").map((char) => 127397 + char.charCodeAt(0)));
 }
 
 function runTheatricalRoll(track, finalIndex, itemHeight, duration) {
@@ -586,7 +613,8 @@ function renderWinner(country) {
   elements.resultCard.classList.remove("winner-revealed");
   void elements.resultCard.offsetWidth;
   elements.resultCard.classList.add("winner-revealed");
-  elements.resultCountry.textContent = country.name;
+  revealComparisonPanel();
+  renderCountryLabel(country, elements.resultCountryFlag, elements.resultCountryName);
   void elements.resultCountry.offsetWidth;
   elements.resultCountry.classList.add("winner-bounce");
   elements.resultCountry.addEventListener("animationend", () => {
@@ -774,7 +802,6 @@ function narrativeImpact(country, italy) {
 
 function renderResultContext(country) {
   const birthRank = state.birthRankByIso3.get(country.iso3);
-  const hdiStanding = buildStanding(country, "hdi");
   const lifeStanding = buildStanding(country, "lifeExpectancy");
   const cards = [
     {
@@ -786,11 +813,6 @@ function renderResultContext(country) {
       label: "Fascia reddito",
       value: country.income || "N/D",
       meta: birthRank ? `${ordinalLabel(birthRank)} per nascite stimate` : "Posizione nascita n/d",
-    },
-    {
-      label: "Posizionamento HDI",
-      value: hdiStanding.label,
-      meta: hdiStanding.meta,
     },
     {
       label: "Profilo longevità",
@@ -838,7 +860,6 @@ function hydrateItalyBaseline(italy) {
     { key: "infantMortality", label: "Mortalità infantile" },
     { key: "gdpPerCapita", label: "PIL pro capite" },
     { key: "internetUsers", label: "Accesso a internet" },
-    { key: "hdi", label: "HDI" },
     { key: "povertyRate", label: "Povertà nazionale" },
   ];
 
@@ -857,7 +878,7 @@ function renderDistribution(countries) {
     const width = highestShare ? (c.birthShare / highestShare) * 100 : 0;
     return `
       <div class="distribution-row">
-        <strong>${escapeHtml(c.name)}</strong>
+        <strong class="distribution-country">${renderCountryLabelMarkup(c)}</strong>
         <div class="distribution-bar" aria-hidden="true">
           <span style="width:${width.toFixed(1)}%"></span>
         </div>
@@ -940,7 +961,7 @@ function renderComparison(country, italy) {
         </div>
         <div class="comparison-values">
           <div class="comparison-value comparison-value-country">
-            <span class="comparison-value-label">${escapeHtml(country.name)}</span>
+            <span class="comparison-value-label">${renderCountryLabelMarkup(country)}</span>
             <strong class="${toneClass(tone)}">
               ${formatMetric(metric.key, country)}
               <span class="confidence-badge confidence-${confidence.level}" title="${confidence.title}">
@@ -950,7 +971,7 @@ function renderComparison(country, italy) {
             <span>${formatMetricMeta(metric.key, country)}</span>
           </div>
           <div class="comparison-value comparison-value-italy">
-            <span class="comparison-value-label">Italia</span>
+            <span class="comparison-value-label">${renderCountryLabelMarkup({ iso2: "IT", name: "Italia" })}</span>
             <strong>${formatMetric(metric.key, italy)}</strong>
             <span>${formatMetricMeta(metric.key, italy)}</span>
           </div>
@@ -1039,12 +1060,11 @@ function buildDeltaLabel(metric, candidate, baseline) {
       return `${formatNumber(absoluteDelta, 0)} ${countryAhead ? "in meno" : "in più"} ogni 100.000`;
     case "intentionalHomicides":
       return `${formatNumber(absoluteDelta, 2)} ${countryAhead ? "in meno" : "in più"} per 100.000`;
-    case "hdi":
     case "ruleOfLawEstimate":
     case "giniIndex":
     case "uhcCoverageIndex":
     case "intergenerationalMobility":
-      return `${formatNumber(absoluteDelta, metric.key === "hdi" ? 3 : 1)} punti ${relation}`;
+      return `${formatNumber(absoluteDelta, 1)} punti ${relation}`;
     default:
       return `${formatNumber(absoluteDelta, 1)} ${relation}`;
   }
@@ -1367,7 +1387,6 @@ function sanitizeCountry(country) {
     infantMortality: sanitizeMetric(country.infantMortality),
     gdpPerCapita: sanitizeMetric(country.gdpPerCapita),
     internetUsers: sanitizeMetric(country.internetUsers),
-    hdi: sanitizeMetric(country.hdi),
     povertyRate: sanitizeMetric(country.povertyRate),
   };
 }
@@ -1427,7 +1446,6 @@ function formatCurrency(value) {
 function shortenSource(value) {
   if (!value) return "fonte n/d";
   if (value === "World Bank Data API") return "World Bank";
-  if (value === "UNDP Human Development Report 2025") return "UNDP HDR 2025";
   return value;
 }
 

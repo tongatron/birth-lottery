@@ -11,7 +11,7 @@ Il sorteggio non usa la popolazione totale come peso, ma una stima delle **nasci
 - Estrae un paese in modo pesato su quella distribuzione.
 - Confronta il paese estratto con l'Italia su alcuni indicatori medi.
 - Mostra `anno` e `fonte` per ogni metrica mostrata in UI.
-- Integra `HDI` da UNDP e `poverta nazionale` da World Bank.
+- Integra `poverta nazionale` da World Bank e altri indicatori di contesto.
 - Mostra i principali paesi per quota stimata di nascite mondiali.
 
 ## Indicatori usati
@@ -30,10 +30,6 @@ Il sorteggio non usa la popolazione totale come peso, ma una stima delle **nasci
 - `SH.XPD.OOPC.CH.ZS` Out-of-pocket expenditure (% of current health expenditure)
 - `SH.UHC.SRVS.CV.XD` UHC service coverage index
 - `GDIM.YOSM` Global Database on Intergenerational Mobility: years of schooling mobility estimate (copertura discontinua)
-
-Fonte aggiuntiva:
-
-- [UNDP Human Development Reports Data Center](https://hdr.undp.org/data-center/human-development-index#/indicies/HDI)
 
 Fonte principale:
 
@@ -71,17 +67,16 @@ Poi apri:
 - [app.js](/Users/tonga/Documents/GitHub/birth-lottery/app.js)
 - [data.js](/Users/tonga/Documents/GitHub/birth-lottery/data.js)
 - [scripts/generate-data.mjs](/Users/tonga/Documents/GitHub/birth-lottery/scripts/generate-data.mjs)
-- [scripts/extract-undp-hdi.py](/Users/tonga/Documents/GitHub/birth-lottery/scripts/extract-undp-hdi.py)
 
 ## Aggiornare il dataset
 
 Il repository contiene gia un dataset locale pronto all'uso in `data.js`.
 
-Lo script [scripts/generate-data.mjs](/Users/tonga/Documents/GitHub/birth-lottery/scripts/generate-data.mjs) serve per rigenerarlo a partire dalle esportazioni World Bank e dal file ufficiale UNDP sull'HDI. In questa prima iterazione l'ho usato per congelare una base dati stabile, cosi l'app non dipende dal supporto `fetch` del browser in cui viene aperta.
+Lo script [scripts/generate-data.mjs](/Users/tonga/Documents/GitHub/birth-lottery/scripts/generate-data.mjs) serve per rigenerarlo a partire dalle esportazioni World Bank e da alcune sorgenti secondarie di supporto. In questa prima iterazione l'ho usato per congelare una base dati stabile, cosi l'app non dipende dal supporto `fetch` del browser in cui viene aperta.
 
 ## Evoluzioni consigliate
 
-- Aggiungere indicatori di poverta e sviluppo umano con una seconda fonte dedicata, ad esempio UNDP o Our World in Data.
+- Aggiungere indicatori di poverta e contesto sociale con una seconda fonte dedicata, ad esempio Our World in Data.
 - Permettere il confronto con un paese scelto dall'utente, non solo con l'Italia.
 - Mostrare anche una mappa e una simulazione multipla di 100 o 1.000 nascite.
 - Esplicitare anno e copertura di ogni metrica direttamente nella UI.

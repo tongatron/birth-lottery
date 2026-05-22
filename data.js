@@ -1,6 +1,6 @@
 window.BIRTH_LOTTERY_DATA = {
   "generatedAt": "2026-05-22T17:36:07.780Z",
-  "source": "World Bank Data API + UNDP Human Development Report 2025",
+  "source": "World Bank Data API + supplemental sources",
   "totalBirths": 132375467.47864199,
   "countries": [
     {
@@ -45,11 +45,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2011",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 25.5,
           "year": "2022",
@@ -79,7 +74,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2694.73780859961,
       "internetUsers": 70,
       "povertyRate": 21.9,
-      "hdi": 0,
       "giniIndex": 25.5,
       "gdpPerCapitaPpp": 11159.9856476091,
       "intentionalHomicides": 2.81530423021647,
@@ -128,11 +122,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2020",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36,
           "year": "2022",
@@ -162,7 +151,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 13303.1481543868,
       "internetUsers": 91.6,
       "povertyRate": 0,
-      "hdi": 0,
       "giniIndex": 36,
       "gdpPerCapitaPpp": 27104.8702677463,
       "intentionalHomicides": 0.5018560705357,
@@ -211,11 +199,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.9,
           "year": "2022",
@@ -245,7 +228,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1084.16041805436,
       "internetUsers": 41.21139908,
       "povertyRate": 56.2,
-      "hdi": 0,
       "giniIndex": 33.9,
       "gdpPerCapitaPpp": 9086.87550609627,
       "intentionalHomicides": 15.7466808233499,
@@ -294,11 +276,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.5,
           "year": "2024",
@@ -328,7 +305,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1478.77277977996,
       "internetUsers": 57.253,
       "povertyRate": 21.9,
-      "hdi": 0,
       "giniIndex": 33.5,
       "gdpPerCapitaPpp": 6252.11543199559,
       "intentionalHomicides": 4.33487075793336,
@@ -377,11 +353,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 34.4,
           "year": "2025",
@@ -411,7 +382,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4925.43048751861,
       "internetUsers": 72.78075544,
       "povertyRate": 9,
-      "hdi": 0,
       "giniIndex": 34.4,
       "gdpPerCapitaPpp": 16448.2755179559,
       "intentionalHomicides": 0.303768746039586,
@@ -460,11 +430,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2020",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 44.7,
           "year": "2020",
@@ -489,7 +454,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 649.383338556725,
       "internetUsers": 19.67350006,
       "povertyRate": 56.2,
-      "hdi": 0,
       "giniIndex": 44.7,
       "gdpPerCapitaPpp": 1821.04868718058,
       "outOfPocketHealth": 38.00354767,
@@ -537,11 +501,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 31.1,
           "year": "2021",
@@ -571,7 +530,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1133.88279681719,
       "internetUsers": 21.94129944,
       "povertyRate": 33.1,
-      "hdi": 0,
       "giniIndex": 31.1,
       "gdpPerCapitaPpp": 3287.53492158893,
       "intentionalHomicides": 8.51054794891045,
@@ -616,11 +574,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 41.8,
           "year": "2024",
@@ -650,7 +603,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 84534.0407841548,
       "internetUsers": 94.69380188,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 41.8,
       "gdpPerCapitaPpp": 85809.9003846359,
       "intentionalHomicides": 5.76340794073065,
@@ -699,11 +651,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30.9,
           "year": "2022",
@@ -733,7 +680,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2593.41611680774,
       "internetUsers": 53.42171316,
       "povertyRate": 18.7,
-      "hdi": 0,
       "giniIndex": 30.9,
       "gdpPerCapitaPpp": 9646.76984383255,
       "intentionalHomicides": 2.34217668208578,
@@ -778,11 +724,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 50.3,
           "year": "2024",
@@ -812,7 +753,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 10310.5488778166,
       "internetUsers": 84.46347227,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 50.3,
       "gdpPerCapitaPpp": 22338.4765640635,
       "intentionalHomicides": 19.2752957673079,
@@ -861,11 +801,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 28.5,
           "year": "2021",
@@ -895,7 +830,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3338.47371395895,
       "internetUsers": 74.64839935,
       "povertyRate": 33.5,
-      "hdi": 0,
       "giniIndex": 28.5,
       "gdpPerCapitaPpp": 19094.1449444111,
       "intentionalHomicides": 1.31152527182627,
@@ -944,11 +878,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40.5,
           "year": "2018",
@@ -978,7 +907,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1186.71691894531,
       "internetUsers": 31.16209984,
       "povertyRate": 26.4,
-      "hdi": 0,
       "giniIndex": 40.5,
       "gdpPerCapitaPpp": 4220.79638671875,
       "intentionalHomicides": 3.74921291744897,
@@ -1027,11 +955,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 42.6,
           "year": "2024",
@@ -1061,7 +984,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 14185.7812248529,
       "internetUsers": 83.12233799,
       "povertyRate": 29.6,
-      "hdi": 0,
       "giniIndex": 42.6,
       "gdpPerCapitaPpp": 26185.3564713253,
       "intentionalHomicides": 24.8589948436701,
@@ -1110,11 +1032,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.3,
           "year": "2023",
@@ -1144,7 +1061,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3984.8315387656,
       "internetUsers": 67.26300914,
       "povertyRate": 15.5,
-      "hdi": 0,
       "giniIndex": 39.3,
       "gdpPerCapitaPpp": 11794.1375488492,
       "intentionalHomicides": 4.34759149828352,
@@ -1193,11 +1109,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 42.7,
           "year": "2019",
@@ -1227,7 +1138,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1077.91278452817,
       "internetUsers": 8.949831061,
       "povertyRate": 16.1,
-      "hdi": 0,
       "giniIndex": 42.7,
       "gdpPerCapitaPpp": 3273.2671741364,
       "intentionalHomicides": 8.97308867739149,
@@ -1276,11 +1186,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2009",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 34.2,
           "year": "2014",
@@ -1310,7 +1215,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 984.607666015625,
       "internetUsers": 18.60000038,
       "povertyRate": 46.5,
-      "hdi": 0,
       "giniIndex": 34.2,
       "gdpPerCapitaPpp": 2115.81616210938,
       "intentionalHomicides": 5.1480839388,
@@ -1359,11 +1263,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 38.5,
           "year": "2022",
@@ -1393,7 +1292,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2132.43452097647,
       "internetUsers": 34.97622513,
       "povertyRate": 39.8,
-      "hdi": 0,
       "giniIndex": 38.5,
       "gdpPerCapitaPpp": 6644.13093243895,
       "intentionalHomicides": 4.87166844718499,
@@ -1442,11 +1340,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 2201.72290691677,
           "year": "2023",
@@ -1471,7 +1364,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 413.757894705303,
       "internetUsers": 16.09499931,
       "povertyRate": 47.1,
-      "hdi": 0,
       "gdpPerCapitaPpp": 2201.72290691677,
       "intentionalHomicides": 4.0324584656778,
       "outOfPocketHealth": 77.1395874,
@@ -1519,11 +1411,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 51.3,
           "year": "2018",
@@ -1553,7 +1440,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2665.87444776753,
       "internetUsers": 40.70479965,
       "povertyRate": 32.3,
-      "hdi": 0,
       "giniIndex": 51.3,
       "gdpPerCapitaPpp": 10118.6089945408,
       "intentionalHomicides": 4.09826656345614,
@@ -1602,11 +1488,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2014",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36.7,
           "year": "2014",
@@ -1636,7 +1517,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 633.887202451545,
       "internetUsers": 17.49099922,
       "povertyRate": 48.6,
-      "hdi": 0,
       "giniIndex": 36.7,
       "gdpPerCapitaPpp": 3164.32154223615,
       "intentionalHomicides": 5.80971851623815,
@@ -1685,11 +1565,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36.1,
           "year": "2022",
@@ -1719,7 +1594,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4717.29028732449,
       "internetUsers": 84.15,
       "povertyRate": 4.2,
-      "hdi": 0,
       "giniIndex": 36.1,
       "gdpPerCapitaPpp": 16385.5065565458,
       "intentionalHomicides": 1.53501286347562,
@@ -1768,11 +1642,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 49.6,
           "year": "2022",
@@ -1802,7 +1671,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 656.776824637306,
       "internetUsers": 20.52729988,
       "povertyRate": 65,
-      "hdi": 0,
       "giniIndex": 49.6,
       "gdpPerCapitaPpp": 1705.37919520416,
       "intentionalHomicides": 3.58999788532633,
@@ -1851,11 +1719,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33,
           "year": "2023",
@@ -1885,7 +1748,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 14889.0185546875,
       "internetUsers": 94.36495368,
       "povertyRate": 7.2,
-      "hdi": 0,
       "giniIndex": 33,
       "gdpPerCapitaPpp": 47404.96484375,
       "intentionalHomicides": 6.76512531955806,
@@ -1934,11 +1796,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 54.1,
           "year": "2022",
@@ -1968,7 +1825,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6267.186814093,
       "internetUsers": 78.35759735,
       "povertyRate": 37.9,
-      "hdi": 0,
       "giniIndex": 54.1,
       "gdpPerCapitaPpp": 15456.1989933658,
       "intentionalHomicides": 43.7202551331462,
@@ -2017,11 +1873,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29.8,
           "year": "2023",
@@ -2051,7 +1902,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6073.61032342708,
       "internetUsers": 81.47450256,
       "povertyRate": 17.5,
-      "hdi": 0,
       "giniIndex": 29.8,
       "gdpPerCapitaPpp": 14464.3186928173,
       "intentionalHomicides": 9.46375217111484,
@@ -2096,11 +1946,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 35.9,
           "year": "2023",
@@ -2130,7 +1975,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 5190.16959024821,
       "internetUsers": 85.3404007,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 35.9,
       "gdpPerCapitaPpp": 19873.8860853805,
       "intentionalHomicides": 2.37540050451863,
@@ -2179,11 +2023,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.9,
           "year": "2021",
@@ -2213,7 +2052,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 735.270255787226,
       "internetUsers": 15.55760002,
       "povertyRate": 41.2,
-      "hdi": 0,
       "giniIndex": 32.9,
       "gdpPerCapitaPpp": 2049.93305251019,
       "intentionalHomicides": 4.41784034939735,
@@ -2262,11 +2100,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36.8,
           "year": "2021",
@@ -2291,7 +2124,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 544.987501003384,
       "internetUsers": 18.67790031,
       "povertyRate": 75.2,
-      "hdi": 0,
       "giniIndex": 36.8,
       "gdpPerCapitaPpp": 1883.5374311384,
       "outOfPocketHealth": 27.42209625,
@@ -2339,11 +2171,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 35.3,
           "year": "2021",
@@ -2368,7 +2195,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2727.8935220697,
       "internetUsers": 41.43219902,
       "povertyRate": 37.5,
-      "hdi": 0,
       "giniIndex": 35.3,
       "gdpPerCapitaPpp": 7669.23195715687,
       "outOfPocketHealth": 31.99314499,
@@ -2416,11 +2242,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 42.2,
           "year": "2021",
@@ -2450,7 +2271,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1830.00833684727,
       "internetUsers": 46.25880051,
       "povertyRate": 37.7,
-      "hdi": 0,
       "giniIndex": 42.2,
       "gdpPerCapitaPpp": 5588.98645861945,
       "intentionalHomicides": 6.76008919336955,
@@ -2499,11 +2319,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 35.7,
           "year": "2021",
@@ -2528,7 +2343,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1094.61949265799,
       "internetUsers": 36.80149841,
       "povertyRate": 45.5,
-      "hdi": 0,
       "giniIndex": 35.7,
       "gdpPerCapitaPpp": 3314.77332231959,
       "outOfPocketHealth": 47.22994995,
@@ -2576,11 +2390,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 43.7,
           "year": "2023",
@@ -2610,7 +2419,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 15892.7157287241,
       "internetUsers": 89.77024003,
       "povertyRate": 13,
-      "hdi": 0,
       "giniIndex": 43.7,
       "gdpPerCapitaPpp": 45639.0192735944,
       "intentionalHomicides": 3.22789482308636,
@@ -2659,11 +2467,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2025",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.7,
           "year": "2025",
@@ -2693,7 +2496,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3161.70010632875,
       "internetUsers": 89.50550079,
       "povertyRate": 5.8,
-      "hdi": 0,
       "giniIndex": 32.7,
       "gdpPerCapitaPpp": 11878.5528706848,
       "intentionalHomicides": 1.39879762685076,
@@ -2742,11 +2544,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2017",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30.7,
           "year": "2017",
@@ -2776,7 +2573,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1359.05001560107,
       "internetUsers": 45.4477005,
       "povertyRate": 24.8,
-      "hdi": 0,
       "giniIndex": 30.7,
       "gdpPerCapitaPpp": 5997.46516323715,
       "intentionalHomicides": 2.57510107248619,
@@ -2825,11 +2621,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2016",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 43.5,
           "year": "2016",
@@ -2859,7 +2650,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2390.77237652715,
       "internetUsers": 72.17569733,
       "povertyRate": 23.4,
-      "hdi": 0,
       "giniIndex": 43.5,
       "gdpPerCapitaPpp": 8019.99702389611,
       "intentionalHomicides": 1.83111773115644,
@@ -2908,11 +2698,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2011",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 27.6,
           "year": "2011",
@@ -2942,7 +2727,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 5752.99076651465,
       "internetUsers": 77.4178009,
       "povertyRate": 5.5,
-      "hdi": 0,
       "giniIndex": 27.6,
       "gdpPerCapitaPpp": 17620.7423956126,
       "intentionalHomicides": 1.16107238811947,
@@ -2991,11 +2775,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 37.4,
           "year": "2022",
@@ -3020,7 +2799,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 961.55975562506,
       "internetUsers": 12.62689972,
       "povertyRate": 44.8,
-      "hdi": 0,
       "giniIndex": 37.4,
       "gdpPerCapitaPpp": 2742.65952183613,
       "outOfPocketHealth": 51.67914963,
@@ -3068,11 +2846,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 1601.96466602339,
           "year": "2024",
@@ -3092,7 +2865,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 629.538899449007,
       "internetUsers": 27.94020081,
       "povertyRate": 55.4,
-      "hdi": 0,
       "gdpPerCapitaPpp": 1601.96466602339,
       "outOfPocketHealth": 30.77948952,
       "birthShare": 0.006080896434801077
@@ -3139,11 +2911,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 37.4,
           "year": "2021",
@@ -3173,7 +2940,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 981.992649769081,
       "internetUsers": 28.25270081,
       "povertyRate": 43.2,
-      "hdi": 0,
       "giniIndex": 37.4,
       "gdpPerCapitaPpp": 2895.89152033665,
       "intentionalHomicides": 1.25044051977478,
@@ -3218,11 +2984,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.3,
           "year": "2020",
@@ -3252,7 +3013,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 32487.0778047567,
       "internetUsers": 85.54153081,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 32.3,
       "gdpPerCapitaPpp": 52039.1716551611,
       "intentionalHomicides": 0.229153196964695,
@@ -3301,11 +3061,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 54.4,
           "year": "2024",
@@ -3335,7 +3090,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7919.20886825345,
       "internetUsers": 79.34543299,
       "povertyRate": 31.8,
-      "hdi": 0,
       "giniIndex": 54.4,
       "gdpPerCapitaPpp": 22349.436440123,
       "intentionalHomicides": 24.9134420347488,
@@ -3384,11 +3138,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 51.5,
           "year": "2022",
@@ -3418,7 +3167,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1187.10943350064,
       "internetUsers": 17.10099983,
       "povertyRate": 60,
-      "hdi": 0,
       "giniIndex": 51.5,
       "gdpPerCapitaPpp": 4214.89277804799,
       "intentionalHomicides": 5.20150860823759,
@@ -3467,11 +3215,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2017",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.4,
           "year": "2021",
@@ -3501,7 +3244,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 53246.3676145108,
       "internetUsers": 95.4720993,
       "povertyRate": 18.6,
-      "hdi": 0,
       "giniIndex": 32.4,
       "gdpPerCapitaPpp": 62009.4907765366,
       "intentionalHomicides": 1.11868407522333,
@@ -3550,11 +3292,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.7,
           "year": "2022",
@@ -3584,7 +3321,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 56103.7323182554,
       "internetUsers": 93.49999579,
       "povertyRate": 14.8,
-      "hdi": 0,
       "giniIndex": 33.7,
       "gdpPerCapitaPpp": 73551.9347696836,
       "intentionalHomicides": 0.910722780231795,
@@ -3633,11 +3369,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 38.5,
           "year": "2019",
@@ -3667,7 +3398,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 522.570393642547,
       "internetUsers": 18.96159935,
       "povertyRate": 50.7,
-      "hdi": 0,
       "giniIndex": 38.5,
       "gdpPerCapitaPpp": 1857.61756950305,
       "intentionalHomicides": 1.77598671180007,
@@ -3716,11 +3446,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 31.8,
           "year": "2023",
@@ -3750,7 +3475,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 46103.0840855884,
       "internetUsers": 88.65381638,
       "povertyRate": 15.6,
-      "hdi": 0,
       "giniIndex": 31.8,
       "gdpPerCapitaPpp": 62556.91810454,
       "intentionalHomicides": 1.33506280409367,
@@ -3799,11 +3523,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.5,
           "year": "2013",
@@ -3833,7 +3552,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4153.1943359375,
       "internetUsers": 91.2,
       "povertyRate": 3.9,
-      "hdi": 0,
       "giniIndex": 39.5,
       "gdpPerCapitaPpp": 10415.1240234375,
       "intentionalHomicides": 1.70500474577332,
@@ -3878,11 +3596,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 71375.3727890285,
           "year": "2024",
@@ -3907,7 +3620,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 35121.6628687742,
       "internetUsers": 100,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 71375.3727890285,
       "intentionalHomicides": 0.935259944754359,
       "outOfPocketHealth": 14.11603928,
@@ -3955,11 +3667,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.3,
           "year": "2024",
@@ -3989,7 +3696,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7346.62022142185,
       "internetUsers": 90.86718789,
       "povertyRate": 5.4,
-      "hdi": 0,
       "giniIndex": 33.3,
       "gdpPerCapitaPpp": 24712.0658575135,
       "intentionalHomicides": 4.79225300638159,
@@ -4038,11 +3744,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2006",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 26.4,
           "year": "2022",
@@ -4072,7 +3773,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1051.67149587463,
       "internetUsers": 33.77000046,
       "povertyRate": 35.2,
-      "hdi": 0,
       "giniIndex": 26.4,
       "gdpPerCapitaPpp": 4772.4616766716,
       "intentionalHomicides": 2.05938679956635,
@@ -4121,11 +3821,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30,
           "year": "2022",
@@ -4155,7 +3850,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1447.31004458428,
       "internetUsers": 46.32189941,
       "povertyRate": 20.3,
-      "hdi": 0,
       "giniIndex": 30,
       "gdpPerCapitaPpp": 5736.62134332704,
       "intentionalHomicides": 2.13004129984372,
@@ -4204,11 +3898,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36.2,
           "year": "2021",
@@ -4238,7 +3927,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1773.21829923448,
       "internetUsers": 60.11780167,
       "povertyRate": 37.5,
-      "hdi": 0,
       "giniIndex": 36.2,
       "gdpPerCapitaPpp": 5070.6486207418,
       "intentionalHomicides": 0.267518151792543,
@@ -4287,11 +3975,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40.1,
           "year": "2024",
@@ -4321,7 +4004,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 8452.37167056621,
       "internetUsers": 81.95705992,
       "povertyRate": 27.6,
-      "hdi": 0,
       "giniIndex": 40.1,
       "gdpPerCapitaPpp": 17802.4182498972,
       "intentionalHomicides": 8.60480803979216,
@@ -4370,11 +4052,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 42.4,
           "year": "2024",
@@ -4404,7 +4081,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 13969.7836603737,
       "internetUsers": 89.66715228,
       "povertyRate": 38.1,
-      "hdi": 0,
       "giniIndex": 42.4,
       "gdpPerCapitaPpp": 30431.1931223693,
       "intentionalHomicides": 4.49291137824536,
@@ -4453,11 +4129,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 50.3,
           "year": "2019",
@@ -4487,7 +4158,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2497.20332208763,
       "internetUsers": 41.64279938,
       "povertyRate": 38.3,
-      "hdi": 0,
       "giniIndex": 50.3,
       "gdpPerCapitaPpp": 5928.0806252756,
       "intentionalHomicides": 6.75833125350771,
@@ -4536,11 +4206,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29.6,
           "year": "2018",
@@ -4565,7 +4230,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1694.95375862193,
       "internetUsers": 33.30469894,
       "povertyRate": 43.7,
-      "hdi": 0,
       "giniIndex": 29.6,
       "gdpPerCapitaPpp": 4565.3007888456,
       "outOfPocketHealth": 54.41574097,
@@ -4613,11 +4277,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 34.4,
           "year": "2021",
@@ -4647,7 +4306,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1485.38018885134,
       "internetUsers": 33.98379898,
       "povertyRate": 36.2,
-      "hdi": 0,
       "giniIndex": 34.4,
       "gdpPerCapitaPpp": 4434.5642184028,
       "intentionalHomicides": 1.1274974068,
@@ -4696,11 +4354,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2020",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 37.5,
           "year": "2020",
@@ -4730,7 +4383,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 219.424830882698,
       "internetUsers": 8.595999718,
       "povertyRate": 51,
-      "hdi": 0,
       "giniIndex": 37.5,
       "gdpPerCapitaPpp": 1194.94681370387,
       "intentionalHomicides": 5.64974214487878,
@@ -4779,11 +4431,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40.7,
           "year": "2021",
@@ -4813,7 +4460,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 11874.4273684245,
       "internetUsers": 98.0206059,
       "povertyRate": 5.1,
-      "hdi": 0,
       "giniIndex": 40.7,
       "gdpPerCapitaPpp": 38779.2830442253,
       "intentionalHomicides": 0.734492430713877,
@@ -4862,11 +4508,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2015",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 44.7,
           "year": "2006",
@@ -4896,7 +4537,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4217.59102643391,
       "internetUsers": 76.67890167,
       "povertyRate": 33.1,
-      "hdi": 0,
       "giniIndex": 44.7,
       "gdpPerCapitaPpp": 21241.4350725543,
       "intentionalHomicides": 12.6466448562847,
@@ -4945,11 +4585,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29.2,
           "year": "2021",
@@ -4979,7 +4614,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 14154.6324958076,
       "internetUsers": 93.39167254,
       "povertyRate": 5,
-      "hdi": 0,
       "giniIndex": 29.2,
       "gdpPerCapitaPpp": 40890.9317694408,
       "intentionalHomicides": 2.55058633787163,
@@ -5028,11 +4662,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.4,
           "year": "2023",
@@ -5062,7 +4691,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 999.65456165547,
       "internetUsers": 31.70330048,
       "povertyRate": 27.4,
-      "hdi": 0,
       "giniIndex": 39.4,
       "gdpPerCapitaPpp": 3710.86040434596,
       "intentionalHomicides": 3.61247427164444,
@@ -5111,11 +4739,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 45.2,
           "year": "2023",
@@ -5145,7 +4768,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6150.02571438505,
       "internetUsers": 60.22140121,
       "povertyRate": 56,
-      "hdi": 0,
       "giniIndex": 45.2,
       "gdpPerCapitaPpp": 14368.6605681815,
       "intentionalHomicides": 23.3657267272051,
@@ -5194,11 +4816,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 34.3,
           "year": "2023",
@@ -5228,7 +4845,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 40385.3413957669,
       "internetUsers": 89.2207202,
       "povertyRate": 20.1,
-      "hdi": 0,
       "giniIndex": 34.3,
       "gdpPerCapitaPpp": 62014.2675153689,
       "intentionalHomicides": 0.568072449338316,
@@ -5273,11 +4889,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 31.5,
           "year": "2022",
@@ -5307,7 +4918,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 54340.3477224733,
       "internetUsers": 94.353302,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 31.5,
       "gdpPerCapitaPpp": 64610.3795171971,
       "intentionalHomicides": 1.97968887560784,
@@ -5356,11 +4966,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2012",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 7966.87352428705,
           "year": "2024",
@@ -5385,7 +4990,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2627.87969756224,
       "internetUsers": 68.47530365,
       "povertyRate": 17.7,
-      "hdi": 0,
       "gdpPerCapitaPpp": 7966.87352428705,
       "intentionalHomicides": 1.82033262639221,
       "outOfPocketHealth": 60.60118866,
@@ -5433,11 +5037,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2016",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 44,
           "year": "2016",
@@ -5467,7 +5066,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1080.14718624765,
       "internetUsers": 6.671000004,
       "povertyRate": 82.3,
-      "hdi": 0,
       "giniIndex": 44,
       "gdpPerCapitaPpp": 1154.88686304107,
       "intentionalHomicides": 13.9825812737537,
@@ -5507,12 +5105,7 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2004",
           "source": "World Bank Data API"
         },
-        "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        }
+        "povertyRate": null
       },
       "population": 26498823,
       "birthRate": 12.858,
@@ -5522,7 +5115,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": null,
       "internetUsers": 0,
       "povertyRate": null,
-      "hdi": 0,
       "birthShare": 0.0025739049132270184
     },
     {
@@ -5567,11 +5159,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.4,
           "year": "2023",
@@ -5601,7 +5188,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 35326.7683069278,
       "internetUsers": 95.7574516,
       "povertyRate": 20.2,
-      "hdi": 0,
       "giniIndex": 33.4,
       "gdpPerCapitaPpp": 57965.2948138837,
       "intentionalHomicides": 0.690855954769765,
@@ -5650,11 +5236,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 37.9,
           "year": "2021",
@@ -5679,7 +5260,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1119.38160509429,
       "internetUsers": 39.48320007,
       "povertyRate": 43.8,
-      "hdi": 0,
       "giniIndex": 37.9,
       "gdpPerCapitaPpp": 3365.45809007306,
       "outOfPocketHealth": 64.34121704,
@@ -5723,11 +5303,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.8,
           "year": "2020",
@@ -5757,7 +5332,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 64603.9856308464,
       "internetUsers": 96.13140106,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 33.8,
       "gdpPerCapitaPpp": 72111.1844628126,
       "intentionalHomicides": 0.854406035826682,
@@ -5806,11 +5380,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2025",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 45.9,
           "year": "2025",
@@ -5840,7 +5409,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6874.705739766,
       "internetUsers": 77.17273115,
       "povertyRate": 21.4,
-      "hdi": 0,
       "giniIndex": 45.9,
       "gdpPerCapitaPpp": 15840.2668567412,
       "intentionalHomicides": 45.7228145164847,
@@ -5889,11 +5457,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36.1,
           "year": "2024",
@@ -5923,7 +5486,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1341.20229027672,
       "internetUsers": 55.79339981,
       "povertyRate": 19.8,
-      "hdi": 0,
       "giniIndex": 36.1,
       "gdpPerCapitaPpp": 5405.98011619139,
       "intentionalHomicides": 0.892370798940089,
@@ -5972,11 +5534,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40.9,
           "year": "2024",
@@ -6006,7 +5563,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4421.16609889999,
       "internetUsers": 79.70469666,
       "povertyRate": 37.7,
-      "hdi": 0,
       "giniIndex": 40.9,
       "gdpPerCapitaPpp": 12877.6351184372,
       "intentionalHomicides": 4.41843313132273,
@@ -6055,11 +5611,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 35.7,
           "year": "2018",
@@ -6089,7 +5640,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 806.654650417726,
       "internetUsers": 25.10499954,
       "povertyRate": 56.8,
-      "hdi": 0,
       "giniIndex": 35.7,
       "gdpPerCapitaPpp": 3522.30588009119,
       "intentionalHomicides": 2.22431228940123,
@@ -6138,11 +5688,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2012",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 41.1,
           "year": "2012",
@@ -6172,7 +5717,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2142.62330526788,
       "internetUsers": 47.8614006,
       "povertyRate": 58.5,
-      "hdi": 0,
       "giniIndex": 41.1,
       "gdpPerCapitaPpp": 3193.67136419915,
       "intentionalHomicides": 41.1518089717388,
@@ -6221,11 +5765,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2009",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 41.9,
           "year": "2009",
@@ -6255,7 +5794,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3006.70564478923,
       "internetUsers": 18.81159973,
       "povertyRate": 39.9,
-      "hdi": 0,
       "giniIndex": 41.9,
       "gdpPerCapitaPpp": 4874.6899553589,
       "intentionalHomicides": 9.34037927179888,
@@ -6304,11 +5842,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 28.5,
           "year": "2023",
@@ -6338,7 +5871,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 25103.565661423,
       "internetUsers": 88.58496367,
       "povertyRate": 13.3,
-      "hdi": 0,
       "giniIndex": 28.5,
       "gdpPerCapitaPpp": 51262.5105756884,
       "intentionalHomicides": 0.802314721828908,
@@ -6387,11 +5919,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 43,
           "year": "2021",
@@ -6421,7 +5948,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 516.160999996036,
       "internetUsers": 13.78250027,
       "povertyRate": 68.8,
-      "hdi": 0,
       "giniIndex": 43,
       "gdpPerCapitaPpp": 1263.10234213699,
       "intentionalHomicides": 20.120400654,
@@ -6466,11 +5992,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.9,
           "year": "2021",
@@ -6500,7 +6021,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 36238.639908315,
       "internetUsers": 97.89563777,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 32.9,
       "gdpPerCapitaPpp": 61051.3492502498,
       "intentionalHomicides": 0.477306316584835,
@@ -6549,11 +6069,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.7,
           "year": "2010",
@@ -6583,7 +6098,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4618.09592498567,
       "internetUsers": 95.62244985,
       "povertyRate": 15.7,
-      "hdi": 0,
       "giniIndex": 33.7,
       "gdpPerCapitaPpp": 10821.4909765317,
       "intentionalHomicides": 0.987830151085125,
@@ -6632,11 +6146,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2025",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 45.7,
           "year": "2024",
@@ -6666,7 +6175,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3426.43483328923,
       "internetUsers": 58.62269974,
       "povertyRate": 60.1,
-      "hdi": 0,
       "giniIndex": 45.7,
       "gdpPerCapitaPpp": 7486.01869616445,
       "intentionalHomicides": 31.4424316507577,
@@ -6715,11 +6223,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 37.7,
           "year": "2019",
@@ -6749,7 +6252,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4515.56787322732,
       "internetUsers": 54.59,
       "povertyRate": 14.3,
-      "hdi": 0,
       "giniIndex": 37.7,
       "gdpPerCapitaPpp": 15632.5924849848,
       "intentionalHomicides": 3.31094038448808,
@@ -6798,11 +6300,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2020",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 25.6,
           "year": "2020",
@@ -6832,7 +6329,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 5389.47314453125,
       "internetUsers": 82.47489929,
       "povertyRate": 23.2,
-      "hdi": 0,
       "giniIndex": 25.6,
       "gdpPerCapitaPpp": 18550.462890625,
       "intentionalHomicides": 3.77663964401616,
@@ -6881,11 +6377,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2025",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39,
           "year": "2024",
@@ -6915,7 +6406,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 10875.6618443092,
       "internetUsers": 91.0022446,
       "povertyRate": 17.3,
-      "hdi": 0,
       "giniIndex": 39,
       "gdpPerCapitaPpp": 27541.6625283384,
       "intentionalHomicides": 10.9166976980638,
@@ -6964,11 +6454,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2011",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 48.9,
           "year": "2011",
@@ -6993,7 +6478,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2482.2489948456,
       "internetUsers": 47.25159836,
       "povertyRate": 40.9,
-      "hdi": 0,
       "giniIndex": 48.9,
       "gdpPerCapitaPpp": 7026.36223281494,
       "outOfPocketHealth": 27.97068977,
@@ -7037,11 +6521,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 38.3,
           "year": "2022",
@@ -7071,7 +6550,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 54176.6844383302,
       "internetUsers": 88.18242225,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 38.3,
       "gdpPerCapitaPpp": 57235.7763244136,
       "intentionalHomicides": 1.62581066709758,
@@ -7120,11 +6598,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32,
           "year": "2019",
@@ -7154,7 +6627,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2110.12036938187,
       "internetUsers": 45.77939987,
       "povertyRate": 31.8,
-      "hdi": 0,
       "giniIndex": 32,
       "gdpPerCapitaPpp": 7368.75275290214,
       "intentionalHomicides": 0.999971522550119,
@@ -7203,11 +6675,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 43,
           "year": "2024",
@@ -7237,7 +6704,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 16709.8893972307,
       "internetUsers": 95.590243,
       "povertyRate": 6.5,
-      "hdi": 0,
       "giniIndex": 43,
       "gdpPerCapitaPpp": 36181.156616977,
       "intentionalHomicides": 6.34829073035101,
@@ -7286,11 +6752,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2016",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 35.3,
           "year": "2016",
@@ -7320,7 +6781,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 851.497723870206,
       "internetUsers": 32.23360062,
       "povertyRate": 50.9,
-      "hdi": 0,
       "giniIndex": 35.3,
       "gdpPerCapitaPpp": 1871.04406164262,
       "intentionalHomicides": 3.08709483452429,
@@ -7369,11 +6829,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 25.7,
           "year": "2021",
@@ -7403,7 +6858,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 67520.4218956281,
       "internetUsers": 97.00679779,
       "povertyRate": 14.5,
-      "hdi": 0,
       "giniIndex": 25.7,
       "gdpPerCapitaPpp": 86173.6290841738,
       "intentionalHomicides": 0.690893081283378,
@@ -7452,11 +6906,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.7,
           "year": "2021",
@@ -7486,7 +6935,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4181.13789301228,
       "internetUsers": 76.5,
       "povertyRate": 16.6,
-      "hdi": 0,
       "giniIndex": 33.7,
       "gdpPerCapitaPpp": 14521.0080937638,
       "intentionalHomicides": 4.69348024650292,
@@ -7535,11 +6983,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 34.7,
           "year": "2024",
@@ -7564,7 +7007,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2123.97909415109,
       "internetUsers": 65.59269714,
       "povertyRate": 15,
-      "hdi": 0,
       "giniIndex": 34.7,
       "gdpPerCapitaPpp": 9775.82817381023,
       "outOfPocketHealth": 44.84078598,
@@ -7608,11 +7050,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40.8,
           "year": "1998",
@@ -7642,7 +7079,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6856.65802730208,
       "internetUsers": 17.99029922,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 40.8,
       "gdpPerCapitaPpp": 21213.0862501953,
       "intentionalHomicides": 1.01355101620555,
@@ -7691,11 +7127,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29.8,
           "year": "2023",
@@ -7725,7 +7156,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 20080.2096215595,
       "internetUsers": 91.29048551,
       "povertyRate": 19,
-      "hdi": 0,
       "giniIndex": 29.8,
       "gdpPerCapitaPpp": 49076.5399383138,
       "intentionalHomicides": 1.10887485110282,
@@ -7774,11 +7204,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 27.5,
           "year": "2024",
@@ -7808,7 +7233,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2420.18542283831,
       "internetUsers": 92.0286026,
       "povertyRate": 25.7,
-      "hdi": 0,
       "giniIndex": 27.5,
       "gdpPerCapitaPpp": 8012.45464442194,
       "intentionalHomicides": 1.74734308054439,
@@ -7857,11 +7281,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36.4,
           "year": "2023",
@@ -7891,7 +7310,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2592.30591217647,
       "internetUsers": 86.63765334,
       "povertyRate": 32.8,
-      "hdi": 0,
       "giniIndex": 36.4,
       "gdpPerCapitaPpp": 4371.11135857265,
       "intentionalHomicides": 0.622023007311598,
@@ -7940,11 +7358,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 44.2,
           "year": "2024",
@@ -7974,7 +7387,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6416.09708970845,
       "internetUsers": 81.57806793,
       "povertyRate": 20.1,
-      "hdi": 0,
       "giniIndex": 44.2,
       "gdpPerCapitaPpp": 18523.6810153,
       "intentionalHomicides": 6.7795163925492,
@@ -8023,11 +7435,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2016",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 46.2,
           "year": "2014",
@@ -8057,7 +7464,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2847.53966339498,
       "internetUsers": 61.39550018,
       "povertyRate": 24.9,
-      "hdi": 0,
       "giniIndex": 46.2,
       "gdpPerCapitaPpp": 8708.79983051626,
       "intentionalHomicides": 11.3473196321723,
@@ -8102,11 +7508,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 14303.8087736988,
           "year": "2024",
@@ -8126,7 +7527,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6569.16408678648,
       "internetUsers": 81.95449829,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 14303.8087736988,
       "outOfPocketHealth": 19.17657852,
       "birthShare": 0.0009197321581103663
@@ -8173,11 +7573,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 26.8,
           "year": "2023",
@@ -8207,7 +7602,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 56614.5679499036,
       "internetUsers": 95.77579144,
       "povertyRate": 12.3,
-      "hdi": 0,
       "giniIndex": 26.8,
       "gdpPerCapitaPpp": 73514.4831045258,
       "intentionalHomicides": 1.08030153549307,
@@ -8252,11 +7646,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 26.4,
           "year": "2018",
@@ -8286,7 +7675,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 50273.5060469837,
       "internetUsers": 100,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 26.4,
       "gdpPerCapitaPpp": 79228.738801276,
       "intentionalHomicides": 0.693218125037315,
@@ -8335,11 +7723,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2012",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 26.6,
           "year": "2005",
@@ -8369,7 +7752,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7283.8499076179,
       "internetUsers": 90.80000181,
       "povertyRate": 6,
-      "hdi": 0,
       "giniIndex": 26.6,
       "gdpPerCapitaPpp": 25088.9993757134,
       "intentionalHomicides": 2.16122820563689,
@@ -8414,11 +7796,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 1742.32363018235,
           "year": "2011",
@@ -8443,7 +7820,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 688.68165957684,
       "internetUsers": 14.34939957,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 1742.32363018235,
       "intentionalHomicides": 15.6075665087306,
       "outOfPocketHealth": 48.44565201,
@@ -8491,11 +7867,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.8,
           "year": "2023",
@@ -8525,7 +7896,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 5579.65969165029,
       "internetUsers": 66.47769928,
       "povertyRate": 27.2,
-      "hdi": 0,
       "giniIndex": 39.8,
       "gdpPerCapitaPpp": 13264.027090968,
       "intentionalHomicides": 7.89768799960639,
@@ -8574,11 +7944,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29.3,
           "year": "2023",
@@ -8608,7 +7973,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 57117.4877440616,
       "internetUsers": 95.76629783,
       "povertyRate": 16.1,
-      "hdi": 0,
       "giniIndex": 29.3,
       "gdpPerCapitaPpp": 71844.9129880579,
       "intentionalHomicides": 1.14675703743944,
@@ -8653,11 +8017,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 4.46315139638841,
           "year": "2019",
@@ -8677,7 +8036,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 9605.27914559614,
       "internetUsers": 70.47699738,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 4.46315139638841,
       "outOfPocketHealth": 16.58238792,
       "birthShare": 0.0007149793784506977
@@ -8724,11 +8082,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2012",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 35.5,
           "year": "2022",
@@ -8758,7 +8111,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3477.72489842684,
       "internetUsers": 80.63400269,
       "povertyRate": 27.4,
-      "hdi": 0,
       "giniIndex": 35.5,
       "gdpPerCapitaPpp": 12574.8329116403,
       "intentionalHomicides": 2.24466989542556,
@@ -8803,11 +8155,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 41740.1658530012,
           "year": "2024",
@@ -8832,7 +8179,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 20285.2272897377,
       "internetUsers": 95.25174678,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 41740.1658530012,
       "intentionalHomicides": 0.138633928990513,
       "outOfPocketHealth": 6.31094599,
@@ -8880,11 +8226,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.9,
           "year": "2023",
@@ -8914,7 +8255,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 29292.242104753,
       "internetUsers": 88.48704454,
       "povertyRate": 16.4,
-      "hdi": 0,
       "giniIndex": 33.9,
       "gdpPerCapitaPpp": 51679.8883807527,
       "intentionalHomicides": 0.719971949892832,
@@ -8963,11 +8303,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 25.7,
           "year": "2023",
@@ -8997,7 +8332,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 31823.3078290564,
       "internetUsers": 87.68776014,
       "povertyRate": 10.2,
-      "hdi": 0,
       "giniIndex": 25.7,
       "gdpPerCapitaPpp": 57285.4237001379,
       "intentionalHomicides": 0.767827757917044,
@@ -9046,11 +8380,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2020",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 38.8,
           "year": "2020",
@@ -9075,7 +8404,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 871.340291776294,
       "internetUsers": 49.49430084,
       "povertyRate": 53.4,
-      "hdi": 0,
       "giniIndex": 38.8,
       "gdpPerCapitaPpp": 3475.61245701341,
       "outOfPocketHealth": 33.7826767,
@@ -9123,11 +8451,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2015",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 59.1,
           "year": "2015",
@@ -9157,7 +8480,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4413.12752211572,
       "internetUsers": 64.87460327,
       "povertyRate": 17.4,
-      "hdi": 0,
       "giniIndex": 59.1,
       "gdpPerCapitaPpp": 11686.6020661881,
       "intentionalHomicides": 11.2077806904171,
@@ -9206,11 +8528,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30.6,
           "year": "2017",
@@ -9240,7 +8557,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 23292.3263882478,
       "internetUsers": 93.77898628,
       "povertyRate": 12.1,
-      "hdi": 0,
       "giniIndex": 30.6,
       "gdpPerCapitaPpp": 48552.4708092529,
       "intentionalHomicides": 0.722657964901225,
@@ -9289,11 +8605,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.8,
           "year": "2022",
@@ -9323,7 +8634,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 103998.186685604,
       "internetUsers": 97.32103855,
       "povertyRate": 15.8,
-      "hdi": 0,
       "giniIndex": 33.8,
       "gdpPerCapitaPpp": 96497.6947971323,
       "intentionalHomicides": 0.597481940544685,
@@ -9372,11 +8682,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 31.2,
           "year": "2023",
@@ -9406,7 +8711,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 58268.8787651601,
       "internetUsers": 91.92573373,
       "povertyRate": 14.8,
-      "hdi": 0,
       "giniIndex": 31.2,
       "gdpPerCapitaPpp": 73911.439663136,
       "intentionalHomicides": 0.876191031111463,
@@ -9455,11 +8759,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 49.7,
           "year": "2024",
@@ -9489,7 +8788,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 19161.2188501596,
       "internetUsers": 72.77149963,
       "povertyRate": 21.7,
-      "hdi": 0,
       "giniIndex": 49.7,
       "gdpPerCapitaPpp": 41369.422541499,
       "intentionalHomicides": 11.7072934419645,
@@ -9538,11 +8836,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2017",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 38,
           "year": "2017",
@@ -9567,7 +8860,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 8230.04311451151,
       "internetUsers": 68.72090149,
       "povertyRate": 33.4,
-      "hdi": 0,
       "giniIndex": 38,
       "gdpPerCapitaPpp": 21510.1725307344,
       "outOfPocketHealth": 17.27153969,
@@ -9615,11 +8907,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.4,
           "year": "2023",
@@ -9649,7 +8936,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 24626.1481858973,
       "internetUsers": 86.26968886,
       "povertyRate": 18.8,
-      "hdi": 0,
       "giniIndex": 33.4,
       "gdpPerCapitaPpp": 44327.2097808276,
       "intentionalHomicides": 0.839605274224601,
@@ -9698,11 +8984,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.4,
           "year": "2021",
@@ -9732,7 +9013,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1007.74151728028,
       "internetUsers": 29.77739906,
       "povertyRate": 50.5,
-      "hdi": 0,
       "giniIndex": 33.4,
       "gdpPerCapitaPpp": 3119.37157047437,
       "intentionalHomicides": 1.11876398954435,
@@ -9781,11 +9061,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 24.4,
           "year": "2020",
@@ -9815,7 +9090,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 8317.63399913792,
       "internetUsers": 94.26182128,
       "povertyRate": 3.5,
-      "hdi": 0,
       "giniIndex": 24.4,
       "gdpPerCapitaPpp": 33010.3307605357,
       "intentionalHomicides": 2.38463165310244,
@@ -9864,11 +9138,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2015",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 54.9,
           "year": "2015",
@@ -9898,7 +9167,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7695.75319445165,
       "internetUsers": 57.45950036,
       "povertyRate": 16.1,
-      "hdi": 0,
       "giniIndex": 54.9,
       "gdpPerCapitaPpp": 20538.1320178889,
       "intentionalHomicides": 11.3681767255945,
@@ -9947,11 +9215,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.8,
           "year": "2023",
@@ -9981,7 +9244,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 13679.2065983557,
       "internetUsers": 87.69071294,
       "povertyRate": 19.7,
-      "hdi": 0,
       "giniIndex": 32.8,
       "gdpPerCapitaPpp": 32832.1763221005,
       "intentionalHomicides": 1.31400205013848,
@@ -10030,11 +9292,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 31.4,
           "year": "2022",
@@ -10064,7 +9321,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6750.6301157724,
       "internetUsers": 85.12349701,
       "povertyRate": 27.1,
-      "hdi": 0,
       "giniIndex": 31.4,
       "gdpPerCapitaPpp": 19144.7261368498,
       "intentionalHomicides": 5.91503475082916,
@@ -10109,11 +9365,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 55551.143658637,
           "year": "2024",
@@ -10138,7 +9389,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 49205.1792146792,
       "internetUsers": 93.51930237,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 55551.143658637,
       "intentionalHomicides": 1.46149415952832,
       "outOfPocketHealth": 12.68764019,
@@ -10186,11 +9436,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29.9,
           "year": "2023",
@@ -10220,7 +9465,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 71026.4832271897,
       "internetUsers": 99.76915157,
       "povertyRate": 12.4,
-      "hdi": 0,
       "giniIndex": 29.9,
       "gdpPerCapitaPpp": 81878.2349849181,
       "intentionalHomicides": 0.840599404536194,
@@ -10269,11 +9513,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 38.5,
           "year": "2022",
@@ -10298,7 +9537,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6745.40013244916,
       "internetUsers": 63.29930115,
       "povertyRate": 50.7,
-      "hdi": 0,
       "giniIndex": 38.5,
       "gdpPerCapitaPpp": 17566.7600284073,
       "outOfPocketHealth": 65.98317719,
@@ -10346,11 +9584,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2017",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 44.9,
           "year": "2017",
@@ -10380,7 +9613,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 971.90771824829,
       "internetUsers": 51.79660034,
       "povertyRate": 49.7,
-      "hdi": 0,
       "giniIndex": 44.9,
       "gdpPerCapitaPpp": 3001.16311951334,
       "intentionalHomicides": 38.2397413122181,
@@ -10429,11 +9661,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 26.5,
           "year": "2023",
@@ -10463,7 +9690,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 86785.4334489176,
       "internetUsers": 99,
       "povertyRate": 12.2,
-      "hdi": 0,
       "giniIndex": 26.5,
       "gdpPerCapitaPpp": 102037.526800237,
       "intentionalHomicides": 0.724747049690651,
@@ -10512,11 +9738,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29,
           "year": "2023",
@@ -10546,7 +9767,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 112894.953240805,
       "internetUsers": 97.18769836,
       "povertyRate": 14,
-      "hdi": 0,
       "giniIndex": 29,
       "gdpPerCapitaPpp": 133437.470117019,
       "intentionalHomicides": 0.654270171245596,
@@ -10595,11 +9815,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.5,
           "year": "2023",
@@ -10629,7 +9844,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 17596.0173663521,
       "internetUsers": 82.438955,
       "povertyRate": 21.7,
-      "hdi": 0,
       "giniIndex": 39.5,
       "gdpPerCapitaPpp": 41969.4515718999,
       "intentionalHomicides": 1.08890737415431,
@@ -10678,11 +9892,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2025",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 45.5,
           "year": "2025",
@@ -10712,7 +9921,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 18587.1532203482,
       "internetUsers": 87.17019653,
       "povertyRate": 17.1,
-      "hdi": 0,
       "giniIndex": 45.5,
       "gdpPerCapitaPpp": 31106.7643556729,
       "intentionalHomicides": 17.7454798727379,
@@ -10757,11 +9965,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 52443.5969223626,
           "year": "2024",
@@ -10786,7 +9989,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 32717.7186631255,
       "internetUsers": 100,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 52443.5969223626,
       "intentionalHomicides": 0.249991818449578,
       "outOfPocketHealth": 10.00349617,
@@ -10834,11 +10036,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 23.8,
           "year": "2023",
@@ -10868,7 +10065,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 25992.6748502048,
       "internetUsers": 89.82507032,
       "povertyRate": 13.7,
-      "hdi": 0,
       "giniIndex": 23.8,
       "gdpPerCapitaPpp": 48132.356430543,
       "intentionalHomicides": 1.12358440823663,
@@ -10913,11 +10109,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 150689.301625826,
           "year": "2024",
@@ -10942,7 +10133,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 90674.066632628,
       "internetUsers": 94.37757178,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 150689.301625826,
       "intentionalHomicides": 0.0690954942050905,
       "outOfPocketHealth": 25.41850281,
@@ -10990,11 +10180,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 27.4,
           "year": "2023",
@@ -11024,7 +10209,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 53149.7671934051,
       "internetUsers": 93.72405196,
       "povertyRate": 12.2,
-      "hdi": 0,
       "giniIndex": 27.4,
       "gdpPerCapitaPpp": 65378.3841859721,
       "intentionalHomicides": 0.98193498501344,
@@ -11073,11 +10257,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.9,
           "year": "2024",
@@ -11107,7 +10286,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 9241.49122313713,
       "internetUsers": 83.79855689,
       "povertyRate": 9.4,
-      "hdi": 0,
       "giniIndex": 33.9,
       "gdpPerCapitaPpp": 28285.0732802982,
       "intentionalHomicides": 2.02806499553233,
@@ -11148,11 +10326,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 75195.9865970615,
           "year": "2024",
@@ -11172,7 +10345,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 54074.6928519479,
       "internetUsers": 95.75536971,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 75195.9865970615,
       "intentionalHomicides": 0.376205815214825,
       "birthShare": 0.000278511499919337
@@ -11219,11 +10391,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 27.4,
           "year": "2024",
@@ -11253,7 +10420,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 8556.21406956719,
       "internetUsers": 81.33930206,
       "povertyRate": 21.7,
-      "hdi": 0,
       "giniIndex": 27.4,
       "gdpPerCapitaPpp": 22823.1795255693,
       "intentionalHomicides": 2.20833575400906,
@@ -11302,11 +10468,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40,
           "year": "2024",
@@ -11336,7 +10497,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 23906.5133029408,
       "internetUsers": 91.99109007,
       "povertyRate": 17.3,
-      "hdi": 0,
       "giniIndex": 40,
       "gdpPerCapitaPpp": 36417.874162496,
       "intentionalHomicides": 11.2453054170348,
@@ -11385,11 +10545,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.9,
           "year": "2021",
@@ -11419,7 +10574,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7753.8006955432,
       "internetUsers": 90.10870361,
       "povertyRate": 8.2,
-      "hdi": 0,
       "giniIndex": 39.9,
       "gdpPerCapitaPpp": 12890.2660051472,
       "intentionalHomicides": 49.4403451527686,
@@ -11468,11 +10622,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2024",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30.1,
           "year": "2023",
@@ -11502,7 +10651,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 24050.4397933135,
       "internetUsers": 83.63240029,
       "povertyRate": 20.3,
-      "hdi": 0,
       "giniIndex": 30.1,
       "gdpPerCapitaPpp": 49550.7921506017,
       "intentionalHomicides": 0.667347104040825,
@@ -11551,11 +10699,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2014",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 28.7,
           "year": "2014",
@@ -11585,7 +10728,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1331.9705130185,
       "internetUsers": 35.04199982,
       "povertyRate": 41.8,
-      "hdi": 0,
       "giniIndex": 28.7,
       "gdpPerCapitaPpp": 4422.77882172399,
       "intentionalHomicides": 4.06594633033822,
@@ -11634,11 +10776,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2016",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 54.6,
           "year": "2016",
@@ -11668,7 +10805,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3909.55892378182,
       "internetUsers": 63.40309906,
       "povertyRate": 58.9,
-      "hdi": 0,
       "giniIndex": 54.6,
       "gdpPerCapitaPpp": 11799.2028793201,
       "intentionalHomicides": 12.5145709802017,
@@ -11713,11 +10849,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 35.1,
           "year": "2017",
@@ -11747,7 +10878,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 76688.6941743178,
       "internetUsers": 98.08540344,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 35.1,
       "gdpPerCapitaPpp": 126046.354855612,
       "intentionalHomicides": 0.0691454145354033,
@@ -11796,11 +10926,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 26.8,
           "year": "2023",
@@ -11830,7 +10955,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7576.19589413326,
       "internetUsers": 77.3687973,
       "povertyRate": 31.6,
-      "hdi": 0,
       "giniIndex": 26.8,
       "gdpPerCapitaPpp": 18614.9880691203,
       "intentionalHomicides": 2.54314378217647,
@@ -11875,11 +10999,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30.3,
           "year": "2024",
@@ -11904,7 +11023,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1662.75663312504,
       "internetUsers": 32.51750183,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 30.3,
       "gdpPerCapitaPpp": 3958.53228789687,
       "outOfPocketHealth": 56.56671524,
@@ -11952,11 +11070,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2017",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 41.6,
           "year": "2017",
@@ -11981,7 +11094,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3552.72335079222,
       "internetUsers": 65.29889679,
       "povertyRate": 21.1,
-      "hdi": 0,
       "giniIndex": 41.6,
       "gdpPerCapitaPpp": 7810.27869066792,
       "outOfPocketHealth": 28.84145355,
@@ -12029,11 +11141,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2015",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30.3,
           "year": "2021",
@@ -12063,7 +11170,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 9358.78768951134,
       "internetUsers": 86.10091103,
       "povertyRate": 16.9,
-      "hdi": 0,
       "giniIndex": 30.3,
       "gdpPerCapitaPpp": 25043.0886396127,
       "intentionalHomicides": 1.22446173133237,
@@ -12112,11 +11218,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29.4,
           "year": "2020",
@@ -12146,7 +11247,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 11377.7757431099,
       "internetUsers": 85.86389923,
       "povertyRate": 19.7,
-      "hdi": 0,
       "giniIndex": 29.4,
       "gdpPerCapitaPpp": 26701.6749563776,
       "intentionalHomicides": 1.38708340817063,
@@ -12195,11 +11295,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2012",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 37.1,
           "year": "2012",
@@ -12229,7 +11324,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 1933.55538435227,
       "internetUsers": 29.04070091,
       "povertyRate": 12.7,
-      "hdi": 0,
       "giniIndex": 37.1,
       "gdpPerCapitaPpp": 2674.89311339831,
       "intentionalHomicides": 3.73435012480591,
@@ -12274,11 +11368,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 66941.2430367989,
           "year": "2024",
@@ -12303,7 +11392,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 29653.5682731534,
       "internetUsers": 100,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 66941.2430367989,
       "intentionalHomicides": 0.195636140255462,
       "outOfPocketHealth": 28.65578461,
@@ -12351,11 +11439,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36,
           "year": "2023",
@@ -12385,7 +11468,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 29384.0189598663,
       "internetUsers": 89.16116293,
       "povertyRate": 20.9,
-      "hdi": 0,
       "giniIndex": 36,
       "gdpPerCapitaPpp": 55285.8991934304,
       "intentionalHomicides": 2.62779952622526,
@@ -12434,11 +11516,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2015",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 38.3,
           "year": "2022",
@@ -12463,7 +11540,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7023.06598512878,
       "internetUsers": 89.4430319734879,
       "povertyRate": 17.6,
-      "hdi": 0,
       "giniIndex": 38.3,
       "gdpPerCapitaPpp": 17864.4160145118,
       "intentionalHomicides": 1.89497747704421,
@@ -12503,11 +11579,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 50247.8492461676,
           "year": "2024",
@@ -12527,7 +11598,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 39343.7154660139,
       "internetUsers": 87.29178106,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 50247.8492461676,
       "intentionalHomicides": 14.5896581532053,
       "birthShare": 0.00013793176218959114
@@ -12574,11 +11644,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 24.7,
           "year": "2023",
@@ -12608,7 +11673,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 34301.0318686594,
       "internetUsers": 90.76355487,
       "povertyRate": 12.7,
-      "hdi": 0,
       "giniIndex": 24.7,
       "gdpPerCapitaPpp": 57186.3713538174,
       "intentionalHomicides": 0.566466326409227,
@@ -12657,11 +11721,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30.7,
           "year": "2019",
@@ -12691,7 +11750,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6425.74151715712,
       "internetUsers": 74.7052002,
       "povertyRate": 24.1,
-      "hdi": 0,
       "giniIndex": 30.7,
       "gdpPerCapitaPpp": 15450.2993265388,
       "intentionalHomicides": 2.0559533103824,
@@ -12736,11 +11794,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 45.1,
           "year": "1998",
@@ -12770,7 +11823,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 29675.2443873316,
       "internetUsers": 83.00080109,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 45.1,
       "gdpPerCapitaPpp": 80155.03939277,
       "intentionalHomicides": 19.1201580922439,
@@ -12819,11 +11871,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.5,
           "year": "2019",
@@ -12853,7 +11900,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 9291.85661671864,
       "internetUsers": 93.1,
       "povertyRate": 21.9,
-      "hdi": 0,
       "giniIndex": 33.5,
       "gdpPerCapitaPpp": 26995.4292563497,
       "intentionalHomicides": 1.52854990019388,
@@ -12898,11 +11944,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40.2,
           "year": "1992",
@@ -12932,7 +11973,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 18733.4110406494,
       "internetUsers": 82.15989685,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 40.2,
       "gdpPerCapitaPpp": 36328.5130065685,
       "intentionalHomicides": 40.4432986623964,
@@ -12981,11 +12021,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 31.8,
           "year": "2023",
@@ -13015,7 +12050,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 38674.29296875,
       "internetUsers": 89.60099246,
       "povertyRate": 13.9,
-      "hdi": 0,
       "giniIndex": 31.8,
       "gdpPerCapitaPpp": 63006.61328125,
       "intentionalHomicides": 0.81785876397005,
@@ -13064,11 +12098,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 34,
           "year": "2023",
@@ -13098,7 +12127,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 23409.0845154775,
       "internetUsers": 92.70757011,
       "povertyRate": 22.5,
-      "hdi": 0,
       "giniIndex": 34,
       "gdpPerCapitaPpp": 43394.2732822314,
       "intentionalHomicides": 2.49681788529087,
@@ -13147,11 +12175,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 36.8,
           "year": "2017",
@@ -13181,7 +12204,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 11990.7798944837,
       "internetUsers": 73.30793533,
       "povertyRate": 8.4,
-      "hdi": 0,
       "giniIndex": 36.8,
       "gdpPerCapitaPpp": 31839.7597535524,
       "intentionalHomicides": 2.27249663925174,
@@ -13230,11 +12252,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.2,
           "year": "2022",
@@ -13264,7 +12281,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6961.78955961526,
       "internetUsers": 87.4,
       "povertyRate": 17.6,
-      "hdi": 0,
       "giniIndex": 39.2,
       "gdpPerCapitaPpp": 21800.5265989822,
       "intentionalHomicides": 6.51946457704576,
@@ -13313,11 +12329,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 28.5,
           "year": "2022",
@@ -13347,7 +12358,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3831.32535494609,
       "internetUsers": 91.27739716,
       "povertyRate": 12.4,
-      "hdi": 0,
       "giniIndex": 28.5,
       "gdpPerCapitaPpp": 16215.1520073153,
       "intentionalHomicides": 2.46751324015657,
@@ -13396,11 +12406,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2022",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 30.7,
           "year": "2023",
@@ -13430,7 +12435,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 31428.3547816104,
       "internetUsers": 92.23796204,
       "povertyRate": 22.5,
-      "hdi": 0,
       "giniIndex": 30.7,
       "gdpPerCapitaPpp": 49968.7108278373,
       "intentionalHomicides": 1.53599045052794,
@@ -13479,11 +12483,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.3,
           "year": "2019",
@@ -13513,7 +12512,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3410.77023167097,
       "internetUsers": 22.35140038,
       "povertyRate": 15.9,
-      "hdi": 0,
       "giniIndex": 32.3,
       "gdpPerCapitaPpp": 3605.60736691735,
       "intentionalHomicides": 0.3346065111081,
@@ -13562,11 +12560,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.9,
           "year": "2018",
@@ -13596,7 +12589,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7681.24400583113,
       "internetUsers": 80.00582262,
       "povertyRate": 52,
-      "hdi": 0,
       "giniIndex": 39.9,
       "gdpPerCapitaPpp": 14346.5188049737,
       "intentionalHomicides": 28.0582917218107,
@@ -13645,11 +12637,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 34.3,
           "year": "2021",
@@ -13679,7 +12666,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 13263.3281277699,
       "internetUsers": 88.88258428,
       "povertyRate": 20,
-      "hdi": 0,
       "giniIndex": 34.3,
       "gdpPerCapitaPpp": 34062.7577672706,
       "intentionalHomicides": 0.789201202111271,
@@ -13728,11 +12714,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2017",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40.7,
           "year": "2017",
@@ -13762,7 +12743,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 3490.56883486557,
       "internetUsers": 59.11759949,
       "povertyRate": 55.5,
-      "hdi": 0,
       "giniIndex": 40.7,
       "gdpPerCapitaPpp": 6241.85614464638,
       "intentionalHomicides": 3.23189666549062,
@@ -13811,11 +12791,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 33.6,
           "year": "2023",
@@ -13845,7 +12820,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 137781.681659123,
       "internetUsers": 99.12902211,
       "povertyRate": 17.3,
-      "hdi": 0,
       "giniIndex": 33.6,
       "gdpPerCapitaPpp": 155941.288210791,
       "intentionalHomicides": 1.5306610542428,
@@ -13894,7 +12868,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": null,
         "giniIndex": {
           "value": 42.4,
           "year": "2015",
@@ -13924,7 +12897,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 5192.48157325878,
       "internetUsers": 74.73519897,
       "povertyRate": 24.8,
-      "hdi": null,
       "giniIndex": 42.4,
       "gdpPerCapitaPpp": 11195.1205312923,
       "intentionalHomicides": 6.99464423976475,
@@ -13969,11 +12941,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 89879.3614980758,
           "year": "2024",
@@ -13998,7 +12965,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 33153.4738913513,
       "internetUsers": 96.29828801,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 89879.3614980758,
       "intentionalHomicides": 0.486378957300791,
       "outOfPocketHealth": 7.41179371,
@@ -14046,11 +13012,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 29.3,
           "year": "2019",
@@ -14080,7 +13041,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 13379.3513577224,
       "internetUsers": 85.23999786,
       "povertyRate": 5.4,
-      "hdi": 0,
       "giniIndex": 29.3,
       "gdpPerCapitaPpp": 26182.7831570917,
       "intentionalHomicides": 0.615093155858455,
@@ -14129,11 +13089,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 38.7,
           "year": "2013",
@@ -14163,7 +13118,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 5392.87761915762,
       "internetUsers": 21.20000076,
       "povertyRate": 21.9,
-      "hdi": 0,
       "giniIndex": 38.7,
       "gdpPerCapitaPpp": 8736.81606772538,
       "intentionalHomicides": 6.26258538794308,
@@ -14212,11 +13166,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 31.8,
           "year": "2023",
@@ -14246,7 +13195,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 43898.5781808597,
       "internetUsers": 93.86029816,
       "povertyRate": 16.7,
-      "hdi": 0,
       "giniIndex": 31.8,
       "gdpPerCapitaPpp": 69863.7461313457,
       "intentionalHomicides": 0.562898250512237,
@@ -14291,11 +13239,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 41197.9342548477,
           "year": "2024",
@@ -14320,7 +13263,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 39455.4466548546,
       "internetUsers": 92.47270203,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 41197.9342548477,
       "intentionalHomicides": 32.1981392997156,
       "outOfPocketHealth": 27.48377991,
@@ -14368,11 +13310,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2017",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 26.8,
           "year": "2019",
@@ -14402,7 +13339,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 86040.5309851288,
       "internetUsers": 98.209198,
       "povertyRate": 8.8,
-      "hdi": 0,
       "giniIndex": 26.8,
       "gdpPerCapitaPpp": 84256.8454573112,
       "intentionalHomicides": 1.29013114183057,
@@ -14443,11 +13379,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 3.10982139906977,
           "year": "2009",
@@ -14462,7 +13393,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 29213.1923192946,
       "internetUsers": 82.0058408035186,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 3.10982139906977,
       "birthShare": 0.00003101575577561178
     },
@@ -14500,11 +13430,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 126959.917138906,
           "year": "2024",
@@ -14524,7 +13449,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 72004.7437020733,
       "internetUsers": 89.82640076,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 126959.917138906,
       "intentionalHomicides": 0.560293537784445,
       "birthShare": 0.00002750585187234538
@@ -14571,11 +13495,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2023",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 24.7,
           "year": "2023",
@@ -14605,7 +13524,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 2288.63471423684,
       "internetUsers": 89.44029999,
       "povertyRate": 5.5,
-      "hdi": 0,
       "giniIndex": 24.7,
       "gdpPerCapitaPpp": 3702.32594703115,
       "intentionalHomicides": 7.12479070927292,
@@ -14654,11 +13572,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2016",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 34.1,
           "year": "2016",
@@ -14688,7 +13601,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 26544.8707282621,
       "internetUsers": 70.36470032,
       "povertyRate": 25.7,
-      "hdi": 0,
       "giniIndex": 34.1,
       "gdpPerCapitaPpp": 24822.5343309908,
       "intentionalHomicides": 7.43794627677661,
@@ -14729,11 +13641,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 0.37108298714383,
           "year": "2009",
@@ -14748,7 +13655,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 22439.8838746025,
       "internetUsers": 72.7038953132942,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 0.37108298714383,
       "birthShare": 0.000022753107304311965
     },
@@ -14786,11 +13692,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 4.32611490161179,
           "year": "2019",
@@ -14805,7 +13706,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 41833.1517132825,
       "internetUsers": 80.5054655600831,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 4.32611490161179,
       "birthShare": 0.000021979818386435125
     },
@@ -14851,11 +13751,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2013",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 40.1,
           "year": "2013",
@@ -14885,7 +13780,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 4166.00476748564,
       "internetUsers": 39.52360153,
       "povertyRate": 41.2,
-      "hdi": 0,
       "giniIndex": 40.1,
       "gdpPerCapitaPpp": 4346.84249671875,
       "intentionalHomicides": 0.906766290056401,
@@ -14934,11 +13828,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2021",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 27.1,
           "year": "2021",
@@ -14968,7 +13857,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 5651.59373063157,
       "internetUsers": 67.4417038,
       "povertyRate": 20.6,
-      "hdi": 0,
       "giniIndex": 27.1,
       "gdpPerCapitaPpp": 7802.66986206107,
       "intentionalHomicides": 0.946346864516251,
@@ -15017,11 +13905,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2015",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 43.7,
           "year": "2015",
@@ -15051,7 +13934,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 14181.6303351598,
       "internetUsers": 68.20500183,
       "povertyRate": 25,
-      "hdi": 0,
       "giniIndex": 43.7,
       "gdpPerCapitaPpp": 27567.3280779839,
       "intentionalHomicides": 39.0440891432332,
@@ -15088,11 +13970,6 @@ window.BIRTH_LOTTERY_DATA = {
         },
         "internetUsers": null,
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 0,
           "year": "2010",
@@ -15107,7 +13984,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 74585.5224096294,
       "internetUsers": null,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 0,
       "birthShare": 0.000010414567187250421
     },
@@ -15153,11 +14029,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 43.8,
           "year": "2018",
@@ -15187,7 +14058,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 11705.0902976658,
       "internetUsers": 70.16159821,
       "povertyRate": 25,
-      "hdi": 0,
       "giniIndex": 43.8,
       "gdpPerCapitaPpp": 20177.8094927386,
       "intentionalHomicides": 13.6657527694502,
@@ -15236,11 +14106,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2018",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.1,
           "year": "2018",
@@ -15270,7 +14135,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 17858.8226383978,
       "internetUsers": 87.81800079,
       "povertyRate": 25.3,
-      "hdi": 0,
       "giniIndex": 32.1,
       "gdpPerCapitaPpp": 33238.5800343754,
       "intentionalHomicides": 7.96669919735506,
@@ -15315,11 +14179,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 21272.0800673662,
           "year": "2024",
@@ -15344,7 +14203,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 11501.2265187188,
       "internetUsers": 76.19010162,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 21272.0800673662,
       "intentionalHomicides": 51.3212761232698,
       "outOfPocketHealth": 26.57362938,
@@ -15384,11 +14242,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 49793.0324395716,
           "year": "2022",
@@ -15408,7 +14261,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 44320.909185774,
       "internetUsers": 64.3774942980087,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 49793.0324395716,
       "intentionalHomicides": 49.8571401177396,
       "birthShare": 0.000008752261442906185
@@ -15447,11 +14299,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 32693.2939764893,
           "year": "2024",
@@ -15471,7 +14318,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 22832.8953958667,
       "internetUsers": 68.1272162511339,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 32693.2939764893,
       "intentionalHomicides": 16.9198131011414,
       "birthShare": 0.000008483160976796426
@@ -15514,11 +14360,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 33386.1917127894,
           "year": "2024",
@@ -15543,7 +14384,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 23542.4526945578,
       "internetUsers": 72.73040009,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 33386.1917127894,
       "intentionalHomicides": 10.7163332993983,
       "outOfPocketHealth": 20.80756378,
@@ -15583,11 +14423,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 88427.7866712691,
           "year": "2023",
@@ -15607,7 +14442,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 99143.5180243123,
       "internetUsers": 81.0676932508161,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 88427.7866712691,
       "intentionalHomicides": 4.3677976836113,
       "birthShare": 0.000006502133185205731
@@ -15646,11 +14480,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 50649.3015232212,
           "year": "2024",
@@ -15670,7 +14499,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 39498.5941293797,
       "internetUsers": 97.17,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 50649.3015232212,
       "intentionalHomicides": 1.93475053810249,
       "birthShare": 0.000006194546849342029
@@ -15717,11 +14545,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2019",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 35.5,
           "year": "2019",
@@ -15751,7 +14574,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 7726.33668877794,
       "internetUsers": 65.915802,
       "povertyRate": 7.2,
-      "hdi": 0,
       "giniIndex": 35.5,
       "gdpPerCapitaPpp": 8194.63854758403,
       "intentionalHomicides": 4.19186150089601,
@@ -15796,11 +14618,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 21300.6848698089,
           "year": "2024",
@@ -15825,7 +14642,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 10405.2787777582,
       "internetUsers": 82.04689789,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 21300.6848698089,
       "intentionalHomicides": 27.063396005142,
       "outOfPocketHealth": 29.32637405,
@@ -15865,11 +14681,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 25.5360106858383,
           "year": "2018",
@@ -15884,7 +14695,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 18017.4589383973,
       "internetUsers": 0,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 25.5360106858383,
       "birthShare": 0.0000052970117753361945
     },
@@ -15918,11 +14728,6 @@ window.BIRTH_LOTTERY_DATA = {
         },
         "internetUsers": null,
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 1.19627241515438,
           "year": "2015",
@@ -15937,7 +14742,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 88328.548125887,
       "internetUsers": null,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 1.19627241515438,
       "birthShare": 0.000005262246345701413
     },
@@ -15975,11 +14779,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 78840.5978395988,
           "year": "2023",
@@ -15999,7 +14798,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 58498.9707973609,
       "internetUsers": 69.4824617821988,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 78840.5978395988,
       "intentionalHomicides": 5.35131374752502,
       "birthShare": 0.000005152253759632931
@@ -16038,11 +14836,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 81908.7781785018,
           "year": "2024",
@@ -16057,7 +14850,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 74119.6607553879,
       "internetUsers": 97.5819589384468,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 81908.7781785018,
       "birthShare": 0.000004461210307682446
     },
@@ -16099,11 +14891,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 74939.4746038578,
           "year": "2024",
@@ -16128,7 +14915,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 49303.6491674336,
       "internetUsers": 94.39759827,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 74939.4746038578,
       "intentionalHomicides": 2.58464719565779,
       "outOfPocketHealth": 11.1459446,
@@ -16172,11 +14958,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 34846.6035342828,
           "year": "2024",
@@ -16201,7 +14982,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 23960.6534357084,
       "internetUsers": 76.88400269,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 34846.6035342828,
       "intentionalHomicides": 64.1601437187219,
       "outOfPocketHealth": 41.80017853,
@@ -16240,12 +15020,7 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "1990",
           "source": "World Bank Data API"
         },
-        "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        }
+        "povertyRate": null
       },
       "population": 44278,
       "birthRate": 12.107,
@@ -16255,7 +15030,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 23785.754590043,
       "internetUsers": 0,
       "povertyRate": null,
-      "hdi": 0,
       "birthShare": 0.000004049645725228447
     },
     {
@@ -16292,11 +15066,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 124252.835702586,
           "year": "2024",
@@ -16316,7 +15085,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 142855.374713782,
       "internetUsers": 98.37,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 124252.835702586,
       "intentionalHomicides": 6.18257133141674,
       "birthShare": 0.0000038671600542796566
@@ -16359,11 +15127,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 37954.3876543471,
           "year": "2024",
@@ -16383,7 +15146,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 37506.7798431288,
       "internetUsers": 0,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 37954.3876543471,
       "intentionalHomicides": 76.3400403511642,
       "birthShare": 0.000003704858417811657
@@ -16418,11 +15180,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 3.20020481310804,
           "year": "2010",
@@ -16437,7 +15194,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": null,
       "internetUsers": 94.4444715818151,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 3.20020481310804,
       "birthShare": 0.0000036261284220012056
     },
@@ -16471,11 +15227,6 @@ window.BIRTH_LOTTERY_DATA = {
         },
         "internetUsers": null,
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 53768.6573945662,
           "year": "2024",
@@ -16490,7 +15241,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 41472.5874498583,
       "internetUsers": null,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 53768.6573945662,
       "birthShare": 0.0000029751339693175624
     },
@@ -16524,11 +15274,6 @@ window.BIRTH_LOTTERY_DATA = {
         },
         "internetUsers": null,
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 26.8997982515131,
           "year": "2016",
@@ -16543,7 +15288,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 21668.3776525323,
       "internetUsers": null,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 26.8997982515131,
       "birthShare": 0.0000029696650934466096
     },
@@ -16585,11 +15329,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 3.08194902456313,
           "year": "2001",
@@ -16609,7 +15348,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 288001.433369041,
       "internetUsers": 99.04489899,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 3.08194902456313,
       "outOfPocketHealth": 8.45358086,
       "birthShare": 0.000002789301560423754
@@ -16648,11 +15386,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 5.12242598094458,
           "year": "2021",
@@ -16672,7 +15405,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 206780.590353385,
       "internetUsers": 98.2641983,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 5.12242598094458,
       "outOfPocketHealth": 19.7171917,
       "birthShare": 0.0000025667898023085095
@@ -16711,11 +15443,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "intentionalHomicides": {
           "value": 8.16559833421794,
           "year": "2006",
@@ -16730,7 +15457,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": null,
       "internetUsers": 77.7042682926829,
       "povertyRate": null,
-      "hdi": 0,
       "intentionalHomicides": 8.16559833421794,
       "birthShare": 0.000002450398734586797
     },
@@ -16772,11 +15498,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 32.4,
           "year": "2012",
@@ -16801,7 +15522,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 13609.158837552,
       "internetUsers": 83.01170349,
       "povertyRate": null,
-      "hdi": 0,
       "giniIndex": 32.4,
       "gdpPerCapitaPpp": 14173.0081043154,
       "outOfPocketHealth": 0.73174924,
@@ -16849,11 +15569,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2010",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "giniIndex": {
           "value": 39.1,
           "year": "2010",
@@ -16883,7 +15598,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 6344.7750188689,
       "internetUsers": 35.20000076,
       "povertyRate": 26.3,
-      "hdi": 0,
       "giniIndex": 39.1,
       "gdpPerCapitaPpp": 6151.01047041608,
       "intentionalHomicides": 18.2907311719786,
@@ -16932,11 +15646,6 @@ window.BIRTH_LOTTERY_DATA = {
           "year": "2006",
           "source": "World Bank Data API"
         },
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 18230.2698627414,
           "year": "2023",
@@ -16961,7 +15670,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 15610.8231931032,
       "internetUsers": 83.92549896,
       "povertyRate": 24.9,
-      "hdi": 0,
       "gdpPerCapitaPpp": 18230.2698627414,
       "intentionalHomicides": 11.2268096213758,
       "outOfPocketHealth": 12.10223293,
@@ -17005,11 +15713,6 @@ window.BIRTH_LOTTERY_DATA = {
           "source": "World Bank Data API"
         },
         "povertyRate": null,
-        "hdi": {
-          "value": 0,
-          "year": "2023",
-          "source": "UNDP Human Development Report 2025 (fallback)"
-        },
         "gdpPerCapitaPpp": {
           "value": 78745.4313299335,
           "year": "2023",
@@ -17034,7 +15737,6 @@ window.BIRTH_LOTTERY_DATA = {
       "gdpPerCapita": 59879.7173015651,
       "internetUsers": 97.35220337,
       "povertyRate": null,
-      "hdi": 0,
       "gdpPerCapitaPpp": 78745.4313299335,
       "intentionalHomicides": 3.63762026882014,
       "outOfPocketHealth": 13.09178734,
