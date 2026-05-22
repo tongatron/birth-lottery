@@ -134,6 +134,8 @@ button:focus-visible {
 }
 
 .draw-button {
+  position: relative;
+  overflow: hidden;
   border: none;
   border-radius: 8px;
   background: var(--btn-green);
@@ -157,6 +159,58 @@ button:focus-visible {
   background: var(--btn-green-hover);
   box-shadow: 0 6px 22px var(--btn-green-glow);
   transform: translateY(-2px);
+}
+
+/* ─── RIPPLE ────────────────────────────────────── */
+
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0);
+  pointer-events: none;
+  animation: rippleExpand 600ms ease-out forwards;
+}
+
+@keyframes rippleExpand {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ─── BIRTH FLASH ───────────────────────────────── */
+
+.birth-flash {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  pointer-events: none;
+  z-index: 9999;
+  animation: birthFlash 700ms ease-out forwards;
+}
+
+@keyframes birthFlash {
+  0%   { opacity: 0.7; }
+  30%  { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+/* ─── RESULT CARD TRANSITIONS ───────────────────── */
+
+.result-exit {
+  animation: resultExit 240ms ease-in forwards;
+}
+
+@keyframes resultExit {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-20px) scale(0.97); }
+}
+
+.result-enter {
+  animation: resultEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes resultEnter {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .draw-button:disabled {

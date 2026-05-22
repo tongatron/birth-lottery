@@ -128,6 +128,7 @@ async function boot() {
     elements.drawButton.textContent = "Avvia la lotteria";
     elements.statusText.textContent = "Dati caricati. Il sorteggio è pronto.";
 
+    elements.drawButton.addEventListener("click", (e) => addRipple(elements.drawButton, e));
     elements.drawButton.addEventListener("click", rollLottery);
 
     initMap(ranked).catch(() => {});
@@ -170,7 +171,7 @@ async function initMap(countries) {
 
   const colorScale = d3.scaleLinear()
     .domain([0, maxShare])
-    .range(["#231f19", "#c9a96e"]);
+    .range(["#c8e6cc", "#1a8040"]);
 
   const paths = svg.selectAll("path.country-path")
     .data(countriesFeature.features)
@@ -239,43 +240,61 @@ function rollLottery() {
   elements.statusText.textContent =
     "Il paese viene estratto in proporzione alle nascite annuali stimate.";
 
+  triggerBirthFlash();
   clearMapHighlight();
 
-  elements.resultEmpty.classList.add("hidden");
-  elements.resultCard.classList.remove("hidden");
-  elements.resultInsights.classList.add("hidden");
-  elements.resultCountry.classList.add("scrambling");
-
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const SCRAMBLE_DURATION = prefersReduced ? 0 : 1800;
+  const hasExisting = state.currentWinner != null;
+  const EXIT_DURATION = (!prefersReduced && hasExisting) ? 240 : 0;
 
-  let scrambleHandle = null;
-  if (!prefersReduced) {
-    scrambleHandle = startScramble(elements.resultCountry);
+  if (!prefersReduced && hasExisting) {
+    elements.resultCard.classList.add("result-exit");
   }
 
   window.setTimeout(() => {
-    if (scrambleHandle) clearInterval(scrambleHandle);
+    elements.resultCard.classList.remove("result-exit");
+    elements.resultEmpty.classList.add("hidden");
+    elements.resultCard.classList.remove("hidden");
+    elements.resultInsights.classList.add("hidden");
+    elements.resultCountry.classList.add("scrambling");
 
-    const winner = weightedPick(state.countries);
-    if (!winner) {
-      state.isRolling = false;
-      elements.drawButton.disabled = false;
-      elements.drawButton.textContent = "Avvia la lotteria";
-      elements.statusText.textContent = "Sorteggio non disponibile con i dati correnti.";
-      return;
+    const SCRAMBLE_DURATION = prefersReduced ? 0 : 1800;
+    let scrambleHandle = null;
+    if (!prefersReduced) {
+      scrambleHandle = startScramble(elements.resultCountry);
     }
 
-    renderWinner(winner);
-    highlightMapCountry(winner.iso3);
+    window.setTimeout(() => {
+      if (scrambleHandle) clearInterval(scrambleHandle);
 
-    state.isRolling = false;
-    elements.drawButton.disabled = false;
-    elements.drawButton.textContent = "Rinasci ancora";
-    elements.statusText.textContent = "Puoi ripetere il sorteggio quante volte vuoi.";
+      const winner = weightedPick(state.countries);
+      if (!winner) {
+        state.isRolling = false;
+        elements.drawButton.disabled = false;
+        elements.drawButton.textContent = "Avvia la lotteria";
+        elements.statusText.textContent = "Sorteggio non disponibile con i dati correnti.";
+        return;
+      }
 
-    document.querySelector("#main-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, SCRAMBLE_DURATION);
+      renderWinner(winner);
+      highlightMapCountry(winner.iso3);
+
+      if (!prefersReduced) {
+        elements.resultCard.classList.add("result-enter");
+        elements.resultCard.addEventListener("animationend", () => {
+          elements.resultCard.classList.remove("result-enter");
+        }, { once: true });
+      }
+
+      state.currentWinner = winner;
+      state.isRolling = false;
+      elements.drawButton.disabled = false;
+      elements.drawButton.textContent = "Rinasci ancora";
+      elements.statusText.textContent = "Puoi ripetere il sorteggio quante volte vuoi.";
+
+      document.querySelector("#main-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, SCRAMBLE_DURATION);
+  }, EXIT_DURATION);
 }
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ·—";
@@ -546,6 +565,27 @@ function getMetricConfidence(country, metricKey) {
   if (age <= 2) return { level: "high", label: "Dato recente", title: `Base aggiornata (${parsedYear})` };
   if (age <= 5) return { level: "medium", label: "Dato stabile", title: `Base solida (${parsedYear})` };
   return { level: "low", label: "Dato storico", title: `Base datata (${parsedYear})` };
+}
+
+// ─── ANIMATIONS ──────────────────────────────────────────
+
+function triggerBirthFlash() {
+  const flash = document.createElement("div");
+  flash.className = "birth-flash";
+  document.body.appendChild(flash);
+  flash.addEventListener("animationend", () => flash.remove(), { once: true });
+}
+
+function addRipple(button, event) {
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = event.clientX - rect.left - size / 2;
+  const y = event.clientY - rect.top - size / 2;
+  const ripple = document.createElement("span");
+  ripple.className = "btn-ripple";
+  ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+  button.appendChild(ripple);
+  ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
 }
 
 // ─── WEIGHTED PICK ───────────────────────────────────────
