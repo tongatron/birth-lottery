@@ -362,6 +362,107 @@ function renderWinner(country) {
   renderComparison(country, state.italy);
 }
 
+// ─── EXTRA DATA ──────────────────────────────────────────
+
+function mergeExtraData(countries) {
+  const extra = window.BIRTH_LOTTERY_EXTRA || {};
+  for (const country of countries) {
+    const s = extra[country.iso3];
+    if (!s) continue;
+    if (s.maternalMortality != null) {
+      country.maternalMortality = s.maternalMortality;
+      country.metricDetails.maternalMortality = { value: s.maternalMortality, year: "2020", source: "World Bank" };
+    }
+    if (s.womenInParliament != null) {
+      country.womenInParliament = s.womenInParliament;
+      country.metricDetails.womenInParliament = { value: s.womenInParliament, year: "2023", source: "World Bank" };
+    }
+    if (s.expectedSchooling != null) {
+      country.expectedSchooling = s.expectedSchooling;
+      country.metricDetails.expectedSchooling = { value: s.expectedSchooling, year: "2023", source: "UNDP HDR" };
+    }
+  }
+}
+
+// ─── NARRATIVE ───────────────────────────────────────────
+
+function buildNarrative(country, italy) {
+  if (country.iso3 === "ITA") {
+    return `Questo sorteggio ti riporta in Italia: il ${formatPercent(country.birthShare)} delle nascite mondiali. Un'improbabilità che tende a passare inosservata proprio perché è il punto di partenza che conosci — sanità universale, ${formatNumber(country.lifeExpectancy, 1)} anni di aspettativa di vita, istruzione pubblica gratuita. In questa lotteria, la tua estrazione originale era già tra le più favorevoli al mondo.`;
+  }
+
+  const parts = [];
+  parts.push(narrativeOpening(country, italy));
+  const impact = narrativeImpact(country, italy);
+  if (impact) parts.push(impact);
+  parts.push(`Il ${formatPercent(country.birthShare)} dei nati nel mondo inizia la propria vita qui.`);
+  return parts.join(" ");
+}
+
+function narrativeOpening(country, italy) {
+  const { name, income, gdpPerCapita } = country;
+  const itGdp = italy.gdpPerCapita;
+
+  if (income === "Low income") {
+    return `${name} figura tra i paesi a basso reddito del pianeta, con condizioni strutturali che rendono la partenza di chi nasce qui molto lontana da quella di chi nasce in Europa.`;
+  }
+  if (income === "Lower middle income") {
+    if (gdpPerCapita != null && itGdp != null) {
+      const pct = Math.round((gdpPerCapita / itGdp) * 100);
+      return `${name} è un paese a reddito medio-basso, con un PIL pro capite di ${formatCurrency(gdpPerCapita)} — circa il ${pct}% di quello italiano.`;
+    }
+    return `${name} appartiene alla fascia dei paesi a reddito medio-basso: una categoria che racchiude alcune delle disuguaglianze più marcate al mondo.`;
+  }
+  if (income === "Upper middle income") {
+    return `${name} è un paese a reddito medio-alto, con standard di vita molto variabili al suo interno ma con una traiettoria di sviluppo consolidata.`;
+  }
+  if (gdpPerCapita != null && itGdp != null && gdpPerCapita > itGdp * 1.4) {
+    return `${name} è un paese ad alto reddito con un PIL pro capite di ${formatCurrency(gdpPerCapita)}: significativamente superiore a quello italiano.`;
+  }
+  return `${name} è classificato tra i paesi ad alto reddito — una partenza statisticamente privilegiata.`;
+}
+
+function narrativeImpact(country, italy) {
+  const le = country.lifeExpectancy;
+  const itLe = italy.lifeExpectancy;
+  if (le != null && itLe != null) {
+    const diff = itLe - le;
+    if (diff >= 10) return `Chi nasce qui vive in media ${formatNumber(le, 1)} anni — ${formatNumber(diff, 1)} in meno rispetto a un italiano.`;
+    if (diff >= 5) return `L'aspettativa di vita è di ${formatNumber(le, 1)} anni, circa ${formatNumber(diff, 1)} anni meno di quella italiana.`;
+    if (diff <= -3) return `L'aspettativa di vita di ${formatNumber(le, 1)} anni è superiore a quella italiana.`;
+  }
+
+  const im = country.infantMortality;
+  const itIm = italy.infantMortality;
+  if (im != null && itIm != null) {
+    const ratio = im / itIm;
+    if (ratio >= 10) return `La mortalità infantile (${formatNumber(im, 1)} su mille nati) è dieci volte quella italiana.`;
+    if (ratio >= 5) return `La mortalità infantile di ${formatNumber(im, 1)} su mille nati è circa cinque volte quella italiana.`;
+    if (ratio >= 3) return `La mortalità infantile — ${formatNumber(im, 1)} su mille nati vivi — è tre volte quella italiana.`;
+  }
+
+  const mm = country.maternalMortality;
+  const itMm = italy.maternalMortality;
+  if (mm != null && itMm != null) {
+    const ratio = mm / itMm;
+    if (ratio >= 50) return `La mortalità materna è di ${formatNumber(mm, 0)} su 100.000 nati vivi: oltre cinquanta volte quella italiana.`;
+    if (ratio >= 20) return `La mortalità materna — ${formatNumber(mm, 0)} su 100.000 nati — è venti volte quella italiana.`;
+  }
+
+  if (country.povertyRate != null && country.povertyRate >= 30) {
+    return `Il ${formatNumber(country.povertyRate, 1)}% della popolazione vive sotto la soglia di povertà nazionale.`;
+  }
+
+  const gdp = country.gdpPerCapita;
+  const itGdp = italy.gdpPerCapita;
+  if (gdp != null && itGdp != null) {
+    if (gdp / itGdp < 0.05) return `Il PIL pro capite — ${formatCurrency(gdp)} — è meno di un ventesimo di quello italiano.`;
+    if (gdp / itGdp < 0.12) return `Il PIL pro capite di ${formatCurrency(gdp)} è meno di un ottavo di quello italiano.`;
+  }
+
+  return null;
+}
+
 // ─── HYDRATE ─────────────────────────────────────────────
 
 function hydrateItalyBaseline(italy) {
@@ -465,102 +566,6 @@ function renderComparison(country, italy) {
       </article>
     `;
   }).join("");
-}
-
-function buildNarrative(country, italy) {
-  if (country.iso3 === "ITA") {
-    const share = italy.birthShare ? formatPercent(italy.birthShare) : "0,70%";
-    return `Sei finito di nuovo in Italia: il paese da cui parti pesa appena ${share} delle nascite mondiali, eppure porta con sé aspettativa di vita sopra gli 83 anni, istruzione universale e uno dei sistemi sanitari più solidi d'Europa. Queste non sono certezze ovunque: sono privilegi statistici. Il ${share} dei nati nel mondo inizia la propria vita qui.`;
-  }
-
-  const incomeLevel = country.incomeLevel || "";
-  const gdpC = country.gdpPerCapita;
-  const gdpI = italy.gdpPerCapita;
-  const lifeC = country.lifeExpectancy;
-  const lifeI = italy.lifeExpectancy;
-  const imC = country.infantMortality;
-  const imI = italy.infantMortality;
-  const mmC = country.maternalMortality;
-  const mmI = italy.maternalMortality;
-  const povC = country.povertyRate;
-  const birthSharePct = country.birthShare ? formatPercent(country.birthShare) : null;
-
-  // Frase 1: collocazione geografica ed economica
-  let sentence1 = "";
-  const incomeLower = incomeLevel.toLowerCase();
-  if (incomeLower.includes("high")) {
-    const gdpStr = gdpC != null && gdpI != null && gdpC / gdpI >= 0.5
-      ? ` con un PIL pro capite di ${formatCurrency(gdpC)}`
-      : "";
-    sentence1 = `${country.name} è un paese ad alto reddito${gdpStr}, collocato tra le economie più avanzate del pianeta.`;
-  } else if (incomeLower.includes("upper")) {
-    const gdpStr = gdpC != null ? ` e un PIL pro capite attorno a ${formatCurrency(gdpC)}` : "";
-    sentence1 = `${country.name} si trova nella fascia dei redditi medio-alti${gdpStr}, in una posizione di transizione tra il Sud e il Nord globale.`;
-  } else if (incomeLower.includes("lower middle") || incomeLower.includes("lower-middle")) {
-    sentence1 = `${country.name} appartiene alla fascia dei redditi medio-bassi, dove la crescita economica coesiste con fragilità strutturali ancora significative.`;
-  } else if (incomeLower.includes("low")) {
-    sentence1 = `${country.name} è classificato tra i paesi a basso reddito, dove le condizioni di partenza alla nascita restano tra le più difficili al mondo.`;
-  } else {
-    const gdpStr = gdpC != null ? ` Il PIL pro capite si attesta attorno a ${formatCurrency(gdpC)}.` : "";
-    sentence1 = `${country.name} è un paese con una collocazione economica intermedia nel panorama globale.${gdpStr}`;
-  }
-
-  // Frase 2: fatto più impattante con numero reale
-  let sentence2 = "";
-  const lifeDiff = (lifeC != null && lifeI != null) ? (lifeI - lifeC) : null;
-  const imRatio = (imC != null && imI != null && imI > 0) ? (imC / imI) : null;
-  const mmRatio = (mmC != null && mmI != null && mmI > 0) ? (mmC / mmI) : null;
-
-  if (lifeDiff != null && lifeDiff >= 5) {
-    sentence2 = `Chi nasce qui vive in media ${formatNumber(lifeDiff, 1)} anni in meno rispetto a chi nasce in Italia: l'aspettativa di vita si ferma a ${formatNumber(lifeC, 1)} anni.`;
-  } else if (lifeDiff != null && lifeDiff <= -5) {
-    sentence2 = `L'aspettativa di vita raggiunge ${formatNumber(lifeC, 1)} anni, superando l'Italia di ${formatNumber(Math.abs(lifeDiff), 1)} anni: un dato che riflette condizioni sanitarie e sociali solide.`;
-  } else if (imRatio != null && imRatio >= 3) {
-    sentence2 = `La mortalità infantile è ${formatNumber(imC, 1)} decessi ogni mille nati vivi — più di ${formatNumber(imRatio, 0)} volte il valore italiano — una distanza che misura in modo diretto la qualità del sistema sanitario alla nascita.`;
-  } else if (mmRatio != null && mmRatio >= 5) {
-    sentence2 = `Con ${formatNumber(mmC, 0)} decessi materni ogni 100.000 nati vivi, il rischio legato alla gravidanza e al parto è ${formatNumber(mmRatio, 0)} volte più alto che in Italia.`;
-  } else if (povC != null && povC >= 30) {
-    sentence2 = `Quasi ${formatNumber(povC, 1)}% della popolazione vive sotto la soglia di povertà nazionale: un dato che indica quanto sia diffusa l'insicurezza economica quotidiana.`;
-  } else if (gdpC != null && gdpI != null && gdpI > 0 && gdpC / gdpI < 0.15) {
-    sentence2 = `Il PIL pro capite è di ${formatCurrency(gdpC)}, meno del 15% di quello italiano: una distanza che si traduce in risorse pubbliche, infrastrutture e opportunità concrete per chi ci nasce.`;
-  } else if (lifeDiff != null && Math.abs(lifeDiff) >= 2) {
-    const dir = lifeDiff > 0 ? "meno" : "più";
-    sentence2 = `L'aspettativa di vita è di ${formatNumber(lifeC, 1)} anni, circa ${formatNumber(Math.abs(lifeDiff), 1)} anni ${dir} rispetto all'Italia: una differenza che riflette le condizioni complessive del sistema paese.`;
-  } else if (mmC != null) {
-    sentence2 = `La mortalità materna è di ${formatNumber(mmC, 0)} ogni 100.000 nati vivi, un indicatore che sintetizza l'accesso e la qualità dell'assistenza sanitaria nel momento più critico.`;
-  } else {
-    sentence2 = `Gli indicatori disponibili delineano un contesto con caratteristiche proprie, che si discostano in vario grado dalle condizioni medie dell'Europa occidentale.`;
-  }
-
-  // Frase 3: punch con birthShare
-  const shareStr = birthSharePct || "una quota ridotta";
-  const sentence3 = `Il ${shareStr} dei nati nel mondo inizia la propria vita qui.`;
-
-  return `${sentence1} ${sentence2} ${sentence3}`;
-}
-
-function mergeExtraData(countries) {
-  const extra = window.BIRTH_LOTTERY_EXTRA;
-  if (!extra || typeof extra !== "object") return;
-  for (const country of countries) {
-    const extraEntry = extra[country.iso3];
-    if (!extraEntry) continue;
-    if (extraEntry.maternalMortality != null) {
-      country.maternalMortality = extraEntry.maternalMortality;
-      country.metricDetails = country.metricDetails || {};
-      country.metricDetails.maternalMortality = { year: 2020, source: "World Bank" };
-    }
-    if (extraEntry.womenInParliament != null) {
-      country.womenInParliament = extraEntry.womenInParliament;
-      country.metricDetails = country.metricDetails || {};
-      country.metricDetails.womenInParliament = { year: 2023, source: "World Bank" };
-    }
-    if (extraEntry.expectedSchooling != null) {
-      country.expectedSchooling = extraEntry.expectedSchooling;
-      country.metricDetails = country.metricDetails || {};
-      country.metricDetails.expectedSchooling = { year: 2023, source: "UNDP HDR 2023" };
-    }
-  }
 }
 
 function buildMetricDetail(candidate, baseline, betterDirection, suffix) {
