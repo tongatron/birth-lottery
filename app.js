@@ -157,6 +157,15 @@ async function boot() {
       probEl.classList.remove("hidden");
     }
 
+    const versionEl = document.querySelector("#version-date");
+    if (versionEl && dataset?.generatedAt) {
+      const d = new Date(dataset.generatedAt);
+      versionEl.textContent = d.toLocaleString("it-IT", {
+        day: "2-digit", month: "short", year: "numeric",
+        hour: "2-digit", minute: "2-digit",
+      });
+    }
+
     elements.drawButton.addEventListener("click", (e) => addRipple(elements.drawButton, e));
     elements.drawButton.addEventListener("click", rollLottery);
 
