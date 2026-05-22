@@ -90,6 +90,27 @@ const METRIC_CONFIG = [
     betterDirection: "higher",
     detail: "anni di scuola attesi per un bambino",
   },
+  {
+    key: "literacyRate",
+    label: "Alfabetizzazione",
+    formatter: (v) => formatNumber(v, 1) + "%",
+    betterDirection: "higher",
+    detail: "adulti ≥15 anni che sanno leggere e scrivere",
+  },
+  {
+    key: "under5Mortality",
+    label: "Mortalità under-5",
+    formatter: (v) => formatNumber(v, 1),
+    betterDirection: "lower",
+    detail: "decessi sotto i 5 anni ogni 1.000 nati vivi",
+  },
+  {
+    key: "healthExpenditure",
+    label: "Spesa sanitaria",
+    formatter: (v) => formatCurrency(v),
+    betterDirection: "higher",
+    detail: "dollari pro capite spesi in sanità",
+  },
 ];
 
 const state = {
@@ -389,6 +410,18 @@ function mergeExtraData(countries) {
     if (s.expectedSchooling != null) {
       country.expectedSchooling = s.expectedSchooling;
       country.metricDetails.expectedSchooling = { value: s.expectedSchooling, year: "2023", source: "UNDP HDR" };
+    }
+    if (s.literacyRate != null) {
+      country.literacyRate = s.literacyRate;
+      country.metricDetails.literacyRate = { value: s.literacyRate, year: "2021", source: "World Bank" };
+    }
+    if (s.under5Mortality != null) {
+      country.under5Mortality = s.under5Mortality;
+      country.metricDetails.under5Mortality = { value: s.under5Mortality, year: "2022", source: "World Bank" };
+    }
+    if (s.healthExpenditure != null) {
+      country.healthExpenditure = s.healthExpenditure;
+      country.metricDetails.healthExpenditure = { value: s.healthExpenditure, year: "2021", source: "World Bank" };
     }
   }
 }

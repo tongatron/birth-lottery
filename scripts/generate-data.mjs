@@ -16,6 +16,9 @@ const FILES = {
   povertyRate: "/private/tmp/birth-lottery-poverty.json",
   hdiWorkbook: "/private/tmp/birth-lottery-hdi.xlsx",
   internetItaly: "/private/tmp/birth-lottery-internet-ita.json",
+  literacyRate: "/private/tmp/birth-lottery-literacy.json",
+  under5Mortality: "/private/tmp/birth-lottery-under5.json",
+  healthExpenditure: "/private/tmp/birth-lottery-health.json",
 };
 
 async function loadJson(path) {
@@ -163,6 +166,9 @@ async function main() {
     internetUsers,
     povertyRate,
     internetItaly,
+    literacyRate,
+    under5Mortality,
+    healthExpenditure,
   ] = await Promise.all([
     loadJson(FILES.countries),
     loadJson(FILES.population),
@@ -173,6 +179,9 @@ async function main() {
     loadJson(FILES.internetUsers),
     loadJson(FILES.povertyRate),
     loadJson(FILES.internetItaly),
+    loadJson(FILES.literacyRate),
+    loadJson(FILES.under5Mortality),
+    loadJson(FILES.healthExpenditure),
   ]);
   const hdiData = await loadHdiRows(FILES.hdiWorkbook);
 
@@ -187,6 +196,9 @@ async function main() {
   applyMetric(countryIndex, povertyRate[1], "povertyRate");
   applyCountryOverride(countryIndex, internetItaly, "internetUsers");
   applyHdiMetric(countryIndex, hdiData);
+  applyMetric(countryIndex, literacyRate[1], "literacyRate");
+  applyMetric(countryIndex, under5Mortality[1], "under5Mortality");
+  applyMetric(countryIndex, healthExpenditure[1], "healthExpenditure");
 
   const dataset = Object.values(countryIndex)
     .map((country) => {
