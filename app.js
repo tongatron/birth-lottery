@@ -153,6 +153,8 @@ const elements = {
   resultCard: document.querySelector("#result-card"),
   lotteryVeil: document.querySelector("#lottery-veil"),
   resultCountry: document.querySelector("#result-country"),
+  resultCountryRoller: document.querySelector("#result-country-roller"),
+  resultCountryTrack: document.querySelector("#result-country-track"),
   resultShare: document.querySelector("#result-share"),
   resultBirths: document.querySelector("#result-births"),
   resultPopulation: document.querySelector("#result-population"),
@@ -324,20 +326,32 @@ function clearMapHighlight() {
 function rollLottery() {
   if (state.isRolling || !state.countries.length) return;
 
+  const winner = weightedPick(state.countries);
+  if (!winner) {
+    elements.drawButton.textContent = "Avvia la lotteria";
+    elements.statusText.textContent = "Sorteggio non disponibile con i dati correnti.";
+    return;
+  }
+
   state.isRolling = true;
   elements.drawButton.disabled = true;
   elements.drawButton.textContent = "Sorteggio in corso…";
   elements.statusText.textContent =
     "Il paese viene estratto in proporzione alle nascite annuali stimate.";
+  document.querySelector("#main-content")?.scrollIntoView({
+    behavior: prefersReducedMotion() ? "auto" : "smooth",
+    block: "start",
+  });
 
   startLotteryAnimation();
   triggerBirthFlash();
   clearMapHighlight();
 
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced = prefersReducedMotion();
   const hasExisting = state.currentWinner != null;
   if (hasExisting) triggerParticleBurst(elements.drawButton);
   const EXIT_DURATION = (!prefersReduced && hasExisting) ? 240 : 0;
+  const ROLLER_DURATION = prefersReduced ? 0 : 3600;
 
   if (!prefersReduced && hasExisting) {
     elements.resultCard.classList.add("result-exit");
@@ -351,28 +365,14 @@ function rollLottery() {
     elements.resultCard.classList.remove("winner-revealed");
     elements.resultInsights.classList.add("hidden");
     elements.resultCountry.classList.add("scrambling");
-
-    const SCRAMBLE_DURATION = prefersReduced ? 0 : 1800;
-    let scrambleHandle = null;
-    if (!prefersReduced) {
-      scrambleHandle = startScramble(elements.resultCountry);
-    }
+    showCountryRoller();
+    const rollerHandle = prefersReduced ? null : startCountryRoller(winner, ROLLER_DURATION);
 
     window.setTimeout(() => {
-      if (scrambleHandle) clearInterval(scrambleHandle);
-
-      const winner = weightedPick(state.countries);
-      if (!winner) {
-        finishLotteryAnimation();
-        elements.resultCard.classList.remove("is-rolling");
-        state.isRolling = false;
-        elements.drawButton.disabled = false;
-        elements.drawButton.textContent = "Avvia la lotteria";
-        elements.statusText.textContent = "Sorteggio non disponibile con i dati correnti.";
-        return;
-      }
+      if (rollerHandle) cleanupCountryRoller(rollerHandle);
 
       renderWinner(winner);
+      hideCountryRoller();
       finishLotteryAnimation();
       highlightMapCountry(winner.iso3);
 
@@ -388,10 +388,12 @@ function rollLottery() {
       elements.drawButton.disabled = false;
       elements.drawButton.textContent = "Rinasci ancora";
       elements.statusText.textContent = "Puoi ripetere il sorteggio quante volte vuoi.";
-
-      document.querySelector("#main-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, SCRAMBLE_DURATION);
+    }, ROLLER_DURATION);
   }, EXIT_DURATION);
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ·—";
@@ -419,13 +421,111 @@ function startScramble(el) {
   }, 80);
 }
 
+function showCountryRoller() {
+  elements.resultCountryRoller.classList.remove("hidden");
+  elements.resultCountryRoller.setAttribute("aria-hidden", "false");
+}
+
+function hideCountryRoller() {
+  elements.resultCountryRoller.classList.add("hidden");
+  elements.resultCountryRoller.setAttribute("aria-hidden", "true");
+  elements.resultCountryTrack.innerHTML = "";
+  elements.resultCountryTrack.style.transition = "";
+  elements.resultCountryTrack.style.transform = "";
+}
+
+function buildRollerSequence(winner, totalItems = 20) {
+  const minimumItems = Math.max(totalItems, 8);
+  const sequence = [];
+
+  for (let i = 0; i < minimumItems - 2; i++) {
+    const candidate = state.countries[Math.floor(Math.random() * state.countries.length)];
+    sequence.push(candidate);
+  }
+
+  sequence.push(winner);
+  sequence.push(state.countries[Math.floor(Math.random() * state.countries.length)]);
+  return sequence;
+}
+
+function startCountryRoller(winner, duration) {
+  const track = elements.resultCountryTrack;
+  const sequence = buildRollerSequence(winner);
+  const finalIndex = sequence.length - 2;
+
+  track.innerHTML = sequence.map((country, index) => `
+      <div class="country-roller-item${index === finalIndex ? " is-final" : ""}">
+        ${escapeHtml(country.name)}
+      </div>
+    `
+  ).join("");
+
+  track.style.transition = "none";
+  track.style.transform = "translateY(0)";
+  const itemHeight = track.querySelector(".country-roller-item")?.getBoundingClientRect().height || 42.4;
+
+  const statsInterval = window.setInterval(() => {
+    const fake = state.countries[Math.floor(Math.random() * state.countries.length)];
+    elements.resultShare.textContent = formatPercent(fake.birthShare);
+    elements.resultBirths.textContent = formatInteger(fake.annualBirths);
+    elements.resultPopulation.textContent = formatInteger(fake.population);
+  }, 110);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      runTheatricalRoll(track, finalIndex, itemHeight, duration);
+    });
+  });
+
+  return { statsInterval };
+}
+
+function cleanupCountryRoller(handle) {
+  window.clearInterval(handle.statsInterval);
+}
+
+function runTheatricalRoll(track, finalIndex, itemHeight, duration) {
+  const finalOffset = -(finalIndex - 1) * itemHeight;
+  const nearStopA = finalOffset + itemHeight * 1.7;
+  const nearStopB = finalOffset + itemHeight * 0.8;
+
+  const phase1 = Math.round(duration * 0.62);
+  const phase2 = Math.round(duration * 0.18);
+  const phase3 = Math.round(duration * 0.12);
+  const phase4 = Math.max(220, duration - phase1 - phase2 - phase3);
+
+  track.style.transition = `transform ${phase1}ms cubic-bezier(0.12, 0.82, 0.2, 1)`;
+  track.style.transform = `translateY(${nearStopA}px)`;
+
+  window.setTimeout(() => {
+    track.style.transition = `transform ${phase2}ms cubic-bezier(0.33, 1, 0.68, 1)`;
+    track.style.transform = `translateY(${nearStopA - itemHeight * 0.45}px)`;
+  }, phase1);
+
+  window.setTimeout(() => {
+    track.style.transition = `transform ${phase3}ms cubic-bezier(0.2, 0.9, 0.3, 1)`;
+    track.style.transform = `translateY(${nearStopB}px)`;
+  }, phase1 + phase2);
+
+  window.setTimeout(() => {
+    track.style.transition = `transform ${phase4}ms cubic-bezier(0.16, 1, 0.3, 1)`;
+    track.style.transform = `translateY(${finalOffset}px)`;
+  }, phase1 + phase2 + phase3);
+}
+
 function renderWinner(country) {
   elements.resultCountry.classList.remove("scrambling");
+  elements.resultCountry.classList.remove("winner-bounce");
   elements.resultCard.classList.remove("is-rolling");
   elements.resultCard.classList.remove("winner-revealed");
   void elements.resultCard.offsetWidth;
   elements.resultCard.classList.add("winner-revealed");
   elements.resultCountry.textContent = country.name;
+  void elements.resultCountry.offsetWidth;
+  elements.resultCountry.classList.add("winner-bounce");
+  elements.resultCountry.addEventListener("animationend", () => {
+    elements.resultCountry.classList.remove("winner-bounce");
+  }, { once: true });
   elements.resultShare.textContent = formatPercent(country.birthShare);
   elements.resultBirths.textContent = formatInteger(country.annualBirths);
   elements.resultPopulation.textContent = formatInteger(country.population);

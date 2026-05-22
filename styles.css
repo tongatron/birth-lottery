@@ -542,6 +542,81 @@ button:focus-visible {
   border-bottom: 1px solid var(--line);
 }
 
+.country-roller {
+  margin-top: 12px;
+}
+
+.country-roller-window {
+  position: relative;
+  height: 7.95rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 246, 245, 0.98)),
+    var(--surface-raise);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.country-roller-window::before,
+.country-roller-window::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.country-roller-window::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(246, 246, 245, 0.98), rgba(246, 246, 245, 0));
+}
+
+.country-roller-window::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(246, 246, 245, 0.98), rgba(246, 246, 245, 0));
+}
+
+.country-roller-focus {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 50%;
+  height: 2.65rem;
+  transform: translateY(-50%);
+  border-radius: 8px;
+  border: 1px solid rgba(30, 158, 82, 0.2);
+  background: rgba(30, 158, 82, 0.08);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55) inset;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.country-roller-track {
+  position: relative;
+  z-index: 0;
+  will-change: transform;
+}
+
+.country-roller-item {
+  height: 2.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+  line-height: 1;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.country-roller-item.is-final {
+  color: var(--ink);
+}
+
 .result-label {
   margin: 0;
   text-transform: uppercase;
@@ -757,8 +832,31 @@ button:focus-visible {
   animation: name-flicker 180ms ease-out infinite alternate;
 }
 
+.result-card.is-rolling #result-country {
+  display: none;
+}
+
 .result-card.winner-revealed {
   animation: winner-arrival 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#result-country.winner-bounce {
+  animation: winnerNameBounce 380ms cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+@keyframes winnerNameBounce {
+  0% {
+    transform: translateY(0);
+  }
+  38% {
+    transform: translateY(-2px);
+  }
+  66% {
+    transform: translateY(1px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .result-insights {
@@ -1245,6 +1343,15 @@ button:focus-visible {
   .comparison-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .country-roller-window {
+    height: 7.2rem;
+  }
+
+  .country-roller-item,
+  .country-roller-focus {
+    height: 2.4rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1316,6 +1423,10 @@ button:focus-visible {
 
   .map-below {
     grid-template-columns: 1fr;
+  }
+
+  .country-roller-item {
+    font-size: clamp(1.1rem, 6vw, 1.45rem);
   }
 }
 
