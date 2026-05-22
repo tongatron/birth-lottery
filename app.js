@@ -149,15 +149,6 @@ const METRIC_CONFIG = [
   },
 ];
 
-const ESSENTIAL_METRIC_KEYS = [
-  "lifeExpectancy",
-  "infantMortality",
-  "gdpPerCapita",
-  "povertyRate",
-  "giniIndex",
-  "intentionalHomicides",
-];
-
 const state = {
   countries: [],
   totalBirths: 0,
@@ -166,7 +157,6 @@ const state = {
   mapReady: false,
   mapPaths: null,
   currentWinner: null,
-  comparisonView: "essential",
   comparisonBaselineIso3: "ITA",
   metricStats: {},
   birthRankByIso3: new Map(),
@@ -194,15 +184,10 @@ const elements = {
   insightScoreDetail: document.querySelector("#insight-score-detail"),
   insightTopDiffs: document.querySelector("#insight-top-diffs"),
   comparisonHeading: document.querySelector("#comparison-heading"),
-  comparisonCaption: document.querySelector("#comparison-caption"),
-  comparisonSummary: document.querySelector("#comparison-summary"),
-  comparisonVisual: document.querySelector("#comparison-visual"),
   comparisonPanel: document.querySelector("#comparison-panel"),
   comparisonBaselineSelect: document.querySelector("#comparison-baseline-select"),
-  comparisonBaselineLabel: document.querySelector("#comparison-baseline-label"),
   comparisonWarning: document.querySelector("#comparison-warning"),
   comparisonGrid: document.querySelector("#comparison-grid"),
-  comparisonToggleButtons: document.querySelectorAll(".comparison-toggle-button"),
   distributionList: document.querySelector("#distribution-list"),
   italyBaseline: document.querySelector("#italy-baseline"),
   worldMap: document.querySelector("#world-map"),
@@ -233,7 +218,6 @@ async function boot() {
     renderDistribution(ranked.slice(0, 10));
     populateComparisonBaselineSelector(ranked);
     renderPlaceholderComparison();
-    bindComparisonControls();
     syncComparisonBaselineUI();
 
     elements.drawButton.disabled = false;
@@ -612,47 +596,6 @@ function renderWinner(country) {
   renderComparison(country, baselineCountry);
 }
 
-function bindComparisonControls() {
-  for (const button of elements.comparisonToggleButtons) {
-    button.addEventListener("click", () => {
-      const nextView = button.dataset.view === "complete" ? "complete" : "essential";
-      if (state.comparisonView === nextView) return;
-      state.comparisonView = nextView;
-      syncComparisonToggle();
-      if (state.currentWinner) {
-        renderComparison(state.currentWinner, getComparisonBaselineCountry());
-      } else {
-        renderPlaceholderComparison(getComparisonBaselineCountry());
-      }
-    });
-  }
-  if (elements.comparisonBaselineSelect) {
-    elements.comparisonBaselineSelect.addEventListener("change", () => {
-      state.comparisonBaselineIso3 = elements.comparisonBaselineSelect.value || "ITA";
-      syncComparisonBaselineUI();
-      if (state.currentWinner) {
-        renderComparison(state.currentWinner, getComparisonBaselineCountry());
-      } else {
-        renderPlaceholderComparison(getComparisonBaselineCountry());
-      }
-    });
-  }
-  syncComparisonToggle();
-}
-
-function syncComparisonToggle() {
-  for (const button of elements.comparisonToggleButtons) {
-    const active = button.dataset.view === state.comparisonView;
-    button.classList.toggle("is-active", active);
-    button.setAttribute("aria-selected", active ? "true" : "false");
-  }
-  if (!elements.comparisonCaption) return;
-  elements.comparisonCaption.textContent =
-    state.comparisonView === "essential"
-      ? "Una lettura più corta mette davanti gli indicatori con impatto e copertura più solidi."
-      : "La vista completa mostra anche metriche con copertura più discontinua, sempre segnalata in tabella.";
-}
-
 function populateComparisonBaselineSelector(countries) {
   if (!elements.comparisonBaselineSelect) return;
   const sorted = [...countries].sort((a, b) => a.name.localeCompare(b.name, "it"));
@@ -664,6 +607,15 @@ function populateComparisonBaselineSelector(countries) {
     state.comparisonBaselineIso3 = "ITA";
     elements.comparisonBaselineSelect.value = "ITA";
   }
+  elements.comparisonBaselineSelect.addEventListener("change", () => {
+    state.comparisonBaselineIso3 = elements.comparisonBaselineSelect.value || "ITA";
+    syncComparisonBaselineUI();
+    if (state.currentWinner) {
+      renderComparison(state.currentWinner, getComparisonBaselineCountry());
+    } else {
+      renderPlaceholderComparison(getComparisonBaselineCountry());
+    }
+  });
 }
 
 function syncComparisonBaselineUI() {
@@ -671,9 +623,6 @@ function syncComparisonBaselineUI() {
   if (!baselineCountry) return;
   if (elements.comparisonHeading) {
     elements.comparisonHeading.textContent = `${baselineCountry.name} vs paese estratto`;
-  }
-  if (elements.comparisonBaselineLabel) {
-    elements.comparisonBaselineLabel.textContent = baselineCountry.name;
   }
   if (elements.comparisonGrid) {
     elements.comparisonGrid.setAttribute(
@@ -893,7 +842,6 @@ function hydrateItalyBaseline(italy) {
     <div class="metric-chip">
       <span>${label}</span>
       <strong>${formatMetric(key, italy)}</strong>
-      <small>${formatMetricMeta(key, italy)}</small>
     </div>
   `).join("");
 }
@@ -915,27 +863,21 @@ function renderDistribution(countries) {
 }
 
 function renderPlaceholderComparison(baselineCountry = getComparisonBaselineCountry()) {
-  renderComparisonSummary(getVisibleMetrics(), null, baselineCountry);
-  renderComparisonVisual(null, baselineCountry, getVisibleMetrics());
   elements.comparisonWarning.classList.add("hidden");
   elements.comparisonWarning.textContent = "";
   elements.comparisonGrid.innerHTML = getComparisonRowsMarkup(getVisibleMetrics(), ({ metric }) => `
     <article class="comparison-row" role="row" data-tone="neutral">
       <div class="comparison-indicator">
         <strong>${metric.label}</strong>
-        <span>${metric.detail}</span>
       </div>
       <div class="comparison-value">
         <strong>-</strong>
-        <span>Paese estratto</span>
       </div>
       <div class="comparison-value">
         <strong>-</strong>
-        <span>${escapeHtml(baselineCountry?.name || "Paese di confronto")}</span>
       </div>
       <div class="comparison-delta">
         <strong class="tone-neutral">In attesa</strong>
-        <span>Avvia il sorteggio</span>
       </div>
     </article>
   `);
@@ -962,50 +904,35 @@ function renderComparison(country, baselineCountry) {
   const missingCount = visibleMetrics.filter(
     (m) => country[m.key] == null || baselineCountry?.[m.key] == null
   ).length;
-  renderComparisonSummary(visibleMetrics, country, baselineCountry);
-  renderComparisonVisual(country, baselineCountry, visibleMetrics);
   renderComparisonWarning(missingCount, visibleMetrics.length);
 
   elements.comparisonGrid.innerHTML = getComparisonRowsMarkup(visibleMetrics, ({ metric, categoryLabel }) => {
     const candidate = country[metric.key];
     const baseline = baselineCountry?.[metric.key];
     const tone = compareMetric(candidate, baseline, metric.betterDirection);
-    const detail = buildMetricDetail(candidate, baseline, metric.betterDirection, metric.detail, baselineCountry?.name);
     const deltaLabel = buildDeltaLabel(metric, candidate, baseline, baselineCountry?.name);
     const directionLabel = buildDirectionLabel(country.name, baselineCountry?.name || "Paese selezionato", candidate, baseline, metric.betterDirection);
-    const confidence = getMetricConfidence(country, metric.key);
-    const coverage = getMetricCoverage(metric.key);
 
     return `
       <article class="comparison-row" role="row" data-tone="${tone}">
         <div class="comparison-row-head">
           <div class="comparison-indicator">
             <strong>${metric.label}</strong>
-            <span>${metric.detail}</span>
           </div>
-          <small class="comparison-meta">${categoryLabel} · ${coverage.label}</small>
         </div>
         <div class="comparison-values">
           <div class="comparison-value comparison-value-country">
             <span class="comparison-value-label">${renderCountryLabelMarkup(country)}</span>
-            <strong class="${toneClass(tone)}">
-              ${formatMetric(metric.key, country)}
-              <span class="confidence-badge confidence-${confidence.level}" title="${confidence.title}">
-                ${confidence.label}
-              </span>
-            </strong>
-            <span>${formatMetricMeta(metric.key, country)}</span>
+            <strong class="${toneClass(tone)}">${formatMetric(metric.key, country)}</strong>
           </div>
           <div class="comparison-value comparison-value-baseline">
             <span class="comparison-value-label">${renderCountryLabelMarkup(baselineCountry || { iso2: "", name: "Paese di confronto" })}</span>
             <strong>${formatMetric(metric.key, baselineCountry || {})}</strong>
-            <span>${formatMetricMeta(metric.key, baselineCountry || {})}</span>
           </div>
         </div>
         <div class="comparison-delta">
           <span class="comparison-outcome comparison-outcome-${tone}">${escapeHtml(directionLabel)}</span>
           <strong class="${toneClass(tone)}">${deltaLabel}</strong>
-          <span>${detail}</span>
         </div>
       </article>
     `;
@@ -1013,15 +940,10 @@ function renderComparison(country, baselineCountry) {
 }
 
 function getVisibleMetrics() {
-  if (state.comparisonView === "complete") return METRIC_CONFIG;
-  return METRIC_CONFIG.filter((metric) => ESSENTIAL_METRIC_KEYS.includes(metric.key));
+  return METRIC_CONFIG;
 }
 
 function getComparisonRowsMarkup(metrics, renderRow) {
-  if (state.comparisonView !== "complete") {
-    return metrics.map((metric) => renderRow({ metric, categoryLabel: metric.category })).join("");
-  }
-
   let currentCategory = null;
   const chunks = [];
   for (const metric of metrics) {
@@ -1036,24 +958,6 @@ function getComparisonRowsMarkup(metrics, renderRow) {
     chunks.push(renderRow({ metric, categoryLabel: currentCategory }));
   }
   return chunks.join("");
-}
-
-function buildMetricDetail(candidate, baseline, betterDirection, suffix, baselineName = "paese selezionato") {
-  if (candidate == null || baseline == null) {
-    return `Dato non disponibile in modo comparabile rispetto a ${baselineName} per ${suffix}.`;
-  }
-  const delta = candidate - baseline;
-  const absoluteDelta = Math.abs(delta);
-  if (absoluteDelta < 0.05) {
-    return `Valore molto vicino a quello di ${baselineName} per ${suffix}.`;
-  }
-  const better = betterDirection === "higher" ? delta > 0 : delta < 0;
-  const toneText = better ? "Meglio" : "Peggio";
-  const formattedDelta =
-    suffix === "dollari correnti per persona"
-      ? formatCurrency(absoluteDelta)
-      : formatNumber(absoluteDelta, 1);
-  return `${toneText} rispetto a ${baselineName} di ${formattedDelta} per ${suffix}.`;
 }
 
 function buildDeltaLabel(metric, candidate, baseline, baselineName = "il paese selezionato") {
@@ -1111,109 +1015,6 @@ function renderComparisonWarning(missingCount, totalCount) {
     missingCount >= 2
       ? `Lettura parziale: ${missingCount} indicatori su ${totalCount} non sono pienamente confrontabili.`
       : `Nota di lettura: ${missingCount} indicatore su ${totalCount} non è pienamente confrontabile.`;
-}
-
-function renderComparisonSummary(metrics, country, baselineCountry) {
-  const averageCoverage = metrics.length
-    ? metrics.reduce((sum, metric) => sum + getMetricCoverage(metric.key).ratio, 0) / metrics.length
-    : 0;
-  const recentCount = country
-    ? metrics.filter((metric) => getMetricConfidence(country, metric.key).level === "high").length
-    : 0;
-  const completeCount = country
-    ? metrics.filter((metric) => country[metric.key] != null && baselineCountry?.[metric.key] != null).length
-    : 0;
-
-  const cards = [
-    {
-      label: "Metriche in vista",
-      value: `${metrics.length}`,
-      meta: state.comparisonView === "essential" ? "Selezione ad alta leggibilità" : "Set completo di indicatori",
-    },
-    {
-      label: "Copertura media",
-      value: formatPercent(averageCoverage),
-      meta: `${formatInteger(Math.round(averageCoverage * state.countries.length))} paesi su ${state.countries.length}, in media`,
-    },
-    {
-      label: country ? "Confronti completi" : "Base dati",
-      value: country ? `${completeCount}/${metrics.length}` : `${state.countries.length} paesi`,
-      meta: country
-        ? baselineCountry && country.iso3 === baselineCountry.iso3
-          ? `Confronto interno al medesimo paese (${country.name})`
-          : `Indicatori disponibili sia per ${country.name} sia per ${baselineCountry?.name || "il paese selezionato"}`
-        : "Dataset pronto per il sorteggio",
-    },
-  ];
-
-  if (country) {
-    cards.push({
-      label: "Dati recenti",
-      value: `${recentCount}/${metrics.length}`,
-      meta: "Metriche del paese con base 2024-2026",
-    });
-  }
-
-  elements.comparisonSummary.innerHTML = cards.map((card) => `
-    <div class="summary-chip">
-      <span>${escapeHtml(card.label)}</span>
-      <strong>${escapeHtml(card.value)}</strong>
-      <small>${escapeHtml(card.meta)}</small>
-    </div>
-  `).join("");
-}
-
-function renderComparisonVisual(country, baselineCountry, metrics) {
-  if (!elements.comparisonVisual) return;
-  if (!country || !baselineCountry) {
-    elements.comparisonVisual.innerHTML = `
-      <div class="comparison-balance-card is-placeholder">
-        <span class="comparison-balance-label">Colpo d'occhio</span>
-        <strong>Il riepilogo apparirà dopo il sorteggio</strong>
-        <p>Qui riassumeremo subito dove il paese estratto sta meglio, peggio o in linea con il paese di confronto.</p>
-      </div>
-    `;
-    return;
-  }
-
-  const tones = metrics.map((metric) => compareMetric(country[metric.key], baselineCountry[metric.key], metric.betterDirection));
-  const better = tones.filter((tone) => tone === "better").length;
-  const worse = tones.filter((tone) => tone === "worse").length;
-  const neutral = tones.filter((tone) => tone === "neutral").length;
-  const total = Math.max(metrics.length, 1);
-  const betterWidth = (better / total) * 100;
-  const neutralWidth = (neutral / total) * 100;
-  const worseWidth = (worse / total) * 100;
-  const lead = better - worse;
-  const leadLabel = lead > 0
-    ? `${country.name} avanti su ${better} indicatori`
-    : lead < 0
-      ? `${baselineCountry.name} avanti su ${worse} indicatori`
-      : "Quadro complessivamente bilanciato";
-
-  elements.comparisonVisual.innerHTML = `
-    <div class="comparison-balance-card">
-      <div>
-        <span class="comparison-balance-label">Colpo d'occhio</span>
-        <strong>${escapeHtml(leadLabel)}</strong>
-        <p>Un riepilogo testuale più rapido da leggere dei grafici metrica per metrica.</p>
-      </div>
-      <div class="comparison-balance-tiles">
-        <div class="comparison-balance-tile is-better">
-          <strong>${better}</strong>
-          <span>Migliori</span>
-        </div>
-        <div class="comparison-balance-tile is-neutral">
-          <strong>${neutral}</strong>
-          <span>Allineati o N/D</span>
-        </div>
-        <div class="comparison-balance-tile is-worse">
-          <strong>${worse}</strong>
-          <span>Peggiori</span>
-        </div>
-      </div>
-    </div>
-  `;
 }
 
 function buildDirectionLabel(countryName, baselineName, candidate, baseline, betterDirection) {
@@ -1432,14 +1233,6 @@ function formatMetric(metricKey, country) {
   return value == null ? "N/D" : config.formatter(value);
 }
 
-function formatMetricMeta(metricKey, country) {
-  const detail = country?.metricDetails?.[metricKey];
-  if (!detail?.year && !detail?.source) return "fonte non disponibile";
-  const yearLabel = detail.year || "anno n/d";
-  const sourceLabel = shortenSource(detail.source);
-  return `${yearLabel} · ${sourceLabel}`;
-}
-
 function formatPercent(value) {
   return new Intl.NumberFormat("it-IT", {
     style: "percent", minimumFractionDigits: 2, maximumFractionDigits: 2,
@@ -1466,12 +1259,6 @@ function formatCurrency(value) {
   return new Intl.NumberFormat("it-IT", {
     style: "currency", currency: "USD", maximumFractionDigits: 0,
   }).format(value);
-}
-
-function shortenSource(value) {
-  if (!value) return "fonte n/d";
-  if (value === "World Bank Data API") return "World Bank";
-  return value;
 }
 
 function toneClass(tone) {
