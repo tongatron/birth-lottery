@@ -304,6 +304,7 @@ function rollLottery() {
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const hasExisting = state.currentWinner != null;
+  if (hasExisting) triggerParticleBurst(elements.drawButton);
   const EXIT_DURATION = (!prefersReduced && hasExisting) ? 240 : 0;
 
   if (!prefersReduced && hasExisting) {
@@ -738,6 +739,28 @@ function addRipple(button, event) {
   ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
   button.appendChild(ripple);
   ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
+}
+
+function triggerParticleBurst(buttonEl) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const rect = buttonEl.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const colors = ["#22c55e","#3b82f6","#f59e0b","#ef4444","#a855f7","#06b6d4","#f97316","#ec4899"];
+  const count = 22;
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement("span");
+    dot.className = "particle";
+    const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
+    const speed = 60 + Math.random() * 130;
+    const dx = Math.cos(angle) * speed;
+    const dy = Math.sin(angle) * speed;
+    const size = 5 + Math.random() * 8;
+    const delay = Math.random() * 60;
+    dot.style.cssText = `left:${cx}px;top:${cy}px;width:${size}px;height:${size}px;background:${colors[i % colors.length]};--dx:${dx.toFixed(1)}px;--dy:${dy.toFixed(1)}px;animation-delay:${delay}ms`;
+    document.body.appendChild(dot);
+    dot.addEventListener("animationend", () => dot.remove(), { once: true });
+  }
 }
 
 // ─── WEIGHTED PICK ───────────────────────────────────────
