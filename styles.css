@@ -225,6 +225,13 @@ button:focus-visible {
   letter-spacing: 0.02em;
 }
 
+.italy-probability {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.01em;
+}
+
 .hero-meta-strip {
   position: absolute;
   bottom: 28px;
