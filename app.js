@@ -194,8 +194,6 @@ const elements = {
   mapTooltip: document.querySelector("#map-tooltip"),
 };
 
-boot();
-
 async function boot() {
   try {
     const dataset = window.BIRTH_LOTTERY_DATA;
@@ -244,7 +242,6 @@ async function boot() {
     elements.drawButton.addEventListener("click", rollLottery);
 
     initMap(ranked).catch(() => {});
-    initBirthStream();
   } catch (error) {
     console.error(error);
     elements.statusText.textContent =
@@ -254,6 +251,10 @@ async function boot() {
     elements.drawButton.addEventListener("click", () => location.reload());
   }
 }
+
+boot().finally(() => {
+  initBirthStream();
+});
 
 // ─── MAP ──────────────────────────────────────────────────
 
@@ -1313,7 +1314,7 @@ function initBirthStream() {
   const grid = document.getElementById("birth-stream-grid");
   const speedBtns = document.querySelectorAll(".speed-btn");
 
-  if (!openBtn || !panel || !grid) return;
+  if (!openBtn || !panel || !grid || !pauseBtn || !closeBtn || !activator) return;
 
   for (let i = 0; i < STREAM_MAX_CELLS; i++) {
     const cell = document.createElement("div");
