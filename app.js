@@ -244,6 +244,7 @@ async function boot() {
     elements.drawButton.addEventListener("click", rollLottery);
 
     initMap(ranked).catch(() => {});
+    initBirthStream();
   } catch (error) {
     console.error(error);
     elements.statusText.textContent =
@@ -1284,4 +1285,162 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+// ─── BIRTH STREAM ─────────────────────────────────────────
+
+const STREAM_BIRTHS_PER_SEC = 4.43;
+const STREAM_MAX_CELLS = 120;
+
+const streamState = {
+  running: false,
+  paused: false,
+  speed: 1,
+  totalShown: 0,
+  pointer: 0,
+  cells: [],
+  rafId: null,
+  lastTimestamp: null,
+  accumulator: 0,
+};
+
+function initBirthStream() {
+  const openBtn = document.getElementById("birth-stream-open");
+  const activator = document.getElementById("birth-stream-activator");
+  const panel = document.getElementById("birth-stream-panel");
+  const pauseBtn = document.getElementById("birth-stream-pause");
+  const closeBtn = document.getElementById("birth-stream-close");
+  const grid = document.getElementById("birth-stream-grid");
+  const speedBtns = document.querySelectorAll(".speed-btn");
+
+  if (!openBtn || !panel || !grid) return;
+
+  for (let i = 0; i < STREAM_MAX_CELLS; i++) {
+    const cell = document.createElement("div");
+    cell.className = "birth-cell birth-cell-empty";
+    cell.setAttribute("aria-hidden", "true");
+    grid.appendChild(cell);
+    streamState.cells.push(cell);
+  }
+
+  openBtn.addEventListener("click", () => {
+    panel.classList.remove("hidden");
+    activator.classList.add("hidden");
+    startStream();
+  });
+
+  closeBtn.addEventListener("click", () => {
+    stopStream();
+    panel.classList.add("hidden");
+    activator.classList.remove("hidden");
+    resetStream();
+  });
+
+  pauseBtn.addEventListener("click", () => {
+    if (streamState.paused) {
+      resumeStream();
+      pauseBtn.textContent = "Pausa";
+    } else {
+      pauseStream();
+      pauseBtn.textContent = "Riprendi";
+    }
+  });
+
+  speedBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      speedBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      streamState.speed = parseInt(btn.dataset.speed, 10);
+    });
+  });
+}
+
+function startStream() {
+  streamState.running = true;
+  streamState.paused = false;
+  streamState.lastTimestamp = null;
+  streamState.accumulator = 0;
+  streamState.rafId = requestAnimationFrame(streamLoop);
+}
+
+function stopStream() {
+  streamState.running = false;
+  if (streamState.rafId) {
+    cancelAnimationFrame(streamState.rafId);
+    streamState.rafId = null;
+  }
+}
+
+function pauseStream() {
+  streamState.paused = true;
+  if (streamState.rafId) {
+    cancelAnimationFrame(streamState.rafId);
+    streamState.rafId = null;
+  }
+}
+
+function resumeStream() {
+  streamState.paused = false;
+  streamState.lastTimestamp = null;
+  streamState.rafId = requestAnimationFrame(streamLoop);
+}
+
+function resetStream() {
+  streamState.totalShown = 0;
+  streamState.pointer = 0;
+  streamState.accumulator = 0;
+  streamState.cells.forEach((c) => {
+    c.className = "birth-cell birth-cell-empty";
+    c.textContent = "";
+    c.title = "";
+  });
+  const counter = document.getElementById("birth-stream-counter");
+  if (counter) counter.textContent = "0 nati";
+}
+
+function streamLoop(timestamp) {
+  if (!streamState.running || streamState.paused) return;
+
+  if (streamState.lastTimestamp !== null) {
+    const delta = (timestamp - streamState.lastTimestamp) / 1000;
+    streamState.accumulator += delta * STREAM_BIRTHS_PER_SEC * streamState.speed;
+    const toAdd = Math.floor(streamState.accumulator);
+    if (toAdd > 0) {
+      streamState.accumulator -= toAdd;
+      const cap = Math.min(toAdd, 25);
+      for (let i = 0; i < cap; i++) spawnBirth();
+      updateStreamCounter();
+    }
+  }
+
+  streamState.lastTimestamp = timestamp;
+  streamState.rafId = requestAnimationFrame(streamLoop);
+}
+
+function spawnBirth() {
+  if (!state.countries.length) return;
+  const country = weightedPick(state.countries);
+  if (!country) return;
+
+  streamState.totalShown++;
+
+  const cell = streamState.cells[streamState.pointer];
+  streamState.pointer = (streamState.pointer + 1) % STREAM_MAX_CELLS;
+
+  cell.classList.remove("birth-cell-empty");
+
+  // Alternate animation name to restart without triggering reflow
+  const useA = !cell.classList.contains("birth-pop-a");
+  cell.classList.remove("birth-pop-a", "birth-pop-b");
+  cell.classList.add(useA ? "birth-pop-a" : "birth-pop-b");
+
+  cell.textContent = countryFlagEmoji(country);
+  cell.title = country.name;
+}
+
+function updateStreamCounter() {
+  const counter = document.getElementById("birth-stream-counter");
+  if (!counter) return;
+  const n = streamState.totalShown;
+  counter.textContent = formatInteger(n) + (n === 1 ? " nato" : " nati");
 }
