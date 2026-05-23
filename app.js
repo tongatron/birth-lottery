@@ -219,7 +219,7 @@ async function boot() {
     syncComparisonBaselineUI();
 
     elements.drawButton.disabled = false;
-    elements.drawButton.textContent = "Avvia la lotteria";
+    elements.drawButton.textContent = "Avvia";
     elements.statusText.textContent = "Dati caricati. Il sorteggio è pronto.";
 
     const probEl = document.querySelector("#italy-probability");
@@ -357,7 +357,7 @@ function rollLottery() {
 
   const winner = weightedPick(state.countries);
   if (!winner) {
-    elements.drawButton.textContent = "Avvia la lotteria";
+    elements.drawButton.textContent = "Avvia";
     elements.statusText.textContent = "Sorteggio non disponibile con i dati correnti.";
     return;
   }
@@ -871,6 +871,7 @@ function renderPlaceholderComparison(baselineCountry = getComparisonBaselineCoun
     <article class="comparison-row" role="row" data-tone="neutral">
       <div class="comparison-indicator">
         <strong>${metric.label}</strong>
+        <small class="metric-desc">${metric.detail}</small>
       </div>
       <div class="comparison-value">
         <strong>-</strong>
@@ -920,6 +921,7 @@ function renderComparison(country, baselineCountry) {
         <div class="comparison-row-head">
           <div class="comparison-indicator">
             <strong>${metric.label}</strong>
+            <small class="metric-desc">${metric.detail}</small>
           </div>
         </div>
         <div class="comparison-values">
@@ -1303,6 +1305,7 @@ const streamState = {
   rafId: null,
   lastTimestamp: null,
   accumulator: 0,
+  firstCycleDone: false,
 };
 
 function initBirthStream() {
@@ -1312,8 +1315,6 @@ function initBirthStream() {
   const pauseBtn = document.getElementById("birth-stream-pause");
   const closeBtn = document.getElementById("birth-stream-close");
   const grid = document.getElementById("birth-stream-grid");
-  const speedBtns = document.querySelectorAll(".speed-btn");
-
   if (!openBtn || !panel || !grid || !pauseBtn || !closeBtn || !activator) return;
 
   for (let i = 0; i < STREAM_MAX_CELLS; i++) {
@@ -1347,13 +1348,6 @@ function initBirthStream() {
     }
   });
 
-  speedBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      speedBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      streamState.speed = parseInt(btn.dataset.speed, 10);
-    });
-  });
 }
 
 function startStream() {
@@ -1390,6 +1384,7 @@ function resetStream() {
   streamState.totalShown = 0;
   streamState.pointer = 0;
   streamState.accumulator = 0;
+  streamState.firstCycleDone = false;
   streamState.cells.forEach((c) => {
     c.className = "birth-cell birth-cell-empty";
     c.textContent = "";
@@ -1427,6 +1422,17 @@ function spawnBirth() {
 
   const cell = streamState.cells[streamState.pointer];
   streamState.pointer = (streamState.pointer + 1) % STREAM_MAX_CELLS;
+
+  if (!streamState.firstCycleDone && streamState.pointer === 0 && streamState.totalShown > 0) {
+    streamState.firstCycleDone = true;
+    streamState.totalShown = 0;
+    streamState.cells.forEach((c) => {
+      c.className = "birth-cell birth-cell-empty";
+      c.textContent = "";
+      c.title = "";
+    });
+    updateStreamCounter();
+  }
 
   cell.classList.remove("birth-cell-empty");
 
