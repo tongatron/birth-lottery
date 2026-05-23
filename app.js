@@ -232,10 +232,8 @@ async function boot() {
     const versionEl = document.querySelector("#version-date");
     if (versionEl && dataset?.generatedAt) {
       const d = new Date(dataset.generatedAt);
-      versionEl.textContent = d.toLocaleString("it-IT", {
-        day: "2-digit", month: "short", year: "numeric",
-        hour: "2-digit", minute: "2-digit",
-      });
+      const label = d.toLocaleDateString("it-IT", { day: "2-digit", month: "short", year: "numeric" });
+      versionEl.textContent = `versione: ${label}`;
     }
 
     elements.drawButton.addEventListener("click", (e) => addRipple(elements.drawButton, e));

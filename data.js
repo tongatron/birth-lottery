@@ -1,5 +1,5 @@
 window.BIRTH_LOTTERY_DATA = {
-  "generatedAt": "2026-05-22T21:14:59.872Z",
+  "generatedAt": "2026-05-23T17:13:11.000Z",
   "source": "World Bank Data API + supplemental sources",
   "totalBirths": 132375467.47864199,
   "countries": [
