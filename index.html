@@ -239,6 +239,37 @@
         </div>
       </main>
 
+      <!-- ── BIRTH STREAM ─────────────────────────────────── -->
+      <div class="birth-stream-wrap">
+        <div class="birth-stream-activator" id="birth-stream-activator">
+          <button id="birth-stream-open" class="birth-stream-open-btn" type="button">
+            <span class="birth-stream-dot" aria-hidden="true"></span>
+            Nascite nel mondo in tempo reale
+          </button>
+        </div>
+
+        <section class="birth-stream-panel hidden" id="birth-stream-panel" aria-label="Nascite nel mondo in tempo reale">
+          <div class="birth-stream-head">
+            <div>
+              <p class="section-kicker">In questo momento</p>
+              <h2 class="birth-stream-title">Nascite nel mondo</h2>
+            </div>
+            <div class="birth-stream-controls">
+              <span class="birth-stream-counter" id="birth-stream-counter" aria-live="polite">0 nati</span>
+              <div class="birth-stream-speed-group" role="group" aria-label="Velocità simulazione">
+                <button class="speed-btn active" data-speed="1" type="button">1×</button>
+                <button class="speed-btn" data-speed="5" type="button">5×</button>
+                <button class="speed-btn" data-speed="10" type="button">10×</button>
+              </div>
+              <button class="birth-stream-pause-btn" id="birth-stream-pause" type="button">Pausa</button>
+              <button class="birth-stream-close-btn" id="birth-stream-close" type="button" aria-label="Chiudi sezione">✕</button>
+            </div>
+          </div>
+          <div class="birth-stream-grid" id="birth-stream-grid" role="img" aria-label="Griglia animata nascite per paese"></div>
+          <p class="birth-stream-note">Ogni quadrato è una nascita estratta proporzionalmente alla quota di nascite di ciascun paese. Velocità 1× = ~4,4 nascite al secondo (ritmo reale).</p>
+        </section>
+      </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
